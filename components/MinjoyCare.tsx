@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { FiZap, FiDroplet, FiStar, FiHeart, FiActivity } from 'react-icons/fi'
+import { FiZap, FiDroplet, FiStar, FiHeart, FiActivity, FiArrowDown, FiTrendingUp, FiPercent, FiMinus, FiClipboard, FiEdit3, FiThumbsUp, FiCheckCircle, FiGift } from 'react-icons/fi'
 
 interface CareService {
   id: string
@@ -23,8 +23,8 @@ const iconMap: Record<string, React.ReactNode> = {
   FiActivity: <FiActivity size={32} />,
 }
 
-// 서비스별 이모지 매핑
-const serviceEmojis = ['💧', '⚡', '✨', '🌸']
+// 서비스별 아이콘 매핑
+const serviceIcons = [FiDroplet, FiZap, FiStar, FiHeart]
 
 const MinjoyCare = () => {
   const [services, setServices] = useState<CareService[]>([])
@@ -76,8 +76,8 @@ const MinjoyCare = () => {
             {/* Decorative elements */}
             <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
             <div className="absolute bottom-10 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 text-[200px] opacity-10 select-none">
-              💆‍♀️
+            <div className="absolute -bottom-10 -right-10 text-[200px] font-black opacity-5 select-none">
+              CARE
             </div>
           </div>
         </div>
@@ -89,7 +89,9 @@ const MinjoyCare = () => {
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
 
           <div className="relative z-10">
-            <div className="text-5xl mb-6">🌟</div>
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <FiStar className="text-primary" size={32} />
+            </div>
             <h3 className="text-3xl md:text-4xl font-bold mb-4 text-brown-dark">
               운동과 식단만으로는 부족합니다
             </h3>
@@ -115,64 +117,67 @@ const MinjoyCare = () => {
             <span className="gradient-text">케어 프로그램</span>
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
-            {serviceList.map((service, index) => (
-              <div
-                key={service.id}
-                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
-              >
-                {/* Image Area */}
-                <div className="h-56 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
-                  {service.image ? (
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <div className="text-7xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                          {serviceEmojis[index] || '✨'}
+            {serviceList.map((service, index) => {
+              const IconComponent = serviceIcons[index] || FiStar
+              return (
+                <div
+                  key={service.id}
+                  className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
+                >
+                  {/* Image Area */}
+                  <div className="h-56 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+                    {service.image ? (
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <div className="mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <IconComponent size={56} />
+                          </div>
+                          <div className="text-sm opacity-60">이미지 준비중</div>
                         </div>
-                        <div className="text-sm opacity-60">이미지 준비중</div>
+                        {/* Decorative pattern */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div className="absolute top-6 left-6 w-24 h-24 border-2 border-white rounded-full"></div>
+                          <div className="absolute bottom-6 right-6 w-20 h-20 border-2 border-white rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white rounded-full"></div>
+                        </div>
                       </div>
-                      {/* Decorative pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="absolute top-6 left-6 w-24 h-24 border-2 border-white rounded-full"></div>
-                        <div className="absolute bottom-6 right-6 w-20 h-20 border-2 border-white rounded-full"></div>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white rounded-full"></div>
+                    )}
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+
+                    {/* Title overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
+                          {iconMap[service.icon] || <FiStar size={24} />}
+                        </div>
+                        <h3 className="text-2xl font-bold text-white">{service.title}</h3>
                       </div>
                     </div>
-                  )}
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  </div>
 
-                  {/* Title overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
-                        {iconMap[service.icon] || <FiStar size={24} />}
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                  {/* Content */}
+                  <div className="p-6">
+                    <p className="text-brown-light mb-6 leading-relaxed">{service.description}</p>
+                    <div className="grid grid-cols-2 gap-3">
+                      {service.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center text-sm text-brown-dark">
+                          <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                          {feature}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <p className="text-brown-light mb-6 leading-relaxed">{service.description}</p>
-                  <div className="grid grid-cols-2 gap-3">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center text-sm text-brown-dark">
-                        <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -183,17 +188,17 @@ const MinjoyCare = () => {
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { value: '-1KG', label: '1회 체험 평균', icon: '⬇️', color: 'from-primary to-primary-dark' },
-              { value: '+1KG', label: '근력 증가', icon: '💪', color: 'from-gym to-gym-dark' },
-              { value: '-3%', label: '체지방률 감소', icon: '🔥', color: 'from-primary to-primary-dark' },
-              { value: '-5cm', label: '둘레 감소', icon: '📏', color: 'from-gold to-gold-dark' },
+              { value: '-1KG', label: '1회 체험 평균', Icon: FiArrowDown, color: 'from-primary to-primary-dark' },
+              { value: '+1KG', label: '근력 증가', Icon: FiTrendingUp, color: 'from-gym to-gym-dark' },
+              { value: '-3%', label: '체지방률 감소', Icon: FiPercent, color: 'from-primary to-primary-dark' },
+              { value: '-5cm', label: '둘레 감소', Icon: FiMinus, color: 'from-gold to-gold-dark' },
             ].map((stat, index) => (
               <div
                 key={index}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               >
                 <div className={`h-24 bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
-                  <span className="text-5xl">{stat.icon}</span>
+                  <stat.Icon className="text-white" size={40} />
                 </div>
                 <div className="p-4 text-center">
                   <div className="text-2xl md:text-3xl font-bold text-brown-dark mb-1">{stat.value}</div>
@@ -211,10 +216,10 @@ const MinjoyCare = () => {
           </h3>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { step: '01', title: '상담 & 진단', desc: '체형 분석과 목표 설정', icon: '📋' },
-              { step: '02', title: '맞춤 프로그램', desc: '개인별 관리 계획 수립', icon: '📝' },
-              { step: '03', title: '전문 관리', desc: '기기 + 수기 복합 관리', icon: '🙌' },
-              { step: '04', title: '결과 확인', desc: '체계적인 관리와 피드백', icon: '✅' },
+              { step: '01', title: '상담 & 진단', desc: '체형 분석과 목표 설정', Icon: FiClipboard },
+              { step: '02', title: '맞춤 프로그램', desc: '개인별 관리 계획 수립', Icon: FiEdit3 },
+              { step: '03', title: '전문 관리', desc: '기기 + 수기 복합 관리', Icon: FiThumbsUp },
+              { step: '04', title: '결과 확인', desc: '체계적인 관리와 피드백', Icon: FiCheckCircle },
             ].map((item, index) => (
               <div key={index} className="relative">
                 {/* Connection line */}
@@ -222,7 +227,9 @@ const MinjoyCare = () => {
                   <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-primary-light/50"></div>
                 )}
                 <div className="bg-white rounded-2xl p-6 shadow-lg border border-primary-light/20 relative z-10 hover:shadow-xl transition-all">
-                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                    <item.Icon className="text-primary" size={24} />
+                  </div>
                   <div className="text-sm text-primary font-bold mb-2">{item.step}</div>
                   <h4 className="font-bold text-lg text-brown-dark mb-1">{item.title}</h4>
                   <p className="text-sm text-brown-light">{item.desc}</p>
@@ -241,7 +248,9 @@ const MinjoyCare = () => {
           </div>
 
           <div className="relative z-10">
-            <div className="text-5xl mb-4">🎁</div>
+            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FiGift className="text-white" size={32} />
+            </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               짧은 시간 목표 달성이 가능합니다
             </h3>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { FiCheckCircle } from 'react-icons/fi'
+import { FiCheckCircle, FiArrowDown, FiTrendingUp, FiPercent, FiTarget, FiMapPin } from 'react-icons/fi'
 import Link from 'next/link'
 
 interface AboutFeature {
@@ -49,12 +49,11 @@ const About = () => {
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform"></div>
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-            <div className="absolute bottom-4 right-4 text-[120px] opacity-10 select-none">
-              🏋️‍♀️
-            </div>
 
             <div className="relative z-10">
-              <div className="text-5xl mb-4">💪</div>
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4">
+                <span className="text-3xl font-black">GYM</span>
+              </div>
               <h3 className="text-3xl md:text-4xl font-black mb-4">민죠이짐</h3>
               <p className="text-lg opacity-90 mb-6">
                 여성 전용 PT 샵<br />
@@ -74,12 +73,11 @@ const About = () => {
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform"></div>
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-            <div className="absolute bottom-4 right-4 text-[120px] opacity-10 select-none">
-              💆‍♀️
-            </div>
 
             <div className="relative z-10">
-              <div className="text-5xl mb-4">✨</div>
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4">
+                <span className="text-2xl font-black">CARE</span>
+              </div>
               <h3 className="text-3xl md:text-4xl font-black mb-4">민죠이케어</h3>
               <p className="text-lg opacity-90 mb-6">
                 누워서 다이어트하는 힐링케어<br />
@@ -123,17 +121,17 @@ const About = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
           {[
-            { value: '-1kg', label: '1회 체험 평균', icon: '⬇️', gradient: 'from-primary to-primary-dark' },
-            { value: '+1kg', label: '근력 증가', icon: '💪', gradient: 'from-gym to-gym-dark' },
-            { value: '-3%', label: '체지방률 감소', icon: '🔥', gradient: 'from-primary to-primary-dark' },
-            { value: '100%', label: '맞춤 관리', icon: '🎯', gradient: 'from-gold to-gold-dark' },
+            { value: '-1kg', label: '1회 체험 평균', Icon: FiArrowDown, gradient: 'from-primary to-primary-dark' },
+            { value: '+1kg', label: '근력 증가', Icon: FiTrendingUp, gradient: 'from-gym to-gym-dark' },
+            { value: '-3%', label: '체지방률 감소', Icon: FiPercent, gradient: 'from-primary to-primary-dark' },
+            { value: '100%', label: '맞춤 관리', Icon: FiTarget, gradient: 'from-gold to-gold-dark' },
           ].map((stat, index) => (
             <div
               key={index}
               className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
             >
               <div className={`h-20 bg-gradient-to-br ${stat.gradient} flex items-center justify-center`}>
-                <span className="text-4xl">{stat.icon}</span>
+                <stat.Icon className="text-white" size={32} />
               </div>
               <div className="p-4 text-center">
                 <div className="text-3xl md:text-4xl font-bold text-brown-dark mb-1">{stat.value}</div>
@@ -169,19 +167,19 @@ const About = () => {
             {/* Visual Element */}
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-gradient-to-br from-gym to-gym-dark rounded-2xl p-6 text-white text-center">
-                <div className="text-4xl mb-2">🏋️‍♀️</div>
-                <div className="font-bold">PT 트레이닝</div>
+                <div className="text-2xl font-black mb-2">PT</div>
+                <div className="font-bold">트레이닝</div>
               </div>
               <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white text-center">
-                <div className="text-4xl mb-2">💆‍♀️</div>
+                <div className="text-2xl font-black mb-2">CARE</div>
                 <div className="font-bold">체형관리</div>
               </div>
               <div className="bg-gradient-to-br from-gold to-gold-dark rounded-2xl p-6 text-white text-center">
-                <div className="text-4xl mb-2">🥗</div>
+                <div className="text-2xl font-black mb-2">DIET</div>
                 <div className="font-bold">식단 관리</div>
               </div>
               <div className="bg-gradient-to-br from-brown-dark to-brown rounded-2xl p-6 text-white text-center">
-                <div className="text-4xl mb-2">🧘‍♀️</div>
+                <div className="text-2xl font-black mb-2">MIND</div>
                 <div className="font-bold">멘탈 케어</div>
               </div>
             </div>
@@ -197,7 +195,9 @@ const About = () => {
           </div>
 
           <div className="relative z-10">
-            <div className="text-5xl mb-4">🏢</div>
+            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FiMapPin className="text-white" size={32} />
+            </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               운동과 관리, 한 건물에서 모두 가능합니다
             </h3>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { FiActivity, FiTarget, FiDroplet, FiStar, FiMapPin } from 'react-icons/fi'
 
 interface Facility {
   id: string
@@ -11,6 +12,10 @@ interface Facility {
   image?: string
   order: number
 }
+
+// 시설별 아이콘 매핑
+const gymIcons = [FiActivity, FiTarget, FiActivity, FiDroplet]
+const careIcons = [FiStar, FiActivity, FiDroplet, FiStar]
 
 const Facilities = () => {
   const [facilities, setFacilities] = useState<Facility[]>([])
@@ -70,52 +75,52 @@ const Facilities = () => {
         <div className="mb-20">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-12 h-12 bg-gym rounded-full flex items-center justify-center">
-              <span className="text-2xl">🏋️‍♀️</span>
+              <span className="text-white font-black text-sm">GYM</span>
             </div>
             <h3 className="text-3xl font-bold gradient-text-gym">민죠이짐 시설</h3>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {gymFeatures.map((feature, index) => (
-              <div
-                key={feature.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gym-light/20"
-              >
-                {/* Image Area */}
-                <div className="h-48 bg-gradient-to-br from-gym to-gym-dark relative overflow-hidden">
-                  {feature.image ? (
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <div className="text-5xl mb-2 opacity-80">
-                          {index === 0 && '🏋️'}
-                          {index === 1 && '💪'}
-                          {index === 2 && '🎯'}
-                          {index === 3 && '🚿'}
+            {gymFeatures.map((feature, index) => {
+              const IconComponent = gymIcons[index] || FiActivity
+              return (
+                <div
+                  key={feature.id}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gym-light/20"
+                >
+                  {/* Image Area */}
+                  <div className="h-48 bg-gradient-to-br from-gym to-gym-dark relative overflow-hidden">
+                    {feature.image ? (
+                      <Image
+                        src={feature.image}
+                        alt={feature.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <div className="mb-2 opacity-80">
+                            <IconComponent size={40} />
+                          </div>
+                          <div className="text-xs opacity-60">이미지 준비중</div>
                         </div>
-                        <div className="text-xs opacity-60">이미지 준비중</div>
+                        {/* Decorative pattern */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
+                          <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
+                        </div>
                       </div>
-                      {/* Decorative pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
-                        <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+                  {/* Content */}
+                  <div className="p-5">
+                    <h4 className="font-bold text-lg text-brown-dark mb-1">{feature.title}</h4>
+                    <p className="text-sm text-brown-light">{feature.description}</p>
+                  </div>
                 </div>
-                {/* Content */}
-                <div className="p-5">
-                  <h4 className="font-bold text-lg text-brown-dark mb-1">{feature.title}</h4>
-                  <p className="text-sm text-brown-light">{feature.description}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -123,52 +128,52 @@ const Facilities = () => {
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-2xl">💆‍♀️</span>
+              <span className="text-white font-black text-xs">CARE</span>
             </div>
             <h3 className="text-3xl font-bold gradient-text">민죠이케어 시설</h3>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {careFeatures.map((feature, index) => (
-              <div
-                key={feature.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
-              >
-                {/* Image Area */}
-                <div className="h-48 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
-                  {feature.image ? (
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <div className="text-5xl mb-2 opacity-80">
-                          {index === 0 && '✨'}
-                          {index === 1 && '🛋️'}
-                          {index === 2 && '🌿'}
-                          {index === 3 && '🧴'}
+            {careFeatures.map((feature, index) => {
+              const IconComponent = careIcons[index] || FiStar
+              return (
+                <div
+                  key={feature.id}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
+                >
+                  {/* Image Area */}
+                  <div className="h-48 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+                    {feature.image ? (
+                      <Image
+                        src={feature.image}
+                        alt={feature.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <div className="mb-2 opacity-80">
+                            <IconComponent size={40} />
+                          </div>
+                          <div className="text-xs opacity-60">이미지 준비중</div>
                         </div>
-                        <div className="text-xs opacity-60">이미지 준비중</div>
+                        {/* Decorative pattern */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
+                          <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
+                        </div>
                       </div>
-                      {/* Decorative pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
-                        <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+                  {/* Content */}
+                  <div className="p-5">
+                    <h4 className="font-bold text-lg text-brown-dark mb-1">{feature.title}</h4>
+                    <p className="text-sm text-brown-light">{feature.description}</p>
+                  </div>
                 </div>
-                {/* Content */}
-                <div className="p-5">
-                  <h4 className="font-bold text-lg text-brown-dark mb-1">{feature.title}</h4>
-                  <p className="text-sm text-brown-light">{feature.description}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -181,7 +186,9 @@ const Facilities = () => {
           </div>
 
           <div className="relative z-10">
-            <div className="text-4xl mb-4">🏢</div>
+            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FiMapPin className="text-white" size={32} />
+            </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               운동과 관리, 한 건물에서 모두 가능합니다
             </h3>

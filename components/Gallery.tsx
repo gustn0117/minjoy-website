@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { FiCamera } from 'react-icons/fi'
 
 interface GalleryItem {
   id: string
@@ -95,7 +96,9 @@ const Gallery = () => {
                   </div>
                 ) : (
                   <div className="text-center">
-                    <div className="text-5xl mb-2">📸</div>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <FiCamera className="text-primary" size={28} />
+                    </div>
                     <p className="text-brown-dark font-medium">Before & After</p>
                   </div>
                 )}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { FiTarget, FiTrendingUp, FiAward, FiHeart, FiActivity, FiStar } from 'react-icons/fi'
+import { FiTarget, FiTrendingUp, FiAward, FiHeart, FiActivity, FiStar, FiUsers, FiPercent } from 'react-icons/fi'
 
 interface GymProgram {
   id: string
@@ -30,8 +30,8 @@ const iconMap: Record<string, React.ReactNode> = {
   FiStar: <FiStar size={40} />,
 }
 
-// 프로그램별 이모지 매핑
-const programEmojis = ['🎯', '🍑', '📸', '💆‍♀️']
+// 프로그램별 아이콘 매핑
+const programIcons = [FiTarget, FiTrendingUp, FiAward, FiHeart]
 
 const MinjoyGym = () => {
   const [programs, setPrograms] = useState<GymProgram[]>([])
@@ -101,8 +101,8 @@ const MinjoyGym = () => {
             {/* Decorative elements */}
             <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
             <div className="absolute bottom-10 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 text-[200px] opacity-10 select-none">
-              🏋️‍♀️
+            <div className="absolute -bottom-10 -right-10 text-[200px] font-black opacity-5 select-none">
+              GYM
             </div>
           </div>
         </div>
@@ -113,51 +113,54 @@ const MinjoyGym = () => {
             <span className="gradient-text-gym">프로그램 소개</span>
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {programList.map((program, index) => (
-              <div
-                key={program.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gym-light/20"
-              >
-                {/* Image Area */}
-                <div className="h-48 bg-gradient-to-br from-gym to-gym-dark relative overflow-hidden">
-                  {program.image ? (
-                    <Image
-                      src={program.image}
-                      alt={program.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <div className="text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                          {programEmojis[index] || '💪'}
+            {programList.map((program, index) => {
+              const IconComponent = programIcons[index] || FiTarget
+              return (
+                <div
+                  key={program.id}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gym-light/20"
+                >
+                  {/* Image Area */}
+                  <div className="h-48 bg-gradient-to-br from-gym to-gym-dark relative overflow-hidden">
+                    {program.image ? (
+                      <Image
+                        src={program.image}
+                        alt={program.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <div className="mb-2 group-hover:scale-110 transition-transform duration-300">
+                            <IconComponent size={48} />
+                          </div>
+                          <div className="text-xs opacity-60">이미지 준비중</div>
                         </div>
-                        <div className="text-xs opacity-60">이미지 준비중</div>
+                        {/* Decorative pattern */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
+                          <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-white rounded-full"></div>
+                        </div>
                       </div>
-                      {/* Decorative pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
-                        <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-white rounded-full"></div>
-                      </div>
-                    </div>
-                  )}
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                </div>
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="text-gym">
-                      {iconMap[program.icon] || <FiTarget size={24} />}
-                    </div>
-                    <h4 className="font-bold text-lg text-brown-dark">{program.title}</h4>
+                    )}
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                   </div>
-                  <p className="text-sm text-brown-light leading-relaxed">{program.description}</p>
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="text-gym">
+                        {iconMap[program.icon] || <FiTarget size={24} />}
+                      </div>
+                      <h4 className="font-bold text-lg text-brown-dark">{program.title}</h4>
+                    </div>
+                    <p className="text-sm text-brown-light leading-relaxed">{program.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -190,16 +193,18 @@ const MinjoyGym = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           {[
-            { value: '500+', label: '누적 회원', icon: '👥' },
-            { value: '98%', label: '목표 달성률', icon: '🎯' },
-            { value: '5년+', label: '전문 경력', icon: '⭐' },
-            { value: '100%', label: '맞춤 프로그램', icon: '💪' },
+            { value: '500+', label: '누적 회원', Icon: FiUsers },
+            { value: '98%', label: '목표 달성률', Icon: FiTarget },
+            { value: '5년+', label: '전문 경력', Icon: FiStar },
+            { value: '100%', label: '맞춤 프로그램', Icon: FiPercent },
           ].map((stat, index) => (
             <div
               key={index}
               className="bg-white p-6 rounded-2xl shadow-lg border border-gym-light/20 text-center group hover:shadow-xl transition-all hover:-translate-y-1"
             >
-              <div className="text-3xl mb-2">{stat.icon}</div>
+              <div className="w-12 h-12 bg-gym/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <stat.Icon className="text-gym" size={24} />
+              </div>
               <div className="text-3xl md:text-4xl font-bold text-gym mb-1">{stat.value}</div>
               <div className="text-sm text-brown-light">{stat.label}</div>
             </div>
@@ -215,7 +220,9 @@ const MinjoyGym = () => {
           </div>
 
           <div className="relative z-10">
-            <div className="text-5xl mb-4">🏆</div>
+            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FiAward className="text-white" size={32} />
+            </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               비포&애프터 사진으로 증명하는 확실한 결과
             </h3>
