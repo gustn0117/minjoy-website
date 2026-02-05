@@ -23,6 +23,7 @@ import {
   FiPlus,
   FiX,
   FiSave,
+  FiActivity,
   FiTarget,
   FiHeart,
   FiMapPin,
