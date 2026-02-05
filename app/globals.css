@@ -17,6 +17,7 @@ html {
 body {
   font-family: 'Noto Sans KR', sans-serif;
   overflow-x: hidden;
+  background-color: #FAF7F2;
 }
 
 @layer components {
@@ -29,14 +30,26 @@ body {
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-dark to-primary bg-clip-text text-transparent;
+  }
+
+  .gradient-text-gym {
+    @apply bg-gradient-to-r from-gym-dark to-gym bg-clip-text text-transparent;
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-primary-dark to-primary text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105;
+  }
+
+  .btn-gym {
+    @apply bg-gradient-to-r from-gym-dark to-gym text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105;
   }
 
   .btn-secondary {
-    @apply border-2 border-primary text-primary px-8 py-3 rounded-full font-medium hover:bg-primary hover:text-white transition-all duration-300;
+    @apply border-2 border-primary text-primary-dark px-8 py-3 rounded-full font-medium hover:bg-primary hover:text-white transition-all duration-300;
+  }
+
+  .btn-secondary-gym {
+    @apply border-2 border-gym text-gym px-8 py-3 rounded-full font-medium hover:bg-gym hover:text-white transition-all duration-300;
   }
 }

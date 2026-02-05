@@ -38,13 +38,13 @@ const MinjoyGym = () => {
   ]
 
   return (
-    <section id="minjoy-gym" className="section-padding bg-white">
+    <section id="minjoy-gym" className="section-padding bg-ivory">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">민죠이짐</span>
+            <span className="gradient-text-gym">민죠이짐</span>
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-brown-dark">
             여성 전용 PT 샵 | 확실한 변화를 위한 전문 트레이닝
           </p>
         </div>
@@ -54,25 +54,25 @@ const MinjoyGym = () => {
           {programs.map((program, index) => (
             <div
               key={index}
-              className="p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              className="p-8 bg-white rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gym-light/20"
             >
-              <div className="text-primary mb-4">{program.icon}</div>
-              <h3 className="text-xl font-bold mb-3">{program.title}</h3>
-              <p className="text-gray-600">{program.description}</p>
+              <div className="text-gym mb-4">{program.icon}</div>
+              <h3 className="text-xl font-bold mb-3 text-brown-dark">{program.title}</h3>
+              <p className="text-brown-light">{program.description}</p>
             </div>
           ))}
         </div>
 
         {/* Target Audience */}
-        <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
-          <h3 className="text-3xl font-bold mb-8 text-center">
+        <div className="bg-white rounded-2xl p-8 md:p-12 border border-gym-light/20">
+          <h3 className="text-3xl font-bold mb-8 text-center text-brown-dark">
             민죠이짐은 이런 분들께 추천합니다
           </h3>
           <div className="grid md:grid-cols-2 gap-8">
             {differentiators.map((item, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-md">
-                <h4 className="text-xl font-bold mb-3 text-primary">{item.title}</h4>
-                <p className="text-gray-600">{item.description}</p>
+              <div key={index} className="bg-ivory-dark p-8 rounded-xl">
+                <h4 className="text-xl font-bold mb-3 text-gym">{item.title}</h4>
+                <p className="text-brown-dark">{item.description}</p>
               </div>
             ))}
           </div>
@@ -80,9 +80,9 @@ const MinjoyGym = () => {
 
         {/* Key Features */}
         <div className="mt-16 text-center">
-          <div className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full">
+          <div className="inline-block bg-gradient-to-r from-gym-dark to-gym text-white px-8 py-4 rounded-full shadow-lg">
             <p className="text-lg font-semibold">
-              🏆 비포&애프터 사진으로 증명하는 확실한 결과
+              비포&애프터 사진으로 증명하는 확실한 결과
             </p>
           </div>
         </div>

@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-ivory shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container-custom">
@@ -37,9 +37,9 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className={`text-2xl font-bold transition-colors ${
-              isScrolled ? 'text-primary' : 'text-white'
+              isScrolled ? 'text-brown-dark' : 'text-white'
             }`}>
-              민죠이
+              <span className="text-primary-dark">민죠이</span>
             </div>
           </Link>
 
@@ -49,8 +49,8 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-colors hover:text-primary ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
+                className={`font-medium transition-colors hover:text-primary-dark ${
+                  isScrolled ? 'text-brown-dark' : 'text-white'
                 }`}
               >
                 {item.name}
@@ -62,7 +62,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center">
             <button
               className={`p-2 rounded-full transition-colors ${
-                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'
+                isScrolled ? 'text-brown-dark hover:bg-primary-light/30' : 'text-white hover:bg-white/20'
               }`}
             >
               <FiUser size={24} />
@@ -73,7 +73,7 @@ const Header = () => {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`lg:hidden p-2 transition-colors ${
-              isScrolled ? 'text-gray-700' : 'text-white'
+              isScrolled ? 'text-brown-dark' : 'text-white'
             }`}
           >
             {isMobileMenuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
@@ -83,13 +83,13 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white shadow-lg">
+        <div className="lg:hidden bg-ivory shadow-lg">
           <nav className="container-custom py-4 space-y-4">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-gray-700 hover:text-primary font-medium transition-colors"
+                className="block py-2 text-brown-dark hover:text-primary-dark font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}

@@ -25,26 +25,26 @@ const MinjoyCare = () => {
   ]
 
   return (
-    <section id="minjoy-care" className="section-padding bg-gradient-to-br from-purple-50 to-pink-50">
+    <section id="minjoy-care" className="section-padding bg-gradient-to-br from-primary-light/30 to-ivory">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">민죠이케어</span>
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-brown-dark">
             누워서 다이어트하는 힐링케어 | 남녀 모두 이용 가능
           </p>
         </div>
 
         {/* Main Message */}
-        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl mb-16 text-center">
-          <h3 className="text-3xl font-bold mb-4">
-            운동과 시대만으로는 부족합니다
+        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl mb-16 text-center border border-primary-light/30">
+          <h3 className="text-3xl font-bold mb-4 text-brown-dark">
+            운동과 식단만으로는 부족합니다
           </h3>
-          <p className="text-xl text-gray-600 mb-8">
-            다이어트도 <span className="text-primary font-bold">'지름길'</span>이 분명 있습니다
+          <p className="text-xl text-brown-light mb-8">
+            다이어트도 <span className="text-primary-dark font-bold">'지름길'</span>이 분명 있습니다
           </p>
-          <div className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full">
+          <div className="inline-block bg-gradient-to-r from-primary-dark to-primary text-white px-8 py-4 rounded-full shadow-lg">
             <p className="text-lg font-semibold">
               맞춤진단 + 운동 + 식단 + 기기관리 + 수기관리 + 멘탈관리
             </p>
@@ -56,14 +56,14 @@ const MinjoyCare = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
             >
-              <div className="text-primary mb-4">{service.icon}</div>
-              <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-              <p className="text-gray-600 mb-6">{service.description}</p>
+              <div className="text-primary-dark mb-4">{service.icon}</div>
+              <h3 className="text-2xl font-bold mb-3 text-brown-dark">{service.title}</h3>
+              <p className="text-brown-light mb-6">{service.description}</p>
               <ul className="space-y-2">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-700">
+                  <li key={idx} className="flex items-center text-brown-dark">
                     <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                     {feature}
                   </li>
@@ -74,7 +74,7 @@ const MinjoyCare = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 md:p-12 text-white text-center">
+        <div className="bg-gradient-to-r from-primary-dark to-primary rounded-2xl p-8 md:p-12 text-white text-center shadow-xl">
           <h3 className="text-3xl font-bold mb-4">
             짧은 시간 목표 달성이 가능합니다
           </h3>
@@ -82,13 +82,13 @@ const MinjoyCare = () => {
             종합 관리로 확실한 효과를 경험하세요
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+            <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30">
               <p className="font-semibold">1회 체험 -1KG</p>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+            <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30">
               <p className="font-semibold">근력 +1KG 증가</p>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+            <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30">
               <p className="font-semibold">체지방률 -3% 감소</p>
             </div>
           </div>

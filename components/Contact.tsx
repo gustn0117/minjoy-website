@@ -38,7 +38,6 @@ const Contact = () => {
       setSubmitStatus('success')
       setFormData({ name: '', phone: '', service: '', message: '' })
 
-      // 3초 후 성공 메시지 숨기기
       setTimeout(() => setSubmitStatus('idle'), 5000)
     } catch (error) {
       setSubmitStatus('error')
@@ -56,13 +55,13 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="section-padding bg-white">
+    <section id="contact" className="section-padding bg-ivory">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">문의하기</span>
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-brown-dark">
             궁금하신 점이 있으시면 언제든 연락주세요
           </p>
         </div>
@@ -70,67 +69,67 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div>
-            <h3 className="text-3xl font-bold mb-8">연락처 정보</h3>
+            <h3 className="text-3xl font-bold mb-8 text-brown-dark">연락처 정보</h3>
 
             <div className="space-y-6 mb-8">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiPhone className="text-primary" size={20} />
+                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FiPhone className="text-primary-dark" size={20} />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">전화</h4>
-                  <p className="text-gray-600">전화 문의 가능</p>
-                  <p className="text-gray-600">카카오톡 상담 가능</p>
+                  <h4 className="font-semibold mb-1 text-brown-dark">전화</h4>
+                  <p className="text-brown-light">전화 문의 가능</p>
+                  <p className="text-brown-light">카카오톡 상담 가능</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiMail className="text-primary" size={20} />
+                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FiMail className="text-primary-dark" size={20} />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">이메일</h4>
-                  <p className="text-gray-600">이메일 문의 가능</p>
+                  <h4 className="font-semibold mb-1 text-brown-dark">이메일</h4>
+                  <p className="text-brown-light">이메일 문의 가능</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiMapPin className="text-primary" size={20} />
+                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FiMapPin className="text-primary-dark" size={20} />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">위치</h4>
-                  <p className="text-gray-600">민죠이짐: [주소]</p>
-                  <p className="text-gray-600">민죠이케어: [주소] (같은 건물 내)</p>
+                  <h4 className="font-semibold mb-1 text-brown-dark">위치</h4>
+                  <p className="text-brown-light">민죠이짐: [주소]</p>
+                  <p className="text-brown-light">민죠이케어: [주소] (같은 건물 내)</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiClock className="text-primary" size={20} />
+                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FiClock className="text-primary-dark" size={20} />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">운영시간</h4>
-                  <p className="text-gray-600">평일: 06:00 - 22:00</p>
-                  <p className="text-gray-600">주말: 08:00 - 20:00</p>
-                  <p className="text-gray-600 text-sm mt-1">※ 예약제 운영</p>
+                  <h4 className="font-semibold mb-1 text-brown-dark">운영시간</h4>
+                  <p className="text-brown-light">평일: 06:00 - 22:00</p>
+                  <p className="text-brown-light">주말: 08:00 - 20:00</p>
+                  <p className="text-brown-light text-sm mt-1">※ 예약제 운영</p>
                 </div>
               </div>
             </div>
 
             {/* Map Placeholder */}
-            <div className="bg-gray-100 rounded-2xl h-64 flex items-center justify-center">
+            <div className="bg-ivory-dark rounded-2xl h-64 flex items-center justify-center border border-primary-light/20">
               <div className="text-center">
-                <FiMapPin className="mx-auto mb-2 text-gray-400" size={40} />
-                <p className="text-gray-500">지도 위치</p>
+                <FiMapPin className="mx-auto mb-2 text-brown-light" size={40} />
+                <p className="text-brown-light">지도 위치</p>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div>
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8">
-              <h3 className="text-3xl font-bold mb-6">상담 신청</h3>
+            <div className="bg-gradient-to-br from-primary-light/30 to-ivory-dark rounded-2xl p-8 border border-primary-light/20">
+              <h3 className="text-3xl font-bold mb-6 text-brown-dark">상담 신청</h3>
 
               {/* 성공 메시지 */}
               {submitStatus === 'success' && (
@@ -156,7 +155,7 @@ const Contact = () => {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">이름 *</label>
+                  <label className="block text-sm font-medium mb-2 text-brown-dark">이름 *</label>
                   <input
                     type="text"
                     name="name"
@@ -164,13 +163,13 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="이름을 입력해주세요"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">연락처 *</label>
+                  <label className="block text-sm font-medium mb-2 text-brown-dark">연락처 *</label>
                   <input
                     type="tel"
                     name="phone"
@@ -178,20 +177,20 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="연락처를 입력해주세요"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">관심 서비스 *</label>
+                  <label className="block text-sm font-medium mb-2 text-brown-dark">관심 서비스 *</label>
                   <select
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
                     <option value="">선택해주세요</option>
                     <option value="gym">민죠이짐 (PT)</option>
@@ -201,14 +200,14 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">문의사항</label>
+                  <label className="block text-sm font-medium mb-2 text-brown-dark">문의사항</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="궁금하신 점을 자유롭게 작성해주세요"
                   />
                 </div>
@@ -235,7 +234,7 @@ const Contact = () => {
                 </button>
               </form>
 
-              <p className="text-sm text-gray-500 mt-4 text-center">
+              <p className="text-sm text-brown-light mt-4 text-center">
                 상담 신청 후 24시간 내에 연락드립니다
               </p>
             </div>
