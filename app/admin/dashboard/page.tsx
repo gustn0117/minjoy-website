@@ -23,7 +23,6 @@ import {
   FiPlus,
   FiX,
   FiSave,
-  FiActivity,
   FiTarget,
   FiHeart,
   FiMapPin,
@@ -495,6 +494,7 @@ export default function AdminDashboard() {
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formDataUpload,
+        credentials: 'include', // 쿠키 포함하여 인증
       })
 
       if (!response.ok) {
@@ -764,172 +764,6 @@ export default function AdminDashboard() {
     }
   }
 
-  // 실시간 미리보기 렌더링
-  const renderPreview = () => {
-    switch (activeTab) {
-      case 'hero-content':
-        return (
-          <div className="bg-gradient-to-r from-primary-dark to-primary rounded-xl p-6 text-white relative overflow-hidden">
-            <div className="relative z-10">
-              <h2 className="text-2xl font-bold mb-2">{(formData.title as string) || '제목을 입력하세요'}</h2>
-              <p className="text-lg opacity-90 mb-1">{(formData.subtitle as string) || '부제목'}</p>
-              <p className="text-sm opacity-80 mb-4 line-clamp-2">{(formData.description as string) || '설명'}</p>
-              <div className="flex gap-2">
-                <span className="px-4 py-2 bg-white text-primary-dark rounded-full text-sm font-medium">
-                  {(formData.buttonText1 as string) || '버튼1'}
-                </span>
-                {(formData.buttonText2 as string) && (
-                  <span className="px-4 py-2 border border-white rounded-full text-sm">
-                    {formData.buttonText2 as string}
-                  </span>
-                )}
-              </div>
-            </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-          </div>
-        )
-      case 'hero-stats':
-        return (
-          <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center border border-white/20">
-            <div className="text-3xl font-bold text-primary mb-1">{(formData.value as string) || '0'}</div>
-            <div className="text-sm text-gray-600">{(formData.label as string) || '레이블'}</div>
-          </div>
-        )
-      case 'gym-programs':
-      case 'care-services':
-        return (
-          <div className="bg-white rounded-xl overflow-hidden shadow-lg border">
-            <div className={`h-32 ${activeTab === 'gym-programs' ? 'bg-gradient-to-br from-orange-400 to-orange-600' : 'bg-gradient-to-br from-pink-400 to-pink-600'} flex items-center justify-center`}>
-              {formData.image ? (
-                <Image src={formData.image as string} alt="Preview" width={200} height={128} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-4xl">{activeTab === 'gym-programs' ? '🏋️' : '💆'}</span>
-              )}
-            </div>
-            <div className="p-4">
-              <h4 className="font-bold text-lg mb-2">{(formData.title as string) || '제목'}</h4>
-              <p className="text-sm text-gray-600 line-clamp-2">{(formData.description as string) || '설명'}</p>
-            </div>
-          </div>
-        )
-      case 'facilities':
-        return (
-          <div className="bg-white rounded-xl overflow-hidden shadow-lg border">
-            <div className={`h-32 ${formData.type === 'gym' ? 'bg-gradient-to-br from-orange-400 to-orange-600' : 'bg-gradient-to-br from-pink-400 to-pink-600'} flex items-center justify-center`}>
-              {formData.image ? (
-                <Image src={formData.image as string} alt="Preview" width={200} height={128} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-4xl">{formData.type === 'gym' ? '🏋️' : '💆'}</span>
-              )}
-            </div>
-            <div className="p-4">
-              <span className={`text-xs px-2 py-1 rounded-full ${formData.type === 'gym' ? 'bg-orange-100 text-orange-600' : 'bg-pink-100 text-pink-600'}`}>
-                {formData.type === 'gym' ? '민죠이짐' : '민죠이케어'}
-              </span>
-              <h4 className="font-bold mt-2">{(formData.title as string) || '시설명'}</h4>
-              <p className="text-sm text-gray-600">{(formData.description as string) || '설명'}</p>
-            </div>
-          </div>
-        )
-      case 'floating-buttons':
-        return (
-          <div className={`inline-flex items-center gap-3 px-4 py-3 rounded-full shadow-lg ${(formData.bgColor as string) || 'bg-gray-200'} ${(formData.textColor as string) || 'text-gray-800'}`}>
-            <span className="w-8 h-8 flex items-center justify-center">
-              {formData.type === 'kakao' && '💬'}
-              {formData.type === 'naver' && '📗'}
-              {formData.type === 'phone' && '📞'}
-              {formData.type === 'inquiry' && '✉️'}
-              {!formData.type && '❓'}
-            </span>
-            <span className="font-medium text-sm">{(formData.label as string) || '버튼 레이블'}</span>
-          </div>
-        )
-      case 'gallery':
-        return (
-          <div className="bg-white rounded-xl overflow-hidden shadow-lg border">
-            <div className="grid grid-cols-2 h-32">
-              <div className="bg-gray-200 flex items-center justify-center text-xs text-gray-500">
-                {formData.beforeImage ? (
-                  <Image src={formData.beforeImage as string} alt="Before" width={100} height={128} className="w-full h-full object-cover" />
-                ) : 'BEFORE'}
-              </div>
-              <div className="bg-gray-300 flex items-center justify-center text-xs text-gray-500">
-                {formData.afterImage ? (
-                  <Image src={formData.afterImage as string} alt="After" width={100} height={128} className="w-full h-full object-cover" />
-                ) : 'AFTER'}
-              </div>
-            </div>
-            <div className="p-3 text-center">
-              <div className="flex justify-center gap-4 text-sm">
-                <span className="text-primary font-bold">{(formData.weightChange as string) || '-0kg'}</span>
-                <span className="text-orange-500 font-bold">{(formData.fatChange as string) || '-0%'}</span>
-              </div>
-              <div className="text-xs text-gray-500 mt-1">{(formData.period as string) || '기간'}</div>
-            </div>
-          </div>
-        )
-      case 'review-images':
-        return (
-          <div className="w-40 h-72 bg-black rounded-[2rem] p-1.5 shadow-xl">
-            <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden relative">
-              {formData.image ? (
-                <Image src={formData.image as string} alt="Review" width={160} height={280} className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 text-xs">
-                  리뷰 이미지
-                </div>
-              )}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-black rounded-b-xl"></div>
-            </div>
-          </div>
-        )
-      case 'about-features':
-        return (
-          <div className="bg-white p-4 rounded-xl shadow border flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center text-white">
-              ✓
-            </div>
-            <span className="font-medium">{(formData.title as string) || '특징을 입력하세요'}</span>
-          </div>
-        )
-      case 'gym-targets':
-        return (
-          <div className="bg-white p-4 rounded-xl shadow border">
-            <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 text-white rounded-full flex items-center justify-center font-bold mb-2">1</div>
-            <h4 className="font-bold text-orange-500 mb-1">{(formData.title as string) || '제목'}</h4>
-            <p className="text-sm text-gray-600">{(formData.description as string) || '설명'}</p>
-          </div>
-        )
-      case 'contact-info':
-        return (
-          <div className="bg-white p-4 rounded-xl shadow border flex items-start gap-3">
-            <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-              {formData.type === 'phone' && '📞'}
-              {formData.type === 'email' && '✉️'}
-              {formData.type === 'address' && '📍'}
-              {formData.type === 'hours' && '🕐'}
-              {formData.type === 'kakao' && '💬'}
-              {formData.type === 'instagram' && '📷'}
-            </div>
-            <div>
-              <div className="text-sm text-gray-500">{(formData.label as string) || '레이블'}</div>
-              <div className="font-medium">{(formData.value as string) || '값'}</div>
-            </div>
-          </div>
-        )
-      case 'menu-items':
-        return (
-          <div className="bg-white px-6 py-3 rounded-lg shadow border inline-block">
-            <span className="font-medium text-gray-700 hover:text-primary cursor-pointer">
-              {(formData.name as string) || '메뉴명'}
-            </span>
-          </div>
-        )
-      default:
-        return null
-    }
-  }
-
   const renderContentForm = () => {
     const config = contentTypeConfig[activeTab]
     if (!config) return null
@@ -945,55 +779,32 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 입력 폼 */}
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {config.fields.map((field) => (
-                <div key={field.name} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {field.label}
-                    {field.required && <span className="text-red-500 ml-1">*</span>}
-                  </label>
-                  {renderFormField(field)}
-                </div>
-              ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {config.fields.map((field) => (
+            <div key={field.name} className={field.type === 'textarea' || field.type === 'image' ? 'md:col-span-2' : ''}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {field.label}
+                {field.required && <span className="text-red-500 ml-1">*</span>}
+              </label>
+              {renderFormField(field)}
             </div>
+          ))}
+        </div>
 
-            <div className="mt-6 flex justify-end space-x-3">
-              <button
-                onClick={cancelEdit}
-                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              >
-                취소
-              </button>
-              <button
-                onClick={isCreating ? handleCreateContent : handleUpdateContent}
-                className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark flex items-center space-x-2"
-              >
-                <FiSave />
-                <span>{isCreating ? '생성' : '저장'}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* 실시간 미리보기 */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-4">
-              <div className="bg-gray-50 rounded-xl p-4 border-2 border-dashed border-gray-200">
-                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                  <FiActivity size={14} />
-                  실시간 미리보기
-                </div>
-                <div className="flex items-center justify-center min-h-[200px]">
-                  {renderPreview()}
-                </div>
-                <p className="text-xs text-gray-400 text-center mt-3">
-                  실제 사이트에 표시되는 모습입니다
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="mt-6 flex justify-end space-x-3">
+          <button
+            onClick={cancelEdit}
+            className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+          >
+            취소
+          </button>
+          <button
+            onClick={isCreating ? handleCreateContent : handleUpdateContent}
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark flex items-center space-x-2"
+          >
+            <FiSave />
+            <span>{isCreating ? '생성' : '저장'}</span>
+          </button>
         </div>
       </div>
     )
