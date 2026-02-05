@@ -12,13 +12,22 @@ interface MenuItem {
   order: number
 }
 
+// 기본 메뉴 항목 - 항상 사용 가능
+const DEFAULT_MENU_ITEMS: MenuItem[] = [
+  { id: '1', name: '홈', href: '/', order: 0 },
+  { id: '2', name: '브랜드 소개', href: '/about', order: 1 },
+  { id: '3', name: '민죠이짐', href: '/gym', order: 2 },
+  { id: '4', name: '민죠이케어', href: '/care', order: 3 },
+  { id: '5', name: '시설 소개', href: '/facilities', order: 4 },
+  { id: '6', name: '변화 갤러리', href: '/gallery', order: 5 },
+  { id: '7', name: '문의하기', href: '/contact', order: 6 },
+]
+
 const Header = () => {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
 
-  // 홈페이지에서만 스크롤에 따라 배경색 변경
   const isHomePage = pathname === '/'
 
   useEffect(() => {
@@ -29,55 +38,16 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // 기본값 - 페이지 경로
-  const defaultMenuItems = [
-    { id: '1', name: '홈', href: '/', order: 0 },
-    { id: '2', name: '브랜드 소개', href: '/about', order: 1 },
-    { id: '3', name: '민죠이짐', href: '/gym', order: 2 },
-    { id: '4', name: '민죠이케어', href: '/care', order: 3 },
-    { id: '5', name: '시설 소개', href: '/facilities', order: 4 },
-    { id: '6', name: '변화 갤러리', href: '/gallery', order: 5 },
-    { id: '7', name: '문의하기', href: '/contact', order: 6 },
-  ]
-
-  // 앵커 링크를 페이지 경로로 변환하는 맵
-  const anchorToPageMap: Record<string, string> = {
-    '#home': '/',
-    '#about': '/about',
-    '#gym': '/gym',
-    '#care': '/care',
-    '#facilities': '/facilities',
-    '#gallery': '/gallery',
-    '#contact': '/contact',
-  }
-
+  // 페이지 이동 시 모바일 메뉴 닫기
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/content?type=menu-items&activeOnly=true')
-        if (response.ok) {
-          const data = await response.json()
-          // href가 앵커 링크인 경우 페이지 경로로 변환
-          const items = (data.items || []).map((item: MenuItem) => ({
-            ...item,
-            href: item.href.startsWith('#')
-              ? (anchorToPageMap[item.href] || '/')
-              : item.href
-          }))
-          setMenuItems(items)
-        }
-      } catch (error) {
-        console.error('Failed to fetch menu items:', error)
-      }
-    }
+    setIsMobileMenuOpen(false)
+  }, [pathname])
 
-    fetchData()
-  }, [])
-
-  const items = menuItems.length > 0 ? menuItems : defaultMenuItems
-
-  // 홈페이지가 아니거나 스크롤되면 배경색 적용
   const showBackground = !isHomePage || isScrolled
+
+  const handleNavClick = () => {
+    setIsMobileMenuOpen(false)
+  }
 
   return (
     <header
@@ -88,7 +58,7 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 relative z-10">
             <div className={`text-2xl font-bold transition-colors ${
               showBackground ? 'text-brown-dark' : 'text-white'
             }`}>
@@ -98,11 +68,12 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {items.map((item) => (
+            {DEFAULT_MENU_ITEMS.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className={`font-medium transition-colors hover:text-primary-dark ${
+                onClick={handleNavClick}
+                className={`font-medium transition-colors hover:text-primary-dark relative z-10 ${
                   showBackground ? 'text-brown-dark' : 'text-white'
                 } ${pathname === item.href ? 'text-primary-dark' : ''}`}
               >
@@ -115,7 +86,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center">
             <Link
               href="/admin"
-              className={`p-2 rounded-full transition-colors ${
+              className={`p-2 rounded-full transition-colors relative z-10 ${
                 showBackground ? 'text-brown-dark hover:bg-primary-light/30' : 'text-white hover:bg-white/20'
               }`}
             >
@@ -125,8 +96,9 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 transition-colors ${
+            className={`lg:hidden p-2 transition-colors relative z-10 ${
               showBackground ? 'text-brown-dark' : 'text-white'
             }`}
           >
@@ -139,14 +111,14 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-ivory shadow-lg">
           <nav className="container-custom py-4 space-y-4">
-            {items.map((item) => (
+            {DEFAULT_MENU_ITEMS.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
                 className={`block py-2 text-brown-dark hover:text-primary-dark font-medium transition-colors ${
                   pathname === item.href ? 'text-primary-dark' : ''
                 }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick}
               >
                 {item.name}
               </Link>
