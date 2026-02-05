@@ -236,22 +236,55 @@ const textColorOptions = [
   { value: 'text-gray-800', label: '진한 회색' },
 ]
 
-// 사이드바 메뉴
-const sidebarMenus = [
-  { id: 'inquiries', label: '문의 관리', icon: FiMessageSquare },
-  { id: 'hero-content', label: '히어로 섹션', icon: FiHome },
-  { id: 'hero-stats', label: '히어로 통계', icon: FiActivity },
-  { id: 'about-features', label: 'About 특징', icon: FiGrid },
-  { id: 'gym-programs', label: '짐 프로그램', icon: FiTarget },
-  { id: 'gym-targets', label: '짐 대상', icon: FiUser },
-  { id: 'care-services', label: '케어 서비스', icon: FiHeart },
-  { id: 'facilities', label: '시설 정보', icon: FiSettings },
-  { id: 'gallery', label: '갤러리', icon: FiImage },
-  { id: 'review-images', label: '리뷰 이미지', icon: FiImage },
-  { id: 'floating-buttons', label: '플로팅 버튼', icon: FiPhone },
-  { id: 'contact-info', label: '연락처', icon: FiMapPin },
-  { id: 'menu-items', label: '메뉴', icon: FiList },
+// 사이드바 메뉴 (카테고리별 그룹화)
+const sidebarMenuGroups = [
+  {
+    title: '고객 관리',
+    items: [
+      { id: 'inquiries', label: '상담 문의', icon: FiMessageSquare, desc: '고객 문의 확인' },
+    ],
+  },
+  {
+    title: '메인 페이지',
+    items: [
+      { id: 'hero-content', label: '메인 배너', icon: FiHome, desc: '첫 화면 배너' },
+      { id: 'hero-stats', label: '실적 통계', icon: FiActivity, desc: '500+ 회원 등' },
+      { id: 'about-features', label: '브랜드 특징', icon: FiGrid, desc: '민죠이만의 특별함' },
+      { id: 'review-images', label: '리뷰 이미지', icon: FiImage, desc: '고객 후기 스크린샷' },
+    ],
+  },
+  {
+    title: '민죠이짐',
+    items: [
+      { id: 'gym-programs', label: 'PT 프로그램', icon: FiTarget, desc: '다이어트, 힙업 등' },
+      { id: 'gym-targets', label: '추천 대상', icon: FiUser, desc: '이런 분께 추천' },
+    ],
+  },
+  {
+    title: '민죠이케어',
+    items: [
+      { id: 'care-services', label: '케어 서비스', icon: FiHeart, desc: '순환, 탄력, 스파' },
+    ],
+  },
+  {
+    title: '공통 콘텐츠',
+    items: [
+      { id: 'facilities', label: '시설 소개', icon: FiSettings, desc: '짐/케어 시설 사진' },
+      { id: 'gallery', label: '비포&애프터', icon: FiImage, desc: '변화 사진' },
+    ],
+  },
+  {
+    title: '사이트 설정',
+    items: [
+      { id: 'floating-buttons', label: '빠른 연락 버튼', icon: FiPhone, desc: '카톡, 네이버, 전화' },
+      { id: 'contact-info', label: '연락처 정보', icon: FiMapPin, desc: '주소, 전화번호' },
+      { id: 'menu-items', label: '상단 메뉴', icon: FiList, desc: '네비게이션' },
+    ],
+  },
 ]
+
+// 플랫 메뉴 목록 (헤더 타이틀 표시용)
+const allMenuItems = sidebarMenuGroups.flatMap(group => group.items)
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -1112,20 +1145,40 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        <nav className="p-4 space-y-2">
-          {sidebarMenus.map((menu) => (
-            <button
-              key={menu.id}
-              onClick={() => setActiveTab(menu.id)}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
-                activeTab === menu.id
-                  ? 'bg-primary/10 text-primary'
-                  : 'hover:bg-gray-100 text-gray-600'
-              }`}
-            >
-              <menu.icon size={20} />
-              {sidebarOpen && <span>{menu.label}</span>}
-            </button>
+        <nav className="p-2 space-y-1 overflow-y-auto max-h-[calc(100vh-80px)]">
+          {sidebarMenuGroups.map((group, groupIndex) => (
+            <div key={group.title} className={groupIndex > 0 ? 'pt-3' : ''}>
+              {sidebarOpen && (
+                <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  {group.title}
+                </div>
+              )}
+              {!sidebarOpen && groupIndex > 0 && (
+                <div className="border-t border-gray-200 my-2"></div>
+              )}
+              <div className="space-y-1">
+                {group.items.map((menu) => (
+                  <button
+                    key={menu.id}
+                    onClick={() => setActiveTab(menu.id)}
+                    className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-colors ${
+                      activeTab === menu.id
+                        ? 'bg-primary/10 text-primary'
+                        : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                    title={!sidebarOpen ? `${menu.label}: ${menu.desc}` : undefined}
+                  >
+                    <menu.icon size={18} className="flex-shrink-0" />
+                    {sidebarOpen && (
+                      <div className="text-left">
+                        <div className="text-sm font-medium">{menu.label}</div>
+                        <div className="text-xs text-gray-400">{menu.desc}</div>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </nav>
       </aside>
@@ -1137,7 +1190,7 @@ export default function AdminDashboard() {
           <div className="px-6 py-4 flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-800">
-                {sidebarMenus.find(m => m.id === activeTab)?.label || '관리자'}
+                {allMenuItems.find(m => m.id === activeTab)?.label || '관리자'}
               </h1>
               <p className="text-sm text-gray-500">안녕하세요, {adminName}님</p>
             </div>
