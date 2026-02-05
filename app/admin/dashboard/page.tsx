@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import {
   FiLogOut,
   FiRefreshCw,
@@ -27,6 +28,7 @@ import {
   FiHeart,
   FiMapPin,
   FiList,
+  FiUpload,
 } from 'react-icons/fi'
 
 interface Inquiry {
@@ -135,8 +137,8 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
       { name: 'period', label: '기간', type: 'text', required: true },
       { name: 'weightChange', label: '체중 변화', type: 'text', required: true },
       { name: 'fatChange', label: '체지방 변화', type: 'text', required: true },
-      { name: 'beforeImage', label: '비포 이미지 URL', type: 'text' },
-      { name: 'afterImage', label: '애프터 이미지 URL', type: 'text' },
+      { name: 'beforeImage', label: '비포 이미지', type: 'image' },
+      { name: 'afterImage', label: '애프터 이미지', type: 'image' },
       { name: 'description', label: '설명', type: 'textarea' },
       { name: 'order', label: '순서', type: 'number' },
       { name: 'isActive', label: '활성화', type: 'checkbox' },
@@ -215,6 +217,8 @@ export default function AdminDashboard() {
   const [editingItem, setEditingItem] = useState<ContentItem | null>(null)
   const [isCreating, setIsCreating] = useState(false)
   const [formData, setFormData] = useState<Record<string, unknown>>({})
+  const [uploadingField, setUploadingField] = useState<string | null>(null)
+  const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({})
 
   const fetchInquiries = useCallback(async (page = 1) => {
     setIsLoading(true)
@@ -395,6 +399,40 @@ export default function AdminDashboard() {
     }
   }
 
+  const handleImageUpload = async (fieldName: string, file: File) => {
+    setUploadingField(fieldName)
+    try {
+      const formDataUpload = new FormData()
+      formDataUpload.append('file', file)
+      formDataUpload.append('folder', activeTab)
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formDataUpload,
+      })
+
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || '업로드 실패')
+      }
+
+      const result = await response.json()
+      setFormData({ ...formData, [fieldName]: result.url })
+    } catch (error) {
+      console.error('Upload error:', error)
+      alert(error instanceof Error ? error.message : '이미지 업로드 중 오류가 발생했습니다.')
+    } finally {
+      setUploadingField(null)
+    }
+  }
+
+  const handleRemoveImage = (fieldName: string) => {
+    setFormData({ ...formData, [fieldName]: '' })
+    if (fileInputRefs.current[fieldName]) {
+      fileInputRefs.current[fieldName]!.value = ''
+    }
+  }
+
   const startEditing = (item: ContentItem) => {
     setEditingItem(item)
     setIsCreating(false)
@@ -529,6 +567,61 @@ export default function AdminDashboard() {
               <option key={type.value} value={type.value}>{type.label}</option>
             ))}
           </select>
+        )
+      case 'image':
+        return (
+          <div className="space-y-2">
+            {value && typeof value === 'string' ? (
+              <div className="relative inline-block">
+                <Image
+                  src={value}
+                  alt="Preview"
+                  width={200}
+                  height={200}
+                  className="rounded-lg object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(field.name)}
+                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600"
+                >
+                  <FiX size={14} />
+                </button>
+              </div>
+            ) : (
+              <div
+                onClick={() => fileInputRefs.current[field.name]?.click()}
+                className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
+                  uploadingField === field.name
+                    ? 'border-primary bg-primary/5'
+                    : 'border-gray-300 hover:border-primary hover:bg-gray-50'
+                }`}
+              >
+                {uploadingField === field.name ? (
+                  <div className="flex flex-col items-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-2"></div>
+                    <p className="text-sm text-gray-500">업로드 중...</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <FiUpload size={32} className="text-gray-400 mb-2" />
+                    <p className="text-sm text-gray-500">클릭하여 이미지 업로드</p>
+                    <p className="text-xs text-gray-400 mt-1">JPG, PNG, GIF, WEBP (최대 10MB)</p>
+                  </div>
+                )}
+              </div>
+            )}
+            <input
+              ref={(el) => { fileInputRefs.current[field.name] = el }}
+              type="file"
+              accept="image/jpeg,image/png,image/gif,image/webp"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) handleImageUpload(field.name, file)
+              }}
+              className="hidden"
+            />
+          </div>
         )
       default:
         return (

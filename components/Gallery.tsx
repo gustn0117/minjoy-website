@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 interface GalleryItem {
   id: string
@@ -61,11 +62,36 @@ const Gallery = () => {
               key={item.id}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
             >
-              <div className="h-64 bg-gradient-to-br from-primary-light to-ivory flex items-center justify-center">
+              <div className="h-64 bg-gradient-to-br from-primary-light to-ivory flex items-center justify-center relative overflow-hidden">
                 {item.beforeImage && item.afterImage ? (
                   <div className="flex w-full h-full">
-                    <div className="w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${item.beforeImage})` }}></div>
-                    <div className="w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${item.afterImage})` }}></div>
+                    <div className="w-1/2 h-full relative">
+                      <Image
+                        src={item.beforeImage}
+                        alt="Before"
+                        fill
+                        className="object-cover"
+                      />
+                      <span className="absolute bottom-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Before</span>
+                    </div>
+                    <div className="w-1/2 h-full relative">
+                      <Image
+                        src={item.afterImage}
+                        alt="After"
+                        fill
+                        className="object-cover"
+                      />
+                      <span className="absolute bottom-2 right-2 bg-primary/80 text-white text-xs px-2 py-1 rounded">After</span>
+                    </div>
+                  </div>
+                ) : item.beforeImage || item.afterImage ? (
+                  <div className="w-full h-full relative">
+                    <Image
+                      src={(item.beforeImage || item.afterImage)!}
+                      alt="Gallery"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 ) : (
                   <div className="text-center">
