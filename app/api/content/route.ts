@@ -14,6 +14,7 @@ const contentTypes = {
   'gallery': prisma.galleryItem,
   'contact-info': prisma.contactInfo,
   'menu-items': prisma.menuItem,
+  'review-images': prisma.reviewImage,
 } as const
 
 type ContentType = keyof typeof contentTypes

@@ -71,6 +71,7 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
       { name: 'buttonLink1', label: '버튼1 링크', type: 'text', required: true },
       { name: 'buttonText2', label: '버튼2 텍스트', type: 'text' },
       { name: 'buttonLink2', label: '버튼2 링크', type: 'text' },
+      { name: 'backgroundImage', label: '배경 이미지', type: 'image' },
       { name: 'order', label: '순서', type: 'number' },
       { name: 'isActive', label: '활성화', type: 'checkbox' },
     ],
@@ -98,6 +99,7 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
       { name: 'title', label: '제목', type: 'text', required: true },
       { name: 'description', label: '설명', type: 'textarea', required: true },
       { name: 'icon', label: '아이콘', type: 'select', required: true },
+      { name: 'image', label: '프로그램 이미지', type: 'image' },
       { name: 'order', label: '순서', type: 'number' },
       { name: 'isActive', label: '활성화', type: 'checkbox' },
     ],
@@ -117,6 +119,7 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
       { name: 'title', label: '제목', type: 'text', required: true },
       { name: 'description', label: '설명', type: 'textarea', required: true },
       { name: 'icon', label: '아이콘', type: 'select', required: true },
+      { name: 'image', label: '서비스 이미지', type: 'image' },
       { name: 'features', label: '특징 (쉼표로 구분)', type: 'text', required: true },
       { name: 'order', label: '순서', type: 'number' },
       { name: 'isActive', label: '활성화', type: 'checkbox' },
@@ -127,6 +130,8 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
     fields: [
       { name: 'type', label: '타입', type: 'facility-type', required: true },
       { name: 'title', label: '제목', type: 'text', required: true },
+      { name: 'description', label: '설명', type: 'textarea' },
+      { name: 'image', label: '시설 이미지', type: 'image' },
       { name: 'order', label: '순서', type: 'number' },
       { name: 'isActive', label: '활성화', type: 'checkbox' },
     ],
@@ -164,6 +169,16 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
       { name: 'isActive', label: '활성화', type: 'checkbox' },
     ],
   },
+  'review-images': {
+    label: '리뷰 이미지',
+    fields: [
+      { name: 'image', label: '리뷰 스크린샷', type: 'image', required: true },
+      { name: 'title', label: '제목', type: 'text' },
+      { name: 'source', label: '출처 (네이버, 카카오 등)', type: 'text' },
+      { name: 'order', label: '순서', type: 'number' },
+      { name: 'isActive', label: '활성화', type: 'checkbox' },
+    ],
+  },
 }
 
 const iconOptions = [
@@ -196,6 +211,7 @@ const sidebarMenus = [
   { id: 'care-services', label: '케어 서비스', icon: FiHeart },
   { id: 'facilities', label: '시설 정보', icon: FiSettings },
   { id: 'gallery', label: '갤러리', icon: FiImage },
+  { id: 'review-images', label: '리뷰 이미지', icon: FiImage },
   { id: 'contact-info', label: '연락처', icon: FiMapPin },
   { id: 'menu-items', label: '메뉴', icon: FiList },
 ]

@@ -1,9 +1,44 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+interface ReviewImage {
+  id: string
+  image: string
+  title?: string
+  source?: string
+  order: number
+}
+
 const Review = () => {
+  const [reviewImages, setReviewImages] = useState<ReviewImage[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=review-images&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          setReviewImages(data.items || [])
+        }
+      } catch (error) {
+        console.error('Failed to fetch review images:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 기본 플레이스홀더 이미지 (관리자가 업로드하기 전)
+  const defaultImages = [
+    { id: '1', image: '/images/1.png', order: 0 },
+    { id: '2', image: '/images/1.png', order: 1 },
+  ]
+
+  const images = reviewImages.length > 0 ? reviewImages : defaultImages
+
   return (
     <section className="relative py-20 bg-gradient-to-br from-amber-900 via-amber-800 to-primary-dark overflow-hidden">
       {/* Background overlay */}
@@ -28,35 +63,43 @@ const Review = () => {
             </Link>
           </div>
 
-          {/* Right Content - Image/Phone Mockups */}
+          {/* Right Content - Phone Mockups */}
           <div className="relative flex justify-center lg:justify-end">
             {/* Phone Frame 1 */}
             <div className="relative w-56 h-[450px] bg-black rounded-[3rem] p-2 shadow-2xl transform -rotate-6 z-10">
               <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-                <Image
-                  src="/images/1.png"
-                  alt="리뷰 스크린샷"
-                  fill
-                  className="object-cover"
-                />
+                {images[0] && (
+                  <Image
+                    src={images[0].image}
+                    alt="리뷰 스크린샷"
+                    fill
+                    className="object-cover"
+                  />
+                )}
                 {/* Notch */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl"></div>
+                {/* Home indicator */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-black/30 rounded-full"></div>
               </div>
             </div>
 
             {/* Phone Frame 2 */}
-            <div className="relative w-56 h-[450px] bg-black rounded-[3rem] p-2 shadow-2xl transform rotate-6 -ml-20 z-20">
-              <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-                <Image
-                  src="/images/1.png"
-                  alt="리뷰 스크린샷"
-                  fill
-                  className="object-cover"
-                />
-                {/* Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl"></div>
+            {images[1] && (
+              <div className="relative w-56 h-[450px] bg-black rounded-[3rem] p-2 shadow-2xl transform rotate-6 -ml-20 z-20">
+                <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
+                  <Image
+                    src={images[1].image}
+                    alt="리뷰 스크린샷"
+                    fill
+                    className="object-cover"
+                  />
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl"></div>
+                  {/* Home indicator */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-black/30 rounded-full"></div>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Decorative elements */}
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-gold/20 rounded-full blur-3xl"></div>

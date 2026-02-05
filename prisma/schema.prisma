@@ -54,18 +54,19 @@ model SiteSetting {
 
 // 히어로 섹션
 model HeroContent {
-  id          String   @id @default(cuid())
-  title       String
-  subtitle    String
-  description String   @db.Text
-  buttonText1 String
-  buttonLink1 String
-  buttonText2 String?
-  buttonLink2 String?
-  isActive    Boolean  @default(true)
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  title           String
+  subtitle        String
+  description     String   @db.Text
+  buttonText1     String
+  buttonLink1     String
+  buttonText2     String?
+  buttonLink2     String?
+  backgroundImage String?  // 배경 이미지
+  isActive        Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@map("hero_contents")
 }
@@ -101,6 +102,7 @@ model GymProgram {
   title       String
   description String   @db.Text
   icon        String   // 아이콘 이름 (FiTarget, FiHeart 등)
+  image       String?  // 프로그램 이미지
   isActive    Boolean  @default(true)
   order       Int      @default(0)
   createdAt   DateTime @default(now())
@@ -128,6 +130,7 @@ model CareService {
   title       String
   description String   @db.Text
   icon        String   // 아이콘 이름
+  image       String?  // 서비스 이미지
   features    String[] // 특징 목록
   isActive    Boolean  @default(true)
   order       Int      @default(0)
@@ -139,13 +142,15 @@ model CareService {
 
 // 시설 정보
 model Facility {
-  id        String   @id @default(cuid())
-  type      String   // gym, care
-  title     String
-  isActive  Boolean  @default(true)
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  type        String   // gym, care
+  title       String
+  description String?  @db.Text
+  image       String?  // 시설 이미지
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("facilities")
 }
@@ -193,4 +198,18 @@ model MenuItem {
   updatedAt DateTime @updatedAt
 
   @@map("menu_items")
+}
+
+// 리뷰 스크린샷
+model ReviewImage {
+  id          String   @id @default(cuid())
+  image       String   // 리뷰 스크린샷 이미지
+  title       String?  // 제목 (선택)
+  source      String?  // 출처 (네이버, 카카오 등)
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("review_images")
 }
