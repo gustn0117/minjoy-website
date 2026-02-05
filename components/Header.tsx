@@ -29,23 +29,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/content?type=menu-items&activeOnly=true')
-        if (response.ok) {
-          const data = await response.json()
-          setMenuItems(data.items || [])
-        }
-      } catch (error) {
-        console.error('Failed to fetch menu items:', error)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  // 기본값 - 페이지 경로로 변경
+  // 기본값 - 페이지 경로
   const defaultMenuItems = [
     { id: '1', name: '홈', href: '/', order: 0 },
     { id: '2', name: '브랜드 소개', href: '/about', order: 1 },
@@ -55,6 +39,40 @@ const Header = () => {
     { id: '6', name: '변화 갤러리', href: '/gallery', order: 5 },
     { id: '7', name: '문의하기', href: '/contact', order: 6 },
   ]
+
+  // 앵커 링크를 페이지 경로로 변환하는 맵
+  const anchorToPageMap: Record<string, string> = {
+    '#home': '/',
+    '#about': '/about',
+    '#gym': '/gym',
+    '#care': '/care',
+    '#facilities': '/facilities',
+    '#gallery': '/gallery',
+    '#contact': '/contact',
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=menu-items&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          // href가 앵커 링크인 경우 페이지 경로로 변환
+          const items = (data.items || []).map((item: MenuItem) => ({
+            ...item,
+            href: item.href.startsWith('#')
+              ? (anchorToPageMap[item.href] || '/')
+              : item.href
+          }))
+          setMenuItems(items)
+        }
+      } catch (error) {
+        console.error('Failed to fetch menu items:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const items = menuItems.length > 0 ? menuItems : defaultMenuItems
 
