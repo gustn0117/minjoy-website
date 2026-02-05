@@ -29,9 +29,9 @@ async function main() {
         subtitle: '운동과 관리를 한 곳에서!',
         description: '단기간에 확실한 변화를 경험하세요',
         buttonText1: '상담 신청하기',
-        buttonLink1: '#contact',
+        buttonLink1: '/contact',
         buttonText2: '더 알아보기',
-        buttonLink2: '#about',
+        buttonLink2: '/about',
       },
     })
     console.log('히어로 콘텐츠 생성')
@@ -163,13 +163,13 @@ async function main() {
   if (!existingMenu) {
     await prisma.menuItem.createMany({
       data: [
-        { name: '홈', href: '#home', order: 0 },
-        { name: '브랜드 소개', href: '#about', order: 1 },
-        { name: '민죠이짐', href: '#minjoy-gym', order: 2 },
-        { name: '민죠이케어', href: '#minjoy-care', order: 3 },
-        { name: '시설 소개', href: '#facilities', order: 4 },
-        { name: '변화 갤러리', href: '#gallery', order: 5 },
-        { name: '문의하기', href: '#contact', order: 6 },
+        { name: '홈', href: '/', order: 0 },
+        { name: '브랜드 소개', href: '/about', order: 1 },
+        { name: '민죠이짐', href: '/gym', order: 2 },
+        { name: '민죠이케어', href: '/care', order: 3 },
+        { name: '시설 소개', href: '/facilities', order: 4 },
+        { name: '변화 갤러리', href: '/gallery', order: 5 },
+        { name: '문의하기', href: '/contact', order: 6 },
       ],
     })
     console.log('메뉴 아이템 생성')

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 interface HeroContent {
   id: string
@@ -57,9 +58,9 @@ const Hero = () => {
     subtitle: '운동과 관리를 한 곳에서!',
     description: '단기간에 확실한 변화를 경험하세요',
     buttonText1: '상담 신청하기',
-    buttonLink1: '#contact',
+    buttonLink1: '/contact',
     buttonText2: '더 알아보기',
-    buttonLink2: '#about',
+    buttonLink2: '/about',
   }
 
   const stats = heroStats.length > 0 ? heroStats : [
@@ -108,13 +109,13 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={content.buttonLink1} className="bg-gradient-to-r from-primary-dark to-primary text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
+          <Link href={content.buttonLink1} className="bg-gradient-to-r from-primary-dark to-primary text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
             {content.buttonText1}
-          </a>
+          </Link>
           {content.buttonText2 && (
-            <a href={content.buttonLink2 || '#'} className="border-2 border-ivory text-ivory px-8 py-3 rounded-full font-medium hover:bg-ivory hover:text-brown-dark transition-all duration-300">
+            <Link href={content.buttonLink2 || '/'} className="border-2 border-ivory text-ivory px-8 py-3 rounded-full font-medium hover:bg-ivory hover:text-brown-dark transition-all duration-300">
               {content.buttonText2}
-            </a>
+            </Link>
           )}
         </div>
 
