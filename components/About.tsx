@@ -1,15 +1,41 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
 
+interface AboutFeature {
+  id: string
+  title: string
+  order: number
+}
+
 const About = () => {
-  const features = [
-    '체형별 맞춤 운동 프로그램',
-    '전문 트레이너의 1:1 관리',
-    '첨단 체형관리 장비',
-    '확실한 비포&애프터 결과',
-    '운동 + 관리 토탈 솔루션',
-    '여성 전용 안전한 환경',
+  const [features, setFeatures] = useState<AboutFeature[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=about-features&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          setFeatures(data.items || [])
+        }
+      } catch (error) {
+        console.error('Failed to fetch about features:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 기본값
+  const featureList = features.length > 0 ? features : [
+    { id: '1', title: '체형별 맞춤 운동 프로그램', order: 0 },
+    { id: '2', title: '전문 트레이너의 1:1 관리', order: 1 },
+    { id: '3', title: '첨단 체형관리 장비', order: 2 },
+    { id: '4', title: '확실한 비포&애프터 결과', order: 3 },
+    { id: '5', title: '운동 + 관리 토탈 솔루션', order: 4 },
+    { id: '6', title: '여성 전용 안전한 환경', order: 5 },
   ]
 
   return (
@@ -34,16 +60,16 @@ const About = () => {
               민죠이짐은 여성 전용 PT샵으로 다이어트, 힙업, 바디프로필, 통증케어 등
               다양한 운동 목적의 회원님들에게 단기간에 확실한 변화를 제공합니다.
               <br /><br />
-              이제 민죠이케어를 통해 "누워서 다이어트하는 힐링케어"까지 함께 경험하세요.
+              이제 민죠이케어를 통해 &quot;누워서 다이어트하는 힐링케어&quot;까지 함께 경험하세요.
               맞춤 진단 + 운동 + 식단 + 기기 관리 + 수기 관리 + 멘탈 관리까지 포함한
               종합 관리로 짧은 시간 목표 달성이 가능합니다.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-start space-x-3">
+              {featureList.map((feature) => (
+                <div key={feature.id} className="flex items-start space-x-3">
                   <FiCheckCircle className="text-primary-dark mt-1 flex-shrink-0" size={20} />
-                  <span className="text-brown-dark">{feature}</span>
+                  <span className="text-brown-dark">{feature.title}</span>
                 </div>
               ))}
             </div>

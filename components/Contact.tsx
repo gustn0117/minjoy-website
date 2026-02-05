@@ -1,9 +1,29 @@
 'use client'
 
-import { useState } from 'react'
-import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiCheck, FiAlertCircle } from 'react-icons/fi'
+import { useState, useEffect } from 'react'
+import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiCheck, FiAlertCircle, FiMessageSquare, FiInstagram } from 'react-icons/fi'
+
+interface ContactInfo {
+  id: string
+  type: string
+  label: string
+  value: string
+  icon?: string
+  order: number
+}
+
+// 아이콘 매핑
+const iconMap: Record<string, React.ReactNode> = {
+  FiPhone: <FiPhone className="text-primary-dark" size={20} />,
+  FiMail: <FiMail className="text-primary-dark" size={20} />,
+  FiMapPin: <FiMapPin className="text-primary-dark" size={20} />,
+  FiClock: <FiClock className="text-primary-dark" size={20} />,
+  FiMessageSquare: <FiMessageSquare className="text-primary-dark" size={20} />,
+  FiInstagram: <FiInstagram className="text-primary-dark" size={20} />,
+}
 
 const Contact = () => {
+  const [contactInfos, setContactInfos] = useState<ContactInfo[]>([])
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -13,6 +33,32 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=contact-info&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          setContactInfos(data.items || [])
+        }
+      } catch (error) {
+        console.error('Failed to fetch contact info:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 기본값
+  const defaultContacts = [
+    { id: '1', type: 'phone', label: '전화', value: '전화 문의 가능\n카카오톡 상담 가능', icon: 'FiPhone', order: 0 },
+    { id: '2', type: 'email', label: '이메일', value: '이메일 문의 가능', icon: 'FiMail', order: 1 },
+    { id: '3', type: 'address', label: '위치', value: '민죠이짐: [주소]\n민죠이케어: [주소] (같은 건물 내)', icon: 'FiMapPin', order: 2 },
+    { id: '4', type: 'hours', label: '운영시간', value: '평일: 06:00 - 22:00\n주말: 08:00 - 20:00\n※ 예약제 운영', icon: 'FiClock', order: 3 },
+  ]
+
+  const contacts = contactInfos.length > 0 ? contactInfos : defaultContacts
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -72,49 +118,19 @@ const Contact = () => {
             <h3 className="text-3xl font-bold mb-8 text-brown-dark">연락처 정보</h3>
 
             <div className="space-y-6 mb-8">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiPhone className="text-primary-dark" size={20} />
+              {contacts.map((contact) => (
+                <div key={contact.id} className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    {contact.icon ? iconMap[contact.icon] || <FiPhone className="text-primary-dark" size={20} /> : <FiPhone className="text-primary-dark" size={20} />}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1 text-brown-dark">{contact.label}</h4>
+                    {contact.value.split('\n').map((line, idx) => (
+                      <p key={idx} className="text-brown-light">{line}</p>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-brown-dark">전화</h4>
-                  <p className="text-brown-light">전화 문의 가능</p>
-                  <p className="text-brown-light">카카오톡 상담 가능</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiMail className="text-primary-dark" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-brown-dark">이메일</h4>
-                  <p className="text-brown-light">이메일 문의 가능</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiMapPin className="text-primary-dark" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-brown-dark">위치</h4>
-                  <p className="text-brown-light">민죠이짐: [주소]</p>
-                  <p className="text-brown-light">민죠이케어: [주소] (같은 건물 내)</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FiClock className="text-primary-dark" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-brown-dark">운영시간</h4>
-                  <p className="text-brown-light">평일: 06:00 - 22:00</p>
-                  <p className="text-brown-light">주말: 08:00 - 20:00</p>
-                  <p className="text-brown-light text-sm mt-1">※ 예약제 운영</p>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Map Placeholder */}

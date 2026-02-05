@@ -1,23 +1,59 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+
+interface Facility {
+  id: string
+  type: string
+  title: string
+  order: number
+}
+
 const Facilities = () => {
-  const gymFeatures = [
-    '최신 웨이트 트레이닝 장비',
-    '유산소 운동 기구',
-    '프리웨이트존',
-    '여성 전용 탈의실 및 샤워실',
-    '깨끗한 운동 환경',
-    '프라이빗 트레이닝룸',
+  const [facilities, setFacilities] = useState<Facility[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=facilities&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          setFacilities(data.items || [])
+        }
+      } catch (error) {
+        console.error('Failed to fetch facilities:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 기본값
+  const defaultGymFeatures = [
+    { id: '1', type: 'gym', title: '최신 웨이트 트레이닝 장비', order: 0 },
+    { id: '2', type: 'gym', title: '유산소 운동 기구', order: 1 },
+    { id: '3', type: 'gym', title: '프리웨이트존', order: 2 },
+    { id: '4', type: 'gym', title: '여성 전용 탈의실 및 샤워실', order: 3 },
+    { id: '5', type: 'gym', title: '깨끗한 운동 환경', order: 4 },
+    { id: '6', type: 'gym', title: '프라이빗 트레이닝룸', order: 5 },
   ]
 
-  const careFeatures = [
-    '첨단 체형관리 장비',
-    '프리미엄 관리실',
-    '편안한 힐링 공간',
-    '1인 1실 관리',
-    '청결한 위생 관리',
-    '아늑한 대기 공간',
+  const defaultCareFeatures = [
+    { id: '7', type: 'care', title: '첨단 체형관리 장비', order: 0 },
+    { id: '8', type: 'care', title: '프리미엄 관리실', order: 1 },
+    { id: '9', type: 'care', title: '편안한 힐링 공간', order: 2 },
+    { id: '10', type: 'care', title: '1인 1실 관리', order: 3 },
+    { id: '11', type: 'care', title: '청결한 위생 관리', order: 4 },
+    { id: '12', type: 'care', title: '아늑한 대기 공간', order: 5 },
   ]
+
+  const gymFeatures = facilities.length > 0
+    ? facilities.filter(f => f.type === 'gym')
+    : defaultGymFeatures
+
+  const careFeatures = facilities.length > 0
+    ? facilities.filter(f => f.type === 'care')
+    : defaultCareFeatures
 
   return (
     <section id="facilities" className="section-padding bg-ivory">
@@ -48,10 +84,10 @@ const Facilities = () => {
               <div className="p-8">
                 <h4 className="text-2xl font-bold mb-6 text-brown-dark">운동 시설</h4>
                 <ul className="space-y-3">
-                  {gymFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center">
+                  {gymFeatures.map((feature) => (
+                    <li key={feature.id} className="flex items-center">
                       <span className="w-2 h-2 bg-gym rounded-full mr-3"></span>
-                      <span className="text-brown-dark">{feature}</span>
+                      <span className="text-brown-dark">{feature.title}</span>
                     </li>
                   ))}
                 </ul>
@@ -75,10 +111,10 @@ const Facilities = () => {
               <div className="p-8">
                 <h4 className="text-2xl font-bold mb-6 text-brown-dark">관리 시설</h4>
                 <ul className="space-y-3">
-                  {careFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center">
+                  {careFeatures.map((feature) => (
+                    <li key={feature.id} className="flex items-center">
                       <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
-                      <span className="text-brown-dark">{feature}</span>
+                      <span className="text-brown-dark">{feature.title}</span>
                     </li>
                   ))}
                 </ul>

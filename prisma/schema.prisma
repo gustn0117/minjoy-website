@@ -36,3 +36,161 @@ model Admin {
 
   @@map("admins")
 }
+
+// ============================================
+// 사이트 콘텐츠 관리
+// ============================================
+
+// 사이트 기본 설정
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String   @db.Text
+  description String?
+  updatedAt   DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// 히어로 섹션
+model HeroContent {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String
+  description String   @db.Text
+  buttonText1 String
+  buttonLink1 String
+  buttonText2 String?
+  buttonLink2 String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("hero_contents")
+}
+
+// 히어로 통계
+model HeroStat {
+  id        String   @id @default(cuid())
+  value     String
+  label     String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("hero_stats")
+}
+
+// About 섹션 특징
+model AboutFeature {
+  id        String   @id @default(cuid())
+  title     String
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("about_features")
+}
+
+// 민죠이짐 프로그램
+model GymProgram {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  icon        String   // 아이콘 이름 (FiTarget, FiHeart 등)
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("gym_programs")
+}
+
+// 민죠이짐 타겟 오디언스
+model GymTarget {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("gym_targets")
+}
+
+// 민죠이케어 서비스
+model CareService {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  icon        String   // 아이콘 이름
+  features    String[] // 특징 목록
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("care_services")
+}
+
+// 시설 정보
+model Facility {
+  id        String   @id @default(cuid())
+  type      String   // gym, care
+  title     String
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("facilities")
+}
+
+// 갤러리 (비포&애프터)
+model GalleryItem {
+  id           String   @id @default(cuid())
+  beforeImage  String?  // 이미지 URL
+  afterImage   String?  // 이미지 URL
+  period       String   // 기간 (예: 3개월)
+  weightChange String   // 체중 변화 (예: -8kg)
+  fatChange    String   // 체지방 변화 (예: -5%)
+  description  String?  @db.Text
+  isActive     Boolean  @default(true)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("gallery_items")
+}
+
+// 연락처 정보
+model ContactInfo {
+  id        String   @id @default(cuid())
+  type      String   // phone, email, address, hours, kakao, instagram
+  label     String
+  value     String   @db.Text
+  icon      String?
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contact_infos")
+}
+
+// 메뉴/네비게이션
+model MenuItem {
+  id        String   @id @default(cuid())
+  name      String
+  href      String
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("menu_items")
+}

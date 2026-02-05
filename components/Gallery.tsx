@@ -1,6 +1,47 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+
+interface GalleryItem {
+  id: string
+  period: string
+  weightChange: string
+  fatChange: string
+  beforeImage?: string
+  afterImage?: string
+  description?: string
+  order: number
+}
+
 const Gallery = () => {
+  const [items, setItems] = useState<GalleryItem[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=gallery&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          setItems(data.items || [])
+        }
+      } catch (error) {
+        console.error('Failed to fetch gallery items:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 기본값
+  const galleryItems = items.length > 0 ? items : [
+    { id: '1', period: '3개월', weightChange: '-8kg', fatChange: '-5%', order: 0 },
+    { id: '2', period: '3개월', weightChange: '-6kg', fatChange: '-4%', order: 1 },
+    { id: '3', period: '2개월', weightChange: '-5kg', fatChange: '-3%', order: 2 },
+    { id: '4', period: '4개월', weightChange: '-10kg', fatChange: '-6%', order: 3 },
+    { id: '5', period: '3개월', weightChange: '-7kg', fatChange: '-5%', order: 4 },
+    { id: '6', period: '2개월', weightChange: '-4kg', fatChange: '-3%', order: 5 },
+  ]
+
   return (
     <section id="gallery" className="section-padding bg-gradient-to-br from-ivory-dark to-primary-light/20">
       <div className="container-custom">
@@ -15,30 +56,40 @@ const Gallery = () => {
 
         {/* Before & After Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {[1, 2, 3, 4, 5, 6].map((item) => (
+          {galleryItems.map((item) => (
             <div
-              key={item}
+              key={item.id}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
             >
               <div className="h-64 bg-gradient-to-br from-primary-light to-ivory flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-5xl mb-2">📸</div>
-                  <p className="text-brown-dark font-medium">Before & After</p>
-                </div>
+                {item.beforeImage && item.afterImage ? (
+                  <div className="flex w-full h-full">
+                    <div className="w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${item.beforeImage})` }}></div>
+                    <div className="w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${item.afterImage})` }}></div>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <div className="text-5xl mb-2">📸</div>
+                    <p className="text-brown-dark font-medium">Before & After</p>
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm text-brown-light">기간</span>
-                  <span className="font-semibold text-brown-dark">3개월</span>
+                  <span className="font-semibold text-brown-dark">{item.period}</span>
                 </div>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm text-brown-light">체중 변화</span>
-                  <span className="font-semibold text-primary-dark">-8kg</span>
+                  <span className="font-semibold text-primary-dark">{item.weightChange}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-brown-light">체지방률</span>
-                  <span className="font-semibold text-primary-dark">-5%</span>
+                  <span className="font-semibold text-primary-dark">{item.fatChange}</span>
                 </div>
+                {item.description && (
+                  <p className="mt-3 text-sm text-brown-light">{item.description}</p>
+                )}
               </div>
             </div>
           ))}

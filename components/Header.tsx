@@ -4,9 +4,17 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FiMenu, FiX, FiUser } from 'react-icons/fi'
 
+interface MenuItem {
+  id: string
+  name: string
+  href: string
+  order: number
+}
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,15 +24,34 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const menuItems = [
-    { name: '홈', href: '#home' },
-    { name: '브랜드 소개', href: '#about' },
-    { name: '민죠이짐', href: '#minjoy-gym' },
-    { name: '민죠이케어', href: '#minjoy-care' },
-    { name: '시설 소개', href: '#facilities' },
-    { name: '변화 갤러리', href: '#gallery' },
-    { name: '문의하기', href: '#contact' },
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content?type=menu-items&activeOnly=true')
+        if (response.ok) {
+          const data = await response.json()
+          setMenuItems(data.items || [])
+        }
+      } catch (error) {
+        console.error('Failed to fetch menu items:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 기본값
+  const defaultMenuItems = [
+    { id: '1', name: '홈', href: '#home', order: 0 },
+    { id: '2', name: '브랜드 소개', href: '#about', order: 1 },
+    { id: '3', name: '민죠이짐', href: '#minjoy-gym', order: 2 },
+    { id: '4', name: '민죠이케어', href: '#minjoy-care', order: 3 },
+    { id: '5', name: '시설 소개', href: '#facilities', order: 4 },
+    { id: '6', name: '변화 갤러리', href: '#gallery', order: 5 },
+    { id: '7', name: '문의하기', href: '#contact', order: 6 },
   ]
+
+  const items = menuItems.length > 0 ? menuItems : defaultMenuItems
 
   return (
     <header
@@ -45,9 +72,9 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {menuItems.map((item) => (
+            {items.map((item) => (
               <Link
-                key={item.name}
+                key={item.id}
                 href={item.href}
                 className={`font-medium transition-colors hover:text-primary-dark ${
                   isScrolled ? 'text-brown-dark' : 'text-white'
@@ -85,9 +112,9 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-ivory shadow-lg">
           <nav className="container-custom py-4 space-y-4">
-            {menuItems.map((item) => (
+            {items.map((item) => (
               <Link
-                key={item.name}
+                key={item.id}
                 href={item.href}
                 className="block py-2 text-brown-dark hover:text-primary-dark font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
