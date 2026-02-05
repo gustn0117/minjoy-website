@@ -15,6 +15,7 @@ const contentTypes = {
   'contact-info': prisma.contactInfo,
   'menu-items': prisma.menuItem,
   'review-images': prisma.reviewImage,
+  'floating-buttons': prisma.floatingButton,
 } as const
 
 type ContentType = keyof typeof contentTypes

@@ -213,3 +213,19 @@ model ReviewImage {
 
   @@map("review_images")
 }
+
+// 플로팅 버튼 (카카오톡, 네이버 예약, 전화 등)
+model FloatingButton {
+  id        String   @id @default(cuid())
+  type      String   // kakao, naver, phone, inquiry
+  label     String   // 버튼 레이블
+  href      String   // 링크 URL
+  bgColor   String   // 배경색 (tailwind class)
+  textColor String   // 텍스트색 (tailwind class)
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("floating_buttons")
+}

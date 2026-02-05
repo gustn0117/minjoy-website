@@ -179,6 +179,18 @@ const contentTypeConfig: Record<string, { label: string; fields: { name: string;
       { name: 'isActive', label: '활성화', type: 'checkbox' },
     ],
   },
+  'floating-buttons': {
+    label: '플로팅 버튼',
+    fields: [
+      { name: 'type', label: '버튼 타입', type: 'floating-button-type', required: true },
+      { name: 'label', label: '버튼 레이블', type: 'text', required: true },
+      { name: 'href', label: '링크 URL', type: 'text', required: true },
+      { name: 'bgColor', label: '배경색', type: 'color-select', required: true },
+      { name: 'textColor', label: '텍스트색', type: 'text-color-select', required: true },
+      { name: 'order', label: '순서', type: 'number' },
+      { name: 'isActive', label: '활성화', type: 'checkbox' },
+    ],
+  },
 }
 
 const iconOptions = [
@@ -200,6 +212,30 @@ const contactTypes = [
   { value: 'instagram', label: '인스타그램' },
 ]
 
+const floatingButtonTypes = [
+  { value: 'kakao', label: '카카오톡 상담' },
+  { value: 'naver', label: '네이버 예약' },
+  { value: 'phone', label: '전화하기' },
+  { value: 'inquiry', label: '상담접수' },
+]
+
+const bgColorOptions = [
+  { value: 'bg-[#FEE500]', label: '카카오 노랑' },
+  { value: 'bg-[#03C75A]', label: '네이버 초록' },
+  { value: 'bg-primary', label: '기본 핑크' },
+  { value: 'bg-primary-dark', label: '진한 핑크' },
+  { value: 'bg-gym', label: '짐 오렌지' },
+  { value: 'bg-white', label: '흰색' },
+  { value: 'bg-gray-800', label: '진한 회색' },
+]
+
+const textColorOptions = [
+  { value: 'text-white', label: '흰색' },
+  { value: 'text-[#3C1E1E]', label: '카카오 갈색' },
+  { value: 'text-primary-dark', label: '진한 핑크' },
+  { value: 'text-gray-800', label: '진한 회색' },
+]
+
 // 사이드바 메뉴
 const sidebarMenus = [
   { id: 'inquiries', label: '문의 관리', icon: FiMessageSquare },
@@ -212,6 +248,7 @@ const sidebarMenus = [
   { id: 'facilities', label: '시설 정보', icon: FiSettings },
   { id: 'gallery', label: '갤러리', icon: FiImage },
   { id: 'review-images', label: '리뷰 이미지', icon: FiImage },
+  { id: 'floating-buttons', label: '플로팅 버튼', icon: FiPhone },
   { id: 'contact-info', label: '연락처', icon: FiMapPin },
   { id: 'menu-items', label: '메뉴', icon: FiList },
 ]
@@ -581,6 +618,48 @@ export default function AdminDashboard() {
             <option value="">선택하세요</option>
             {contactTypes.map((type) => (
               <option key={type.value} value={type.value}>{type.label}</option>
+            ))}
+          </select>
+        )
+      case 'floating-button-type':
+        return (
+          <select
+            value={(value as string) || ''}
+            onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            required={field.required}
+          >
+            <option value="">선택하세요</option>
+            {floatingButtonTypes.map((type) => (
+              <option key={type.value} value={type.value}>{type.label}</option>
+            ))}
+          </select>
+        )
+      case 'color-select':
+        return (
+          <select
+            value={(value as string) || ''}
+            onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            required={field.required}
+          >
+            <option value="">선택하세요</option>
+            {bgColorOptions.map((color) => (
+              <option key={color.value} value={color.value}>{color.label}</option>
+            ))}
+          </select>
+        )
+      case 'text-color-select':
+        return (
+          <select
+            value={(value as string) || ''}
+            onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            required={field.required}
+          >
+            <option value="">선택하세요</option>
+            {textColorOptions.map((color) => (
+              <option key={color.value} value={color.value}>{color.label}</option>
             ))}
           </select>
         )
