@@ -53,123 +53,100 @@ const MinjoyCare = () => {
   ]
 
   return (
-    <section id="minjoy-care" className="section-padding bg-gradient-to-br from-primary-light/30 to-ivory">
+    <section id="minjoy-care" className="section-padding bg-gray-50">
       <div className="container-custom">
         {/* Hero Banner */}
-        <div className="relative mb-16 rounded-3xl overflow-hidden">
-          <div className="bg-gradient-to-r from-primary-dark via-primary to-primary-light h-64 md:h-80">
-            <div className="absolute inset-0 flex items-center">
-              <div className="container-custom">
-                <div className="max-w-2xl text-white">
-                  <h2 className="text-4xl md:text-6xl font-black mb-4">
-                    민죠이케어
-                  </h2>
-                  <p className="text-xl md:text-2xl font-medium opacity-90">
-                    누워서 다이어트하는 힐링케어
-                  </p>
-                  <p className="text-lg opacity-80 mt-2">
-                    남녀 모두 이용 가능
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* Decorative elements */}
-            <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-10 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 text-[200px] font-black opacity-5 select-none">
-              CARE
+        <div className="mb-16 rounded-xl overflow-hidden bg-primary">
+          <div className="px-8 md:px-12 py-16 md:py-20">
+            <div className="max-w-2xl text-white">
+              <h2 className="text-4xl md:text-6xl font-black mb-4">
+                민죠이케어
+              </h2>
+              <p className="text-xl md:text-2xl font-medium text-white/90">
+                누워서 다이어트하는 힐링케어
+              </p>
+              <p className="text-lg text-white/80 mt-2">
+                남녀 모두 이용 가능
+              </p>
             </div>
           </div>
         </div>
 
         {/* Main Message */}
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl mb-16 text-center border border-primary-light/30 relative overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-
-          <div className="relative z-10">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FiStar className="text-primary" size={32} />
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4 text-brown-dark">
-              운동과 식단만으로는 부족합니다
-            </h3>
-            <p className="text-xl text-brown-light mb-8">
-              다이어트도 <span className="text-primary-dark font-bold">&apos;지름길&apos;</span>이 분명 있습니다
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {['맞춤진단', '운동', '식단', '기기관리', '수기관리', '멘탈관리'].map((item, index) => (
-                <span
-                  key={index}
-                  className="bg-gradient-to-r from-primary-dark to-primary text-white px-5 py-2 rounded-full font-medium shadow-md"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
+        <div className="bg-white rounded-lg p-8 md:p-12 mb-16 text-center border border-gray-200">
+          <div className="w-16 h-16 bg-primary-50 rounded-lg flex items-center justify-center mx-auto mb-6">
+            <FiStar className="text-primary" size={32} />
+          </div>
+          <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            운동과 식단만으로는 부족합니다
+          </h3>
+          <p className="text-xl text-gray-600 mb-8">
+            다이어트도 <span className="text-primary font-bold">&apos;지름길&apos;</span>이 분명 있습니다
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {['맞춤진단', '운동', '식단', '기기관리', '수기관리', '멘탈관리'].map((item, index) => (
+              <span
+                key={index}
+                className="bg-primary text-white px-3 py-1 rounded-md text-sm font-medium"
+              >
+                {item}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Services - Rich Card Design */}
+        {/* Services */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold mb-8 text-center">
-            <span className="gradient-text">케어 프로그램</span>
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center mb-10">
+            <p className="text-sm text-primary font-medium mb-2">PROGRAMS</p>
+            <h3 className="text-3xl font-bold text-gray-900">케어 프로그램</h3>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
             {serviceList.map((service, index) => {
               const IconComponent = serviceIcons[index] || FiStar
               return (
                 <div
                   key={service.id}
-                  className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
+                  className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow duration-200"
                 >
                   {/* Image Area */}
-                  <div className="h-56 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+                  <div className="h-56 bg-gray-200 relative overflow-hidden">
                     {service.image ? (
                       <Image
                         src={service.image}
                         alt={service.title}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <div className="mb-3 group-hover:scale-110 transition-transform duration-300">
+                        <div className="text-center text-gray-400">
+                          <div className="mb-3">
                             <IconComponent size={56} />
                           </div>
-                          <div className="text-sm opacity-60">이미지 준비중</div>
-                        </div>
-                        {/* Decorative pattern */}
-                        <div className="absolute inset-0 opacity-10">
-                          <div className="absolute top-6 left-6 w-24 h-24 border-2 border-white rounded-full"></div>
-                          <div className="absolute bottom-6 right-6 w-20 h-20 border-2 border-white rounded-full"></div>
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white rounded-full"></div>
+                          <div className="text-sm text-gray-400">이미지 준비중</div>
                         </div>
                       </div>
                     )}
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
 
                     {/* Title overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gray-900/60">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
-                          {iconMap[service.icon] || <FiStar size={24} />}
+                        <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+                          {iconMap[service.icon] || <FiStar size={20} />}
                         </div>
-                        <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                        <h3 className="text-xl font-bold text-white">{service.title}</h3>
                       </div>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-6">
-                    <p className="text-brown-light mb-6 leading-relaxed">{service.description}</p>
+                    <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
                     <div className="grid grid-cols-2 gap-3">
                       {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-brown-dark">
-                          <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                        <div key={idx} className="flex items-center text-sm text-gray-900">
+                          <span className="w-2 h-2 bg-primary rounded-full mr-2 flex-shrink-0"></span>
                           {feature}
                         </div>
                       ))}
@@ -181,29 +158,28 @@ const MinjoyCare = () => {
           </div>
         </div>
 
-        {/* Before/After Showcase */}
+        {/* Effect Stats */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold mb-8 text-center text-brown-dark">
-            관리 효과
-          </h3>
+          <div className="text-center mb-10">
+            <p className="text-sm text-primary font-medium mb-2">RESULTS</p>
+            <h3 className="text-3xl font-bold text-gray-900">관리 효과</h3>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { value: '-1KG', label: '1회 체험 평균', Icon: FiArrowDown, color: 'from-primary to-primary-dark' },
-              { value: '+1KG', label: '근력 증가', Icon: FiTrendingUp, color: 'from-gym to-gym-dark' },
-              { value: '-3%', label: '체지방률 감소', Icon: FiPercent, color: 'from-primary to-primary-dark' },
-              { value: '-5cm', label: '둘레 감소', Icon: FiMinus, color: 'from-gold to-gold-dark' },
+              { value: '-1KG', label: '1회 체험 평균', Icon: FiArrowDown },
+              { value: '+1KG', label: '근력 증가', Icon: FiTrendingUp },
+              { value: '-3%', label: '체지방률 감소', Icon: FiPercent },
+              { value: '-5cm', label: '둘레 감소', Icon: FiMinus },
             ].map((stat, index) => (
               <div
                 key={index}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-md transition-shadow duration-200"
               >
-                <div className={`h-24 bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
-                  <stat.Icon className="text-white" size={40} />
+                <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <stat.Icon className="text-primary" size={24} />
                 </div>
-                <div className="p-4 text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-brown-dark mb-1">{stat.value}</div>
-                  <div className="text-xs text-brown-light">{stat.label}</div>
-                </div>
+                <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                <div className="text-xs text-gray-500">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -211,9 +187,10 @@ const MinjoyCare = () => {
 
         {/* Process Steps */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold mb-8 text-center text-brown-dark">
-            관리 프로세스
-          </h3>
+          <div className="text-center mb-10">
+            <p className="text-sm text-primary font-medium mb-2">PROCESS</p>
+            <h3 className="text-3xl font-bold text-gray-900">관리 프로세스</h3>
+          </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
               { step: '01', title: '상담 & 진단', desc: '체형 분석과 목표 설정', Icon: FiClipboard },
@@ -224,15 +201,17 @@ const MinjoyCare = () => {
               <div key={index} className="relative">
                 {/* Connection line */}
                 {index < 3 && (
-                  <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-primary-light/50"></div>
+                  <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-gray-200"></div>
                 )}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border border-primary-light/20 relative z-10 hover:shadow-xl transition-all">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                    <item.Icon className="text-primary" size={24} />
+                <div className="bg-white rounded-lg p-6 border border-gray-200 relative z-10 hover:shadow-md transition-shadow duration-200">
+                  <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-4 text-sm font-bold">
+                    {item.step}
                   </div>
-                  <div className="text-sm text-primary font-bold mb-2">{item.step}</div>
-                  <h4 className="font-bold text-lg text-brown-dark mb-1">{item.title}</h4>
-                  <p className="text-sm text-brown-light">{item.desc}</p>
+                  <div className="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center mb-3">
+                    <item.Icon className="text-primary" size={20} />
+                  </div>
+                  <h4 className="font-bold text-lg text-gray-900 mb-1">{item.title}</h4>
+                  <p className="text-sm text-gray-600">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -240,31 +219,23 @@ const MinjoyCare = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-primary-dark via-primary to-primary-light rounded-3xl p-8 md:p-12 text-white text-center shadow-xl relative overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-1/4 translate-y-1/4"></div>
+        <div className="bg-primary rounded-xl p-8 md:p-12 text-white text-center">
+          <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <FiGift className="text-white" size={32} />
           </div>
-
-          <div className="relative z-10">
-            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FiGift className="text-white" size={32} />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              짧은 시간 목표 달성이 가능합니다
-            </h3>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              종합 관리로 확실한 효과를 경험하세요.<br />
-              지금 바로 무료 상담을 받아보세요.
-            </p>
-            <a
-              href="/contact"
-              className="inline-block bg-white text-primary-dark px-8 py-4 rounded-full font-bold hover:bg-ivory transition-colors shadow-lg"
-            >
-              무료 상담 신청하기
-            </a>
-          </div>
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            짧은 시간 목표 달성이 가능합니다
+          </h3>
+          <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+            종합 관리로 확실한 효과를 경험하세요.<br />
+            지금 바로 무료 상담을 받아보세요.
+          </p>
+          <a
+            href="/contact"
+            className="inline-block bg-white text-primary-dark px-8 py-3 rounded-md font-bold hover:bg-gray-50 transition-colors"
+          >
+            무료 상담 신청하기
+          </a>
         </div>
       </div>
     </section>

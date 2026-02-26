@@ -12,7 +12,6 @@ interface MenuItem {
   order: number
 }
 
-// 기본 메뉴 항목 - 항상 사용 가능
 const DEFAULT_MENU_ITEMS: MenuItem[] = [
   { id: '1', name: '홈', href: '/', order: 0 },
   { id: '2', name: '브랜드 소개', href: '/about', order: 1 },
@@ -38,7 +37,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // 페이지 이동 시 모바일 메뉴 닫기
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
@@ -52,54 +50,56 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showBackground ? 'bg-ivory shadow-lg' : 'bg-transparent'
+        showBackground ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-transparent'
       }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 relative z-10">
-            <div className={`text-2xl font-bold transition-colors ${
-              showBackground ? 'text-brown-dark' : 'text-white'
+          <Link href="/" className="flex items-center relative z-10">
+            <span className={`text-2xl font-bold transition-colors ${
+              showBackground ? 'text-primary' : 'text-white'
             }`}>
-              <span className="text-primary-dark">민죠이</span>
-            </div>
+              민죠이
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {DEFAULT_MENU_ITEMS.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
                 onClick={handleNavClick}
-                className={`font-medium transition-colors hover:text-primary-dark relative z-10 ${
-                  showBackground ? 'text-brown-dark' : 'text-white'
-                } ${pathname === item.href ? 'text-primary-dark' : ''}`}
+                className={`text-sm font-medium transition-colors relative z-10 ${
+                  showBackground
+                    ? pathname === item.href
+                      ? 'text-primary'
+                      : 'text-gray-700 hover:text-primary'
+                    : pathname === item.href
+                      ? 'text-white font-semibold'
+                      : 'text-white/80 hover:text-white'
+                }`}
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          {/* User Icon */}
           <div className="hidden lg:flex items-center">
             <Link
               href="/admin"
-              className={`p-2 rounded-full transition-colors relative z-10 ${
-                showBackground ? 'text-brown-dark hover:bg-primary-light/30' : 'text-white hover:bg-white/20'
+              className={`p-2 rounded-md transition-colors relative z-10 ${
+                showBackground ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/20'
               }`}
             >
-              <FiUser size={24} />
+              <FiUser size={22} />
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`lg:hidden p-2 transition-colors relative z-10 ${
-              showBackground ? 'text-brown-dark' : 'text-white'
+              showBackground ? 'text-gray-700' : 'text-white'
             }`}
           >
             {isMobileMenuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
@@ -107,16 +107,15 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-ivory shadow-lg">
-          <nav className="container-custom py-4 space-y-4">
+        <div className="lg:hidden bg-white border-t border-gray-100">
+          <nav className="container-custom py-4 space-y-1">
             {DEFAULT_MENU_ITEMS.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className={`block py-2 text-brown-dark hover:text-primary-dark font-medium transition-colors ${
-                  pathname === item.href ? 'text-primary-dark' : ''
+                className={`block py-3 px-4 rounded-md text-gray-700 hover:text-primary hover:bg-primary-50 font-medium transition-colors ${
+                  pathname === item.href ? 'text-primary bg-primary-50' : ''
                 }`}
                 onClick={handleNavClick}
               >

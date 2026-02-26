@@ -34,7 +34,6 @@ const FloatingButtons = () => {
     fetchButtons()
   }, [])
 
-  // 기본 버튼 (DB에 데이터가 없을 때 사용)
   const defaultButtons: FloatingButton[] = [
     {
       id: 'kakao',
@@ -69,7 +68,7 @@ const FloatingButtons = () => {
       label: '상담접수',
       href: '/contact',
       bgColor: 'bg-white',
-      textColor: 'text-primary-dark',
+      textColor: 'text-primary',
       order: 3,
     },
   ]
@@ -101,14 +100,14 @@ const FloatingButtons = () => {
   return (
     <div className="fixed right-4 bottom-4 z-40 flex flex-col items-end gap-3">
       {isExpanded && (
-        <div className="flex flex-col gap-3 animate-fade-in">
+        <div className="flex flex-col gap-3">
           {displayButtons.map((button) => (
             <Link
               key={button.id}
               href={button.href}
               target={button.href.startsWith('http') ? '_blank' : undefined}
               rel={button.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className={`flex items-center gap-3 px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${button.bgColor} ${button.textColor} ${button.type === 'inquiry' ? 'border-2 border-primary-light' : ''}`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${button.bgColor} ${button.textColor} ${button.type === 'inquiry' ? 'border-2 border-gray-200' : ''}`}
             >
               <span className="flex items-center justify-center w-8 h-8">
                 {getButtonIcon(button.type)}
@@ -119,12 +118,11 @@ const FloatingButtons = () => {
         </div>
       )}
 
-      {/* Toggle Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
           isExpanded
-            ? 'bg-gray-600 text-white rotate-0'
+            ? 'bg-gray-600 text-white'
             : 'bg-primary text-white'
         }`}
       >

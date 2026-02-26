@@ -60,13 +60,14 @@ const Facilities = () => {
     : defaultCareFeatures
 
   return (
-    <section id="facilities" className="section-padding bg-ivory">
+    <section id="facilities" className="section-padding bg-white">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">시설 소개</span>
+          <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">Facilities</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            시설 소개
           </h2>
-          <p className="text-xl text-brown-dark">
+          <p className="text-xl text-gray-600">
             최고의 시설에서 최상의 케어를 받으세요
           </p>
         </div>
@@ -74,10 +75,10 @@ const Facilities = () => {
         {/* Gym Facilities Section */}
         <div className="mb-20">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 bg-gym rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
               <span className="text-white font-black text-sm">GYM</span>
             </div>
-            <h3 className="text-3xl font-bold gradient-text-gym">민죠이짐 시설</h3>
+            <h3 className="text-3xl font-bold text-primary">민죠이짐 시설</h3>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -86,37 +87,32 @@ const Facilities = () => {
               return (
                 <div
                   key={feature.id}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gym-light/20"
+                  className="group bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-300"
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gradient-to-br from-gym to-gym-dark relative overflow-hidden">
+                  <div className="h-48 bg-gray-100 relative overflow-hidden">
                     {feature.image ? (
                       <Image
                         src={feature.image}
                         alt={feature.title}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <div className="mb-2 opacity-80">
-                            <IconComponent size={40} />
+                        <div className="text-center">
+                          <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <IconComponent className="text-primary" size={24} />
                           </div>
-                          <div className="text-xs opacity-60">이미지 준비중</div>
-                        </div>
-                        {/* Decorative pattern */}
-                        <div className="absolute inset-0 opacity-10">
-                          <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
-                          <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
+                          <div className="text-xs text-gray-400">이미지 준비중</div>
                         </div>
                       </div>
                     )}
                   </div>
                   {/* Content */}
                   <div className="p-5">
-                    <h4 className="font-bold text-lg text-brown-dark mb-1">{feature.title}</h4>
-                    <p className="text-sm text-brown-light">{feature.description}</p>
+                    <h4 className="font-bold text-lg text-gray-900 mb-1">{feature.title}</h4>
+                    <p className="text-sm text-gray-500">{feature.description}</p>
                   </div>
                 </div>
               )
@@ -130,7 +126,7 @@ const Facilities = () => {
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
               <span className="text-white font-black text-xs">CARE</span>
             </div>
-            <h3 className="text-3xl font-bold gradient-text">민죠이케어 시설</h3>
+            <h3 className="text-3xl font-bold text-primary">민죠이케어 시설</h3>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -139,37 +135,32 @@ const Facilities = () => {
               return (
                 <div
                   key={feature.id}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
+                  className="group bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-300"
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+                  <div className="h-48 bg-gray-100 relative overflow-hidden">
                     {feature.image ? (
                       <Image
                         src={feature.image}
                         alt={feature.title}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <div className="mb-2 opacity-80">
-                            <IconComponent size={40} />
+                        <div className="text-center">
+                          <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <IconComponent className="text-primary" size={24} />
                           </div>
-                          <div className="text-xs opacity-60">이미지 준비중</div>
-                        </div>
-                        {/* Decorative pattern */}
-                        <div className="absolute inset-0 opacity-10">
-                          <div className="absolute top-4 left-4 w-20 h-20 border border-white rounded-full"></div>
-                          <div className="absolute bottom-4 right-4 w-16 h-16 border border-white rounded-full"></div>
+                          <div className="text-xs text-gray-400">이미지 준비중</div>
                         </div>
                       </div>
                     )}
                   </div>
                   {/* Content */}
                   <div className="p-5">
-                    <h4 className="font-bold text-lg text-brown-dark mb-1">{feature.title}</h4>
-                    <p className="text-sm text-brown-light">{feature.description}</p>
+                    <h4 className="font-bold text-lg text-gray-900 mb-1">{feature.title}</h4>
+                    <p className="text-sm text-gray-500">{feature.description}</p>
                   </div>
                 </div>
               )
@@ -178,25 +169,17 @@ const Facilities = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="bg-gradient-to-r from-primary-dark via-primary to-gym rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-1/4 translate-y-1/4"></div>
+        <div className="bg-primary rounded-xl p-8 md:p-12 text-center text-white">
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <FiMapPin className="text-white" size={32} />
           </div>
-
-          <div className="relative z-10">
-            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FiMapPin className="text-white" size={32} />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              운동과 관리, 한 건물에서 모두 가능합니다
-            </h3>
-            <p className="text-white/80 max-w-2xl mx-auto">
-              민죠이짐과 민죠이케어는 같은 건물 내 위치하여<br className="hidden md:block" />
-              이동 없이 편리하게 운동과 관리를 받으실 수 있습니다.
-            </p>
-          </div>
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            운동과 관리, 한 건물에서 모두 가능합니다
+          </h3>
+          <p className="text-white/80 max-w-2xl mx-auto">
+            민죠이짐과 민죠이케어는 같은 건물 내 위치하여<br className="hidden md:block" />
+            이동 없이 편리하게 운동과 관리를 받으실 수 있습니다.
+          </p>
         </div>
       </div>
     </section>

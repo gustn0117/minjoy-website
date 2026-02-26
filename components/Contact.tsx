@@ -14,12 +14,12 @@ interface ContactInfo {
 
 // 아이콘 매핑
 const iconMap: Record<string, React.ReactNode> = {
-  FiPhone: <FiPhone className="text-primary-dark" size={20} />,
-  FiMail: <FiMail className="text-primary-dark" size={20} />,
-  FiMapPin: <FiMapPin className="text-primary-dark" size={20} />,
-  FiClock: <FiClock className="text-primary-dark" size={20} />,
-  FiMessageSquare: <FiMessageSquare className="text-primary-dark" size={20} />,
-  FiInstagram: <FiInstagram className="text-primary-dark" size={20} />,
+  FiPhone: <FiPhone className="text-primary" size={20} />,
+  FiMail: <FiMail className="text-primary" size={20} />,
+  FiMapPin: <FiMapPin className="text-primary" size={20} />,
+  FiClock: <FiClock className="text-primary" size={20} />,
+  FiMessageSquare: <FiMessageSquare className="text-primary" size={20} />,
+  FiInstagram: <FiInstagram className="text-primary" size={20} />,
 }
 
 const Contact = () => {
@@ -101,13 +101,14 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="section-padding bg-ivory">
+    <section id="contact" className="section-padding bg-white">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">문의하기</span>
+          <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">Contact</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            문의하기
           </h2>
-          <p className="text-xl text-brown-dark">
+          <p className="text-xl text-gray-600">
             궁금하신 점이 있으시면 언제든 연락주세요
           </p>
         </div>
@@ -115,18 +116,18 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div>
-            <h3 className="text-3xl font-bold mb-8 text-brown-dark">연락처 정보</h3>
+            <h3 className="text-3xl font-bold mb-8 text-gray-900">연락처 정보</h3>
 
             <div className="space-y-6 mb-8">
               {contacts.map((contact) => (
                 <div key={contact.id} className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-light/30 rounded-full flex items-center justify-center flex-shrink-0">
-                    {contact.icon ? iconMap[contact.icon] || <FiPhone className="text-primary-dark" size={20} /> : <FiPhone className="text-primary-dark" size={20} />}
+                  <div className="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
+                    {contact.icon ? iconMap[contact.icon] || <FiPhone className="text-primary" size={20} /> : <FiPhone className="text-primary" size={20} />}
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1 text-brown-dark">{contact.label}</h4>
+                    <h4 className="font-semibold mb-1 text-gray-900">{contact.label}</h4>
                     {contact.value.split('\n').map((line, idx) => (
-                      <p key={idx} className="text-brown-light">{line}</p>
+                      <p key={idx} className="text-gray-500">{line}</p>
                     ))}
                   </div>
                 </div>
@@ -134,18 +135,18 @@ const Contact = () => {
             </div>
 
             {/* Map Placeholder */}
-            <div className="bg-ivory-dark rounded-2xl h-64 flex items-center justify-center border border-primary-light/20">
+            <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center border border-gray-200">
               <div className="text-center">
-                <FiMapPin className="mx-auto mb-2 text-brown-light" size={40} />
-                <p className="text-brown-light">지도 위치</p>
+                <FiMapPin className="mx-auto mb-2 text-gray-400" size={40} />
+                <p className="text-gray-500">지도 위치</p>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div>
-            <div className="bg-gradient-to-br from-primary-light/30 to-ivory-dark rounded-2xl p-8 border border-primary-light/20">
-              <h3 className="text-3xl font-bold mb-6 text-brown-dark">상담 신청</h3>
+            <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
+              <h3 className="text-3xl font-bold mb-6 text-gray-900">상담 신청</h3>
 
               {/* 성공 메시지 */}
               {submitStatus === 'success' && (
@@ -171,7 +172,7 @@ const Contact = () => {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-brown-dark">이름 *</label>
+                  <label className="block text-sm font-medium mb-2 text-gray-900">이름 *</label>
                   <input
                     type="text"
                     name="name"
@@ -179,13 +180,13 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="이름을 입력해주세요"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-brown-dark">연락처 *</label>
+                  <label className="block text-sm font-medium mb-2 text-gray-900">연락처 *</label>
                   <input
                     type="tel"
                     name="phone"
@@ -193,20 +194,20 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="연락처를 입력해주세요"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-brown-dark">관심 서비스 *</label>
+                  <label className="block text-sm font-medium mb-2 text-gray-900">관심 서비스 *</label>
                   <select
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
                     <option value="">선택해주세요</option>
                     <option value="gym">민죠이짐 (PT)</option>
@@ -216,14 +217,14 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-brown-dark">문의사항</label>
+                  <label className="block text-sm font-medium mb-2 text-gray-900">문의사항</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="궁금하신 점을 자유롭게 작성해주세요"
                   />
                 </div>
@@ -250,7 +251,7 @@ const Contact = () => {
                 </button>
               </form>
 
-              <p className="text-sm text-brown-light mt-4 text-center">
+              <p className="text-sm text-gray-500 mt-4 text-center">
                 상담 신청 후 24시간 내에 연락드립니다
               </p>
             </div>

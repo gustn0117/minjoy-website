@@ -1185,7 +1185,7 @@ export default function AdminDashboard() {
       <aside className={`${sidebarOpen ? 'w-64' : 'w-20'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
         <div className="p-4 border-b flex items-center justify-between">
           {sidebarOpen && (
-            <h1 className="text-xl font-bold gradient-text">민죠이 관리자</h1>
+            <h1 className="text-xl font-bold text-primary">민죠이 관리자</h1>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}

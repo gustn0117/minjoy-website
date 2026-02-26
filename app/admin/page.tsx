@@ -63,10 +63,10 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold gradient-text mb-2">민죠이 관리자</h1>
+          <h1 className="text-3xl font-bold text-primary mb-2">민죠이 관리자</h1>
           <p className="text-gray-600">관리자 계정으로 로그인하세요</p>
         </div>
 

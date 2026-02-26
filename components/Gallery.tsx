@@ -45,13 +45,14 @@ const Gallery = () => {
   ]
 
   return (
-    <section id="gallery" className="section-padding bg-gradient-to-br from-ivory-dark to-primary-light/20">
+    <section id="gallery" className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">변화 갤러리</span>
+          <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">Gallery</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            변화 갤러리
           </h2>
-          <p className="text-xl text-brown-dark">
+          <p className="text-xl text-gray-600">
             민죠이에서 이루어낸 놀라운 변화들
           </p>
         </div>
@@ -61,9 +62,9 @@ const Gallery = () => {
           {galleryItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-primary-light/20"
+              className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-300"
             >
-              <div className="h-64 bg-gradient-to-br from-primary-light to-ivory flex items-center justify-center relative overflow-hidden">
+              <div className="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
                 {item.beforeImage && item.afterImage ? (
                   <div className="flex w-full h-full">
                     <div className="w-1/2 h-full relative">
@@ -96,28 +97,28 @@ const Gallery = () => {
                   </div>
                 ) : (
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <div className="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-2">
                       <FiCamera className="text-primary" size={28} />
                     </div>
-                    <p className="text-brown-dark font-medium">Before & After</p>
+                    <p className="text-gray-500 font-medium">Before & After</p>
                   </div>
                 )}
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-brown-light">기간</span>
-                  <span className="font-semibold text-brown-dark">{item.period}</span>
+                  <span className="text-sm text-gray-500">기간</span>
+                  <span className="font-semibold text-gray-900">{item.period}</span>
                 </div>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-brown-light">체중 변화</span>
-                  <span className="font-semibold text-primary-dark">{item.weightChange}</span>
+                  <span className="text-sm text-gray-500">체중 변화</span>
+                  <span className="font-semibold text-primary">{item.weightChange}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-brown-light">체지방률</span>
-                  <span className="font-semibold text-primary-dark">{item.fatChange}</span>
+                  <span className="text-sm text-gray-500">체지방률</span>
+                  <span className="font-semibold text-primary">{item.fatChange}</span>
                 </div>
                 {item.description && (
-                  <p className="mt-3 text-sm text-brown-light">{item.description}</p>
+                  <p className="mt-3 text-sm text-gray-500">{item.description}</p>
                 )}
               </div>
             </div>
@@ -125,26 +126,26 @@ const Gallery = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl border border-gold/20">
-          <h3 className="text-3xl font-bold text-center mb-8 text-brown-dark">
+        <div className="bg-white rounded-lg p-8 md:p-12 border border-gray-200">
+          <h3 className="text-3xl font-bold text-center mb-8 text-gray-900">
             회원님들의 평균 변화
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-dark mb-2">-6.5kg</div>
-              <div className="text-brown-light">평균 체중 감량</div>
+              <div className="text-4xl font-bold text-primary mb-2">-6.5kg</div>
+              <div className="text-gray-500">평균 체중 감량</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-dark mb-2">-4.2%</div>
-              <div className="text-brown-light">평균 체지방률 감소</div>
+              <div className="text-4xl font-bold text-primary mb-2">-4.2%</div>
+              <div className="text-gray-500">평균 체지방률 감소</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-gym mb-2">+2.1kg</div>
-              <div className="text-brown-light">평균 근육량 증가</div>
+              <div className="text-4xl font-bold text-primary mb-2">+2.1kg</div>
+              <div className="text-gray-500">평균 근육량 증가</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-gold mb-2">3개월</div>
-              <div className="text-brown-light">평균 목표 달성 기간</div>
+              <div className="text-4xl font-bold text-primary mb-2">3개월</div>
+              <div className="text-gray-500">평균 목표 달성 기간</div>
             </div>
           </div>
         </div>
