@@ -978,8 +978,8 @@ export default function AdminDashboard() {
               <p className="text-gray-500 text-sm">새 문의</p>
               <p className="text-3xl font-bold text-primary">{unreadCount}</p>
             </div>
-            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-              <FiMessageSquare className="text-purple-600" size={24} />
+            <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+              <FiMessageSquare className="text-primary" size={24} />
             </div>
           </div>
         </div>
@@ -1034,7 +1034,7 @@ export default function AdminDashboard() {
                       if (!inquiry.isRead) handleMarkAsRead(inquiry.id)
                     }}
                     className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${
-                      selectedInquiry?.id === inquiry.id ? 'bg-purple-50' : ''
+                      selectedInquiry?.id === inquiry.id ? 'bg-primary-50' : ''
                     } ${!inquiry.isRead ? 'bg-blue-50/50' : ''}`}
                   >
                     <div className="flex items-start justify-between">
