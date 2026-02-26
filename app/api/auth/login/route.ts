@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 import { createToken, setAuthCookie } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
@@ -14,11 +14,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const admin = await prisma.admin.findUnique({
-      where: { email },
-    })
+    const { data: admin, error } = await supabase
+      .from('admins')
+      .select('*')
+      .eq('email', email)
+      .single()
 
-    if (!admin) {
+    if (error || !admin) {
       return NextResponse.json(
         { error: '이메일 또는 비밀번호가 올바르지 않습니다.' },
         { status: 401 }

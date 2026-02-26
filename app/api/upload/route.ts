@@ -2,29 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import { existsSync } from 'fs'
 import path from 'path'
-import { cookies } from 'next/headers'
-import { jwtVerify } from 'jose'
-
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'your-secret-key')
-
-async function verifyAuth() {
-  const cookieStore = cookies()
-  const token = cookieStore.get('admin-token')?.value
-
-  if (!token) return false
-
-  try {
-    await jwtVerify(token, JWT_SECRET)
-    return true
-  } catch {
-    return false
-  }
-}
+import { getSession } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   // 인증 확인
-  const isAuthenticated = await verifyAuth()
-  if (!isAuthenticated) {
+  const session = await getSession()
+  if (!session) {
     return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 })
   }
 

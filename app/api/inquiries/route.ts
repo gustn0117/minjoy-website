@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 
 // 상담 문의 생성
 export async function POST(request: NextRequest) {
@@ -14,14 +14,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const inquiry = await prisma.inquiry.create({
-      data: {
+    const { data: inquiry, error } = await supabase
+      .from('inquiries')
+      .insert({
         name,
         phone,
         service,
         message: message || null,
-      },
-    })
+      })
+      .select()
+      .single()
+
+    if (error) throw error
 
     return NextResponse.json(
       { message: '상담 신청이 완료되었습니다.', inquiry },
@@ -42,16 +46,23 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '10')
-    const skip = (page - 1) * limit
+    const from = (page - 1) * limit
+    const to = from + limit - 1
 
-    const [inquiries, total] = await Promise.all([
-      prisma.inquiry.findMany({
-        orderBy: { createdAt: 'desc' },
-        skip,
-        take: limit,
-      }),
-      prisma.inquiry.count(),
+    const [{ data: inquiries, error }, { count }] = await Promise.all([
+      supabase
+        .from('inquiries')
+        .select('*')
+        .order('createdAt', { ascending: false })
+        .range(from, to),
+      supabase
+        .from('inquiries')
+        .select('*', { count: 'exact', head: true }),
     ])
+
+    if (error) throw error
+
+    const total = count || 0
 
     return NextResponse.json({
       inquiries,

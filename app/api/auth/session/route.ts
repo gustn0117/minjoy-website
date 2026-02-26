@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getSession } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 
 export async function GET() {
   const session = await getSession()
@@ -9,12 +9,13 @@ export async function GET() {
     return NextResponse.json({ authenticated: false }, { status: 401 })
   }
 
-  const admin = await prisma.admin.findUnique({
-    where: { id: session.id },
-    select: { id: true, email: true, name: true },
-  })
+  const { data: admin, error } = await supabase
+    .from('admins')
+    .select('id, email, name')
+    .eq('id', session.id)
+    .single()
 
-  if (!admin) {
+  if (error || !admin) {
     return NextResponse.json({ authenticated: false }, { status: 401 })
   }
 

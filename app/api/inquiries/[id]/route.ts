@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 
 // 문의 상세 조회
 export async function GET(
@@ -8,11 +8,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const inquiry = await prisma.inquiry.findUnique({
-      where: { id },
-    })
+    const { data: inquiry, error } = await supabase
+      .from('inquiries')
+      .select('*')
+      .eq('id', id)
+      .single()
 
-    if (!inquiry) {
+    if (error || !inquiry) {
       return NextResponse.json(
         { error: '문의를 찾을 수 없습니다.' },
         { status: 404 }
@@ -38,10 +40,14 @@ export async function PATCH(
     const { id } = await params
     const body = await request.json()
 
-    const inquiry = await prisma.inquiry.update({
-      where: { id },
-      data: { isRead: body.isRead ?? true },
-    })
+    const { data: inquiry, error } = await supabase
+      .from('inquiries')
+      .update({ isRead: body.isRead ?? true })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
 
     return NextResponse.json(inquiry)
   } catch (error) {
@@ -60,9 +66,12 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params
-    await prisma.inquiry.delete({
-      where: { id },
-    })
+    const { error } = await supabase
+      .from('inquiries')
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
 
     return NextResponse.json({ message: '문의가 삭제되었습니다.' })
   } catch (error) {

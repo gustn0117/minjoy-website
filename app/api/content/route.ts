@@ -1,42 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 
-// 지원하는 콘텐츠 타입
-const contentTypes = {
-  'site-settings': prisma.siteSetting,
-  'hero-content': prisma.heroContent,
-  'hero-stats': prisma.heroStat,
-  'about-features': prisma.aboutFeature,
-  'gym-programs': prisma.gymProgram,
-  'gym-targets': prisma.gymTarget,
-  'care-services': prisma.careService,
-  'facilities': prisma.facility,
-  'gallery': prisma.galleryItem,
-  'contact-info': prisma.contactInfo,
-  'menu-items': prisma.menuItem,
-  'review-images': prisma.reviewImage,
-  'floating-buttons': prisma.floatingButton,
-} as const
-
-type ContentType = keyof typeof contentTypes
+// 콘텐츠 타입 → 테이블명 매핑
+const contentTables: Record<string, string> = {
+  'site-settings': 'site_settings',
+  'hero-content': 'hero_contents',
+  'hero-stats': 'hero_stats',
+  'about-features': 'about_features',
+  'gym-programs': 'gym_programs',
+  'gym-targets': 'gym_targets',
+  'care-services': 'care_services',
+  'facilities': 'facilities',
+  'gallery': 'gallery_items',
+  'contact-info': 'contact_infos',
+  'menu-items': 'menu_items',
+  'review-images': 'review_images',
+  'floating-buttons': 'floating_buttons',
+}
 
 // GET: 콘텐츠 목록 조회
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const type = searchParams.get('type') as ContentType
+    const type = searchParams.get('type')
     const activeOnly = searchParams.get('activeOnly') === 'true'
 
-    if (!type || !contentTypes[type]) {
+    if (!type || !contentTables[type]) {
       return NextResponse.json({ error: '유효하지 않은 콘텐츠 타입입니다.' }, { status: 400 })
     }
 
-    const model = contentTypes[type] as any
+    const table = contentTables[type]
+    let query = supabase.from(table).select('*')
 
-    const where = activeOnly ? { isActive: true } : {}
-    const orderBy = type === 'site-settings' ? { key: 'asc' as const } : { order: 'asc' as const }
+    if (activeOnly) {
+      query = query.eq('isActive', true)
+    }
 
-    const items = await model.findMany({ where, orderBy })
+    if (type === 'site-settings') {
+      query = query.order('key', { ascending: true })
+    } else {
+      query = query.order('order', { ascending: true })
+    }
+
+    const { data: items, error } = await query
+
+    if (error) throw error
 
     return NextResponse.json({ items })
   } catch (error) {
@@ -50,12 +58,18 @@ export async function POST(request: NextRequest) {
   try {
     const { type, data } = await request.json()
 
-    if (!type || !contentTypes[type as ContentType]) {
+    if (!type || !contentTables[type]) {
       return NextResponse.json({ error: '유효하지 않은 콘텐츠 타입입니다.' }, { status: 400 })
     }
 
-    const model = contentTypes[type as ContentType] as any
-    const item = await model.create({ data })
+    const table = contentTables[type]
+    const { data: item, error } = await supabase
+      .from(table)
+      .insert(data)
+      .select()
+      .single()
+
+    if (error) throw error
 
     return NextResponse.json({ item }, { status: 201 })
   } catch (error) {
@@ -69,7 +83,7 @@ export async function PUT(request: NextRequest) {
   try {
     const { type, id, data } = await request.json()
 
-    if (!type || !contentTypes[type as ContentType]) {
+    if (!type || !contentTables[type]) {
       return NextResponse.json({ error: '유효하지 않은 콘텐츠 타입입니다.' }, { status: 400 })
     }
 
@@ -77,8 +91,15 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'ID가 필요합니다.' }, { status: 400 })
     }
 
-    const model = contentTypes[type as ContentType] as any
-    const item = await model.update({ where: { id }, data })
+    const table = contentTables[type]
+    const { data: item, error } = await supabase
+      .from(table)
+      .update(data)
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
 
     return NextResponse.json({ item })
   } catch (error) {
@@ -91,10 +112,10 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const type = searchParams.get('type') as ContentType
+    const type = searchParams.get('type')
     const id = searchParams.get('id')
 
-    if (!type || !contentTypes[type]) {
+    if (!type || !contentTables[type]) {
       return NextResponse.json({ error: '유효하지 않은 콘텐츠 타입입니다.' }, { status: 400 })
     }
 
@@ -102,8 +123,13 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'ID가 필요합니다.' }, { status: 400 })
     }
 
-    const model = contentTypes[type] as any
-    await model.delete({ where: { id } })
+    const table = contentTables[type]
+    const { error } = await supabase
+      .from(table)
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
 
     return NextResponse.json({ message: '삭제되었습니다.' })
   } catch (error) {
