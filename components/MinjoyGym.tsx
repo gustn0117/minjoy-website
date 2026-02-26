@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiTarget, FiTrendingUp, FiAward, FiHeart, FiActivity, FiStar, FiUsers, FiPercent } from 'react-icons/fi'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 interface GymProgram {
   id: string
@@ -36,6 +37,13 @@ const programIcons = [FiTarget, FiTrendingUp, FiAward, FiHeart]
 const MinjoyGym = () => {
   const [programs, setPrograms] = useState<GymProgram[]>([])
   const [targets, setTargets] = useState<GymTarget[]>([])
+
+  // Scroll animation refs
+  const heroSection = useScrollAnimation()
+  const programSection = useScrollAnimation()
+  const targetSection = useScrollAnimation()
+  const statsSection = useScrollAnimation()
+  const ctaSection = useScrollAnimation()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,8 +89,14 @@ const MinjoyGym = () => {
     <section id="minjoy-gym" className="section-padding bg-white">
       <div className="container-custom">
         {/* Hero Banner */}
-        <div className="mb-16 rounded-xl overflow-hidden bg-primary">
-          <div className="px-8 md:px-12 py-16 md:py-20">
+        <div
+          ref={heroSection.ref}
+          className={`mb-16 rounded-xl overflow-hidden bg-primary relative scroll-hidden ${heroSection.isVisible ? 'scroll-visible' : ''}`}
+        >
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+
+          <div className="px-8 md:px-12 py-16 md:py-20 relative z-10">
             <div className="max-w-2xl text-white">
               <h2 className="text-4xl md:text-6xl font-black mb-4">
                 민죠이짐
@@ -95,13 +109,21 @@ const MinjoyGym = () => {
               </p>
             </div>
           </div>
+
+          {/* Decorative large icon on right side */}
+          <div className="absolute top-1/2 right-8 md:right-16 -translate-y-1/2 opacity-10">
+            <FiActivity size={160} className="text-white" />
+          </div>
         </div>
 
         {/* Programs */}
-        <div className="mb-20">
+        <div
+          ref={programSection.ref}
+          className={`mb-20 scroll-hidden ${programSection.isVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="text-center mb-10">
             <p className="text-sm text-primary font-medium mb-2">PROGRAMS</p>
-            <h3 className="text-3xl font-bold text-gray-900">프로그램 소개</h3>
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">프로그램 소개</h3>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {programList.map((program, index) => {
@@ -109,24 +131,24 @@ const MinjoyGym = () => {
               return (
                 <div
                   key={program.id}
-                  className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                  className={`bg-white rounded-lg overflow-hidden border border-gray-200 card-hover group stagger-${(index % 6) + 1}`}
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gray-200 relative overflow-hidden">
+                  <div className="h-48 relative overflow-hidden">
                     {program.image ? (
                       <Image
                         src={program.image}
                         alt={program.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-gray-400">
-                          <div className="mb-2">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
+                        <div className="text-center text-primary/40">
+                          <div className="mb-2 transition-transform duration-300 group-hover:scale-110">
                             <IconComponent size={48} />
                           </div>
-                          <div className="text-xs text-gray-400">이미지 준비중</div>
+                          <div className="text-xs text-primary/40">이미지 준비중</div>
                         </div>
                       </div>
                     )}
@@ -148,10 +170,13 @@ const MinjoyGym = () => {
         </div>
 
         {/* Target Audience */}
-        <div className="mb-20">
+        <div
+          ref={targetSection.ref}
+          className={`mb-20 scroll-hidden ${targetSection.isVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="text-center mb-10">
             <p className="text-sm text-primary font-medium mb-2">FOR YOU</p>
-            <h3 className="text-3xl font-bold text-gray-900">
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">
               민죠이짐은 이런 분들께 추천합니다
             </h3>
           </div>
@@ -159,7 +184,7 @@ const MinjoyGym = () => {
             {targetList.map((item, index) => (
               <div
                 key={item.id}
-                className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                className={`bg-white p-6 rounded-lg border border-gray-200 border-l-4 border-l-primary hover:bg-primary-50 transition-all duration-300 card-hover stagger-${index + 1}`}
               >
                 {/* Number badge */}
                 <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 text-sm">
@@ -173,7 +198,10 @@ const MinjoyGym = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        <div
+          ref={statsSection.ref}
+          className={`grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 scroll-hidden ${statsSection.isVisible ? 'scroll-visible' : ''}`}
+        >
           {[
             { value: '500+', label: '누적 회원', Icon: FiUsers },
             { value: '98%', label: '목표 달성률', Icon: FiTarget },
@@ -182,35 +210,44 @@ const MinjoyGym = () => {
           ].map((stat, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg border border-gray-200 text-center hover:shadow-md transition-shadow duration-200"
+              className={`bg-white p-6 rounded-lg border border-gray-200 text-center card-hover stagger-${index + 1}`}
             >
-              <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <stat.Icon className="text-primary" size={24} />
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-1 transition-transform duration-300 hover:scale-110 cursor-default">{stat.value}</div>
               <div className="text-sm text-gray-500">{stat.label}</div>
             </div>
           ))}
         </div>
 
         {/* CTA Banner */}
-        <div className="bg-primary rounded-xl p-8 md:p-12 text-center text-white">
-          <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <FiAward className="text-white" size={32} />
+        <div
+          ref={ctaSection.ref}
+          className={`bg-primary rounded-xl p-8 md:p-12 text-center text-white relative overflow-hidden scroll-hidden ${ctaSection.isVisible ? 'scroll-visible' : ''}`}
+        >
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+          <div className="relative z-10">
+            <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+              <FiAward className="text-white" size={32} />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              비포&애프터 사진으로 증명하는 확실한 결과
+            </h3>
+            <p className="text-white/80 mb-6 max-w-2xl mx-auto">
+              민죠이짐에서 당신의 변화를 시작하세요.<br />
+              전문 트레이너가 목표 달성까지 함께합니다.
+            </p>
+            <a
+              href="/contact"
+              className="inline-block bg-white text-primary-dark px-8 py-3 rounded-md font-bold btn-premium hover:bg-gray-50 transition-colors"
+            >
+              무료 상담 신청하기
+            </a>
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            비포&애프터 사진으로 증명하는 확실한 결과
-          </h3>
-          <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-            민죠이짐에서 당신의 변화를 시작하세요.<br />
-            전문 트레이너가 목표 달성까지 함께합니다.
-          </p>
-          <a
-            href="/contact"
-            className="inline-block bg-white text-primary-dark px-8 py-3 rounded-md font-bold hover:bg-gray-50 transition-colors"
-          >
-            무료 상담 신청하기
-          </a>
         </div>
       </div>
     </section>

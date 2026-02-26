@@ -99,38 +99,47 @@ const FloatingButtons = () => {
 
   return (
     <div className="fixed right-4 bottom-4 z-40 flex flex-col items-end gap-3">
-      {isExpanded && (
-        <div className="flex flex-col gap-3">
-          {displayButtons.map((button) => (
-            <Link
-              key={button.id}
-              href={button.href}
-              target={button.href.startsWith('http') ? '_blank' : undefined}
-              rel={button.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${button.bgColor} ${button.textColor} ${button.type === 'inquiry' ? 'border-2 border-gray-200' : ''}`}
-            >
-              <span className="flex items-center justify-center w-8 h-8">
-                {getButtonIcon(button.type)}
-              </span>
-              <span className="font-medium text-sm whitespace-nowrap">{button.label}</span>
-            </Link>
-          ))}
-        </div>
-      )}
+      {/* Buttons with stagger animation */}
+      <div className={`flex flex-col gap-3 transition-all duration-300 ${
+        isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}>
+        {displayButtons.map((button, index) => (
+          <Link
+            key={button.id}
+            href={button.href}
+            target={button.href.startsWith('http') ? '_blank' : undefined}
+            rel={button.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${button.bgColor} ${button.textColor} ${button.type === 'inquiry' ? 'border-2 border-gray-200' : ''}`}
+            style={{
+              transitionDelay: isExpanded ? `${index * 60}ms` : '0ms',
+              transform: isExpanded ? 'translateX(0)' : 'translateX(20px)',
+              opacity: isExpanded ? 1 : 0,
+            }}
+          >
+            <span className="flex items-center justify-center w-8 h-8">
+              {getButtonIcon(button.type)}
+            </span>
+            <span className="font-medium text-sm whitespace-nowrap">{button.label}</span>
+          </Link>
+        ))}
+      </div>
 
+      {/* Toggle Button with rotation */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
+        className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-500 hover:scale-110 ${
           isExpanded
-            ? 'bg-gray-600 text-white'
-            : 'bg-primary text-white'
+            ? 'bg-gray-700 text-white'
+            : 'bg-primary text-white animate-pulse-glow'
         }`}
       >
-        {isExpanded ? (
-          <FiX className="w-6 h-6" />
-        ) : (
-          <FiMessageSquare className="w-6 h-6" />
-        )}
+        <span className={`transition-transform duration-500 flex items-center justify-center ${isExpanded ? 'rotate-90' : 'rotate-0'}`}>
+          {isExpanded ? (
+            <FiX className="w-6 h-6" />
+          ) : (
+            <FiMessageSquare className="w-6 h-6" />
+          )}
+        </span>
       </button>
     </div>
   )

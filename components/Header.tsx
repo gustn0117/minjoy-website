@@ -49,14 +49,14 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showBackground ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+        showBackground ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100' : 'bg-transparent'
       }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center relative z-10">
-            <span className={`text-2xl font-bold transition-colors ${
+          <Link href="/" className="flex items-center relative z-10 transition-opacity duration-200 hover:opacity-80">
+            <span className={`text-2xl font-bold transition-colors duration-200 ${
               showBackground ? 'text-primary' : 'text-white'
             }`}>
               민죠이
@@ -69,7 +69,7 @@ const Header = () => {
                 key={item.id}
                 href={item.href}
                 onClick={handleNavClick}
-                className={`text-sm font-medium transition-colors relative z-10 ${
+                className={`text-sm font-medium transition-colors duration-200 relative z-10 flex flex-col items-center gap-1.5 ${
                   showBackground
                     ? pathname === item.href
                       ? 'text-primary'
@@ -80,6 +80,11 @@ const Header = () => {
                 }`}
               >
                 {item.name}
+                {pathname === item.href && (
+                  <span className={`w-1 h-1 rounded-full ${
+                    showBackground ? 'bg-primary' : 'bg-white'
+                  }`} />
+                )}
               </Link>
             ))}
           </nav>
@@ -87,7 +92,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center">
             <Link
               href="/admin"
-              className={`p-2 rounded-md transition-colors relative z-10 ${
+              className={`p-2 rounded-md transition-colors duration-200 relative z-10 ${
                 showBackground ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/20'
               }`}
             >
@@ -98,7 +103,7 @@ const Header = () => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 transition-colors relative z-10 ${
+            className={`lg:hidden p-2 transition-colors duration-200 relative z-10 ${
               showBackground ? 'text-gray-700' : 'text-white'
             }`}
           >
@@ -107,24 +112,29 @@ const Header = () => {
         </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100">
-          <nav className="container-custom py-4 space-y-1">
-            {DEFAULT_MENU_ITEMS.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className={`block py-3 px-4 rounded-md text-gray-700 hover:text-primary hover:bg-primary-50 font-medium transition-colors ${
-                  pathname === item.href ? 'text-primary bg-primary-50' : ''
-                }`}
-                onClick={handleNavClick}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      <div
+        className={`lg:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <nav className="container-custom py-4 space-y-1">
+          {DEFAULT_MENU_ITEMS.map((item, index) => (
+            <Link
+              key={item.id}
+              href={item.href}
+              className={`block py-3 px-4 rounded-md text-gray-700 hover:text-primary hover:bg-primary-50 font-medium transition-all duration-200 ${
+                pathname === item.href ? 'text-primary bg-primary-50' : ''
+              } ${isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}`}
+              style={{
+                transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms',
+              }}
+              onClick={handleNavClick}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   )
 }

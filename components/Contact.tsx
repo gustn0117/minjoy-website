@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiCheck, FiAlertCircle, FiMessageSquare, FiInstagram } from 'react-icons/fi'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 interface ContactInfo {
   id: string
@@ -14,12 +15,12 @@ interface ContactInfo {
 
 // 아이콘 매핑
 const iconMap: Record<string, React.ReactNode> = {
-  FiPhone: <FiPhone className="text-primary" size={20} />,
-  FiMail: <FiMail className="text-primary" size={20} />,
-  FiMapPin: <FiMapPin className="text-primary" size={20} />,
-  FiClock: <FiClock className="text-primary" size={20} />,
-  FiMessageSquare: <FiMessageSquare className="text-primary" size={20} />,
-  FiInstagram: <FiInstagram className="text-primary" size={20} />,
+  FiPhone: <FiPhone className="text-white" size={20} />,
+  FiMail: <FiMail className="text-white" size={20} />,
+  FiMapPin: <FiMapPin className="text-white" size={20} />,
+  FiClock: <FiClock className="text-white" size={20} />,
+  FiMessageSquare: <FiMessageSquare className="text-white" size={20} />,
+  FiInstagram: <FiInstagram className="text-white" size={20} />,
 }
 
 const Contact = () => {
@@ -33,6 +34,10 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation()
+  const { ref: infoRef, isVisible: infoVisible } = useScrollAnimation()
+  const { ref: formRef, isVisible: formVisible } = useScrollAnimation()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,26 +108,32 @@ const Contact = () => {
   return (
     <section id="contact" className="section-padding bg-white">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <div
+          ref={sectionRef}
+          className={`text-center mb-16 scroll-hidden ${sectionVisible ? 'scroll-visible' : ''}`}
+        >
           <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">Contact</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 section-accent">
             문의하기
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 mt-6">
             궁금하신 점이 있으시면 언제든 연락주세요
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div>
+          <div
+            ref={infoRef}
+            className={`scroll-hidden ${infoVisible ? 'scroll-visible' : ''}`}
+          >
             <h3 className="text-3xl font-bold mb-8 text-gray-900">연락처 정보</h3>
 
             <div className="space-y-6 mb-8">
-              {contacts.map((contact) => (
-                <div key={contact.id} className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
-                    {contact.icon ? iconMap[contact.icon] || <FiPhone className="text-primary" size={20} /> : <FiPhone className="text-primary" size={20} />}
+              {contacts.map((contact, index) => (
+                <div key={contact.id} className={`flex items-start space-x-4 stagger-${index + 1}`}>
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                    {contact.icon ? iconMap[contact.icon] || <FiPhone className="text-white" size={20} /> : <FiPhone className="text-white" size={20} />}
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1 text-gray-900">{contact.label}</h4>
@@ -135,22 +146,25 @@ const Contact = () => {
             </div>
 
             {/* Map Placeholder */}
-            <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center border border-gray-200">
+            <div className="bg-gradient-to-br from-primary-50 to-ivory rounded-xl h-64 flex items-center justify-center border border-primary/10">
               <div className="text-center">
-                <FiMapPin className="mx-auto mb-2 text-gray-400" size={40} />
-                <p className="text-gray-500">지도 위치</p>
+                <FiMapPin className="mx-auto mb-2 text-primary/40" size={40} />
+                <p className="text-primary/50 font-medium">지도 위치</p>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div>
-            <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
+          <div
+            ref={formRef}
+            className={`scroll-hidden ${formVisible ? 'scroll-visible' : ''}`}
+          >
+            <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
               <h3 className="text-3xl font-bold mb-6 text-gray-900">상담 신청</h3>
 
               {/* 성공 메시지 */}
               {submitStatus === 'success' && (
-                <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg flex items-center space-x-3">
+                <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-xl shadow-sm flex items-center space-x-3">
                   <FiCheck className="text-green-600 flex-shrink-0" size={24} />
                   <div>
                     <p className="font-semibold text-green-800">상담 신청이 완료되었습니다!</p>
@@ -161,7 +175,7 @@ const Contact = () => {
 
               {/* 에러 메시지 */}
               {submitStatus === 'error' && (
-                <div className="mb-6 p-4 bg-red-100 border border-red-300 rounded-lg flex items-center space-x-3">
+                <div className="mb-6 p-4 bg-red-100 border border-red-300 rounded-xl shadow-sm flex items-center space-x-3">
                   <FiAlertCircle className="text-red-600 flex-shrink-0" size={24} />
                   <div>
                     <p className="font-semibold text-red-800">오류가 발생했습니다</p>
@@ -180,7 +194,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:shadow-md focus:shadow-primary/10 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed transition-shadow duration-300"
                     placeholder="이름을 입력해주세요"
                   />
                 </div>
@@ -194,7 +208,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:shadow-md focus:shadow-primary/10 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed transition-shadow duration-300"
                     placeholder="연락처를 입력해주세요"
                   />
                 </div>
@@ -207,7 +221,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:shadow-md focus:shadow-primary/10 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed transition-shadow duration-300"
                   >
                     <option value="">선택해주세요</option>
                     <option value="gym">민죠이짐 (PT)</option>
@@ -224,7 +238,7 @@ const Contact = () => {
                     onChange={handleChange}
                     rows={4}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:shadow-md focus:shadow-primary/10 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed transition-shadow duration-300"
                     placeholder="궁금하신 점을 자유롭게 작성해주세요"
                   />
                 </div>
@@ -232,7 +246,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full btn-primary btn-premium flex items-center justify-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.02] transition-transform duration-300"
                 >
                   {isSubmitting ? (
                     <>

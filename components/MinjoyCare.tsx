@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiZap, FiDroplet, FiStar, FiHeart, FiActivity, FiArrowDown, FiTrendingUp, FiPercent, FiMinus, FiClipboard, FiEdit3, FiThumbsUp, FiCheckCircle, FiGift } from 'react-icons/fi'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 interface CareService {
   id: string
@@ -28,6 +29,14 @@ const serviceIcons = [FiDroplet, FiZap, FiStar, FiHeart]
 
 const MinjoyCare = () => {
   const [services, setServices] = useState<CareService[]>([])
+
+  // Scroll animation refs
+  const heroSection = useScrollAnimation()
+  const messageSection = useScrollAnimation()
+  const serviceSection = useScrollAnimation()
+  const effectSection = useScrollAnimation()
+  const processSection = useScrollAnimation()
+  const ctaSection = useScrollAnimation()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,8 +65,14 @@ const MinjoyCare = () => {
     <section id="minjoy-care" className="section-padding bg-gray-50">
       <div className="container-custom">
         {/* Hero Banner */}
-        <div className="mb-16 rounded-xl overflow-hidden bg-primary">
-          <div className="px-8 md:px-12 py-16 md:py-20">
+        <div
+          ref={heroSection.ref}
+          className={`mb-16 rounded-xl overflow-hidden bg-primary relative scroll-hidden ${heroSection.isVisible ? 'scroll-visible' : ''}`}
+        >
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+
+          <div className="px-8 md:px-12 py-16 md:py-20 relative z-10">
             <div className="max-w-2xl text-white">
               <h2 className="text-4xl md:text-6xl font-black mb-4">
                 민죠이케어
@@ -70,11 +85,19 @@ const MinjoyCare = () => {
               </p>
             </div>
           </div>
+
+          {/* Decorative large icon on right side */}
+          <div className="absolute top-1/2 right-8 md:right-16 -translate-y-1/2 opacity-10">
+            <FiHeart size={160} className="text-white" />
+          </div>
         </div>
 
         {/* Main Message */}
-        <div className="bg-white rounded-lg p-8 md:p-12 mb-16 text-center border border-gray-200">
-          <div className="w-16 h-16 bg-primary-50 rounded-lg flex items-center justify-center mx-auto mb-6">
+        <div
+          ref={messageSection.ref}
+          className={`bg-white rounded-lg p-8 md:p-12 mb-16 text-center border border-gray-200 card-hover scroll-hidden ${messageSection.isVisible ? 'scroll-visible' : ''}`}
+        >
+          <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <FiStar className="text-primary" size={32} />
           </div>
           <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
@@ -87,7 +110,11 @@ const MinjoyCare = () => {
             {['맞춤진단', '운동', '식단', '기기관리', '수기관리', '멘탈관리'].map((item, index) => (
               <span
                 key={index}
-                className="bg-primary text-white px-3 py-1 rounded-md text-sm font-medium"
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-transform duration-300 hover:scale-105 ${
+                  index % 2 === 0
+                    ? 'bg-primary text-white'
+                    : 'bg-primary-100 text-primary'
+                }`}
               >
                 {item}
               </span>
@@ -96,10 +123,13 @@ const MinjoyCare = () => {
         </div>
 
         {/* Services */}
-        <div className="mb-20">
+        <div
+          ref={serviceSection.ref}
+          className={`mb-20 scroll-hidden ${serviceSection.isVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="text-center mb-10">
             <p className="text-sm text-primary font-medium mb-2">PROGRAMS</p>
-            <h3 className="text-3xl font-bold text-gray-900">케어 프로그램</h3>
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">케어 프로그램</h3>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {serviceList.map((service, index) => {
@@ -107,30 +137,30 @@ const MinjoyCare = () => {
               return (
                 <div
                   key={service.id}
-                  className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                  className={`bg-white rounded-lg overflow-hidden border border-gray-200 card-hover group stagger-${index + 1}`}
                 >
                   {/* Image Area */}
-                  <div className="h-56 bg-gray-200 relative overflow-hidden">
+                  <div className="h-56 relative overflow-hidden">
                     {service.image ? (
                       <Image
                         src={service.image}
                         alt={service.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-gray-400">
-                          <div className="mb-3">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
+                        <div className="text-center text-primary/40">
+                          <div className="mb-3 transition-transform duration-300 group-hover:scale-110">
                             <IconComponent size={56} />
                           </div>
-                          <div className="text-sm text-gray-400">이미지 준비중</div>
+                          <div className="text-sm text-primary/40">이미지 준비중</div>
                         </div>
                       </div>
                     )}
 
-                    {/* Title overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gray-900/60">
+                    {/* Title overlay - improved gradient */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-brown-dark/70 via-brown-dark/20 to-transparent">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
                           {iconMap[service.icon] || <FiStar size={20} />}
@@ -159,10 +189,13 @@ const MinjoyCare = () => {
         </div>
 
         {/* Effect Stats */}
-        <div className="mb-20">
+        <div
+          ref={effectSection.ref}
+          className={`mb-20 scroll-hidden ${effectSection.isVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="text-center mb-10">
             <p className="text-sm text-primary font-medium mb-2">RESULTS</p>
-            <h3 className="text-3xl font-bold text-gray-900">관리 효과</h3>
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">관리 효과</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
@@ -173,12 +206,12 @@ const MinjoyCare = () => {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-md transition-shadow duration-200"
+                className={`bg-white rounded-lg border border-gray-200 p-6 text-center card-hover stagger-${index + 1}`}
               >
-                <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <stat.Icon className="text-primary" size={24} />
                 </div>
-                <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-1 transition-transform duration-300 hover:scale-110 cursor-default">{stat.value}</div>
                 <div className="text-xs text-gray-500">{stat.label}</div>
               </div>
             ))}
@@ -186,10 +219,13 @@ const MinjoyCare = () => {
         </div>
 
         {/* Process Steps */}
-        <div className="mb-20">
+        <div
+          ref={processSection.ref}
+          className={`mb-20 scroll-hidden ${processSection.isVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="text-center mb-10">
             <p className="text-sm text-primary font-medium mb-2">PROCESS</p>
-            <h3 className="text-3xl font-bold text-gray-900">관리 프로세스</h3>
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">관리 프로세스</h3>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
@@ -198,16 +234,16 @@ const MinjoyCare = () => {
               { step: '03', title: '전문 관리', desc: '기기 + 수기 복합 관리', Icon: FiThumbsUp },
               { step: '04', title: '결과 확인', desc: '체계적인 관리와 피드백', Icon: FiCheckCircle },
             ].map((item, index) => (
-              <div key={index} className="relative">
-                {/* Connection line */}
+              <div key={index} className={`relative stagger-${index + 1}`}>
+                {/* Dashed connection line */}
                 {index < 3 && (
-                  <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-gray-200"></div>
+                  <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 border-t-2 border-dashed border-primary-light"></div>
                 )}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 relative z-10 hover:shadow-md transition-shadow duration-200">
+                <div className="bg-white rounded-lg p-6 border border-gray-200 relative z-10 card-hover hover:bg-primary-50 hover:border-primary transition-all duration-300">
                   <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-4 text-sm font-bold">
                     {item.step}
                   </div>
-                  <div className="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center mb-3">
+                  <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
                     <item.Icon className="text-primary" size={20} />
                   </div>
                   <h4 className="font-bold text-lg text-gray-900 mb-1">{item.title}</h4>
@@ -219,23 +255,32 @@ const MinjoyCare = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-primary rounded-xl p-8 md:p-12 text-white text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <FiGift className="text-white" size={32} />
+        <div
+          ref={ctaSection.ref}
+          className={`bg-primary rounded-xl p-8 md:p-12 text-white text-center relative overflow-hidden scroll-hidden ${ctaSection.isVisible ? 'scroll-visible' : ''}`}
+        >
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+          <div className="relative z-10">
+            <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+              <FiGift className="text-white" size={32} />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              짧은 시간 목표 달성이 가능합니다
+            </h3>
+            <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+              종합 관리로 확실한 효과를 경험하세요.<br />
+              지금 바로 무료 상담을 받아보세요.
+            </p>
+            <a
+              href="/contact"
+              className="inline-block bg-white text-primary-dark px-8 py-3 rounded-md font-bold btn-premium hover:bg-gray-50 transition-colors"
+            >
+              무료 상담 신청하기
+            </a>
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            짧은 시간 목표 달성이 가능합니다
-          </h3>
-          <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            종합 관리로 확실한 효과를 경험하세요.<br />
-            지금 바로 무료 상담을 받아보세요.
-          </p>
-          <a
-            href="/contact"
-            className="inline-block bg-white text-primary-dark px-8 py-3 rounded-md font-bold hover:bg-gray-50 transition-colors"
-          >
-            무료 상담 신청하기
-          </a>
         </div>
       </div>
     </section>

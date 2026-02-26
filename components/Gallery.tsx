@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiCamera } from 'react-icons/fi'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 interface GalleryItem {
   id: string
@@ -17,6 +18,10 @@ interface GalleryItem {
 
 const Gallery = () => {
   const [items, setItems] = useState<GalleryItem[]>([])
+
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation()
+  const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation()
+  const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,22 +52,28 @@ const Gallery = () => {
   return (
     <section id="gallery" className="section-padding bg-gray-50">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <div
+          ref={sectionRef}
+          className={`text-center mb-16 scroll-hidden ${sectionVisible ? 'scroll-visible' : ''}`}
+        >
           <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">Gallery</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 section-accent">
             변화 갤러리
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 mt-6">
             민죠이에서 이루어낸 놀라운 변화들
           </p>
         </div>
 
         {/* Before & After Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {galleryItems.map((item) => (
+        <div
+          ref={gridRef}
+          className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 scroll-hidden ${gridVisible ? 'scroll-visible' : ''}`}
+        >
+          {galleryItems.map((item, index) => (
             <div
               key={item.id}
-              className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-300"
+              className={`group bg-white rounded-xl overflow-hidden border border-gray-200 border-t-4 border-t-primary card-hover transition-all duration-300 stagger-${index + 1}`}
             >
               <div className="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
                 {item.beforeImage && item.afterImage ? (
@@ -72,7 +83,7 @@ const Gallery = () => {
                         src={item.beforeImage}
                         alt="Before"
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <span className="absolute bottom-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Before</span>
                     </div>
@@ -81,7 +92,7 @@ const Gallery = () => {
                         src={item.afterImage}
                         alt="After"
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <span className="absolute bottom-2 right-2 bg-primary/80 text-white text-xs px-2 py-1 rounded">After</span>
                     </div>
@@ -92,7 +103,7 @@ const Gallery = () => {
                       src={(item.beforeImage || item.afterImage)!}
                       alt="Gallery"
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 ) : (
@@ -105,17 +116,17 @@ const Gallery = () => {
                 )}
               </div>
               <div className="p-6">
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-3">
                   <span className="text-sm text-gray-500">기간</span>
                   <span className="font-semibold text-gray-900">{item.period}</span>
                 </div>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-3">
                   <span className="text-sm text-gray-500">체중 변화</span>
-                  <span className="font-semibold text-primary">{item.weightChange}</span>
+                  <span className="bg-primary-50 text-primary px-3 py-1 rounded-full text-sm font-bold">{item.weightChange}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">체지방률</span>
-                  <span className="font-semibold text-primary">{item.fatChange}</span>
+                  <span className="bg-primary-50 text-primary px-3 py-1 rounded-full text-sm font-bold">{item.fatChange}</span>
                 </div>
                 {item.description && (
                   <p className="mt-3 text-sm text-gray-500">{item.description}</p>
@@ -126,26 +137,29 @@ const Gallery = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="bg-white rounded-lg p-8 md:p-12 border border-gray-200">
-          <h3 className="text-3xl font-bold text-center mb-8 text-gray-900">
+        <div
+          ref={statsRef}
+          className={`bg-primary rounded-xl p-8 md:p-12 scroll-hidden ${statsVisible ? 'scroll-visible' : ''}`}
+        >
+          <h3 className="text-3xl font-bold text-center mb-8 text-white">
             회원님들의 평균 변화
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">-6.5kg</div>
-              <div className="text-gray-500">평균 체중 감량</div>
+              <div className="text-4xl md:text-5xl font-black text-white mb-2">-6.5kg</div>
+              <div className="text-white/70 font-medium">평균 체중 감량</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">-4.2%</div>
-              <div className="text-gray-500">평균 체지방률 감소</div>
+              <div className="text-4xl md:text-5xl font-black text-white mb-2">-4.2%</div>
+              <div className="text-white/70 font-medium">평균 체지방률 감소</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">+2.1kg</div>
-              <div className="text-gray-500">평균 근육량 증가</div>
+              <div className="text-4xl md:text-5xl font-black text-white mb-2">+2.1kg</div>
+              <div className="text-white/70 font-medium">평균 근육량 증가</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">3개월</div>
-              <div className="text-gray-500">평균 목표 달성 기간</div>
+              <div className="text-4xl md:text-5xl font-black text-white mb-2">3개월</div>
+              <div className="text-white/70 font-medium">평균 목표 달성 기간</div>
             </div>
           </div>
         </div>

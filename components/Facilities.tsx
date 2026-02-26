@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiActivity, FiTarget, FiDroplet, FiStar, FiMapPin } from 'react-icons/fi'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 interface Facility {
   id: string
@@ -19,6 +20,11 @@ const careIcons = [FiStar, FiActivity, FiDroplet, FiStar]
 
 const Facilities = () => {
   const [facilities, setFacilities] = useState<Facility[]>([])
+
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation()
+  const { ref: gymRef, isVisible: gymVisible } = useScrollAnimation()
+  const { ref: careRef, isVisible: careVisible } = useScrollAnimation()
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,21 +68,27 @@ const Facilities = () => {
   return (
     <section id="facilities" className="section-padding bg-white">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <div
+          ref={sectionRef}
+          className={`text-center mb-16 scroll-hidden ${sectionVisible ? 'scroll-visible' : ''}`}
+        >
           <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">Facilities</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 section-accent">
             시설 소개
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 mt-6">
             최고의 시설에서 최상의 케어를 받으세요
           </p>
         </div>
 
         {/* Gym Facilities Section */}
-        <div className="mb-20">
+        <div
+          ref={gymRef}
+          className={`mb-20 scroll-hidden ${gymVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-black text-sm">GYM</span>
+            <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-sm">
+              <span className="text-white font-black text-sm tracking-wide">GYM</span>
             </div>
             <h3 className="text-3xl font-bold text-primary">민죠이짐 시설</h3>
           </div>
@@ -87,10 +99,10 @@ const Facilities = () => {
               return (
                 <div
                   key={feature.id}
-                  className="group bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-300"
+                  className={`group bg-white rounded-xl overflow-hidden border border-gray-200 card-hover hover:border-primary transition-all duration-300 stagger-${index + 1}`}
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gray-100 relative overflow-hidden">
+                  <div className="h-48 bg-gradient-to-br from-primary-50 to-primary-100 relative overflow-hidden">
                     {feature.image ? (
                       <Image
                         src={feature.image}
@@ -101,10 +113,10 @@ const Facilities = () => {
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
-                          <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <IconComponent className="text-primary" size={24} />
+                          <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+                            <IconComponent className="text-primary" size={28} />
                           </div>
-                          <div className="text-xs text-gray-400">이미지 준비중</div>
+                          <div className="text-xs text-primary/50 font-medium">이미지 준비중</div>
                         </div>
                       </div>
                     )}
@@ -121,10 +133,13 @@ const Facilities = () => {
         </div>
 
         {/* Care Facilities Section */}
-        <div className="mb-16">
+        <div
+          ref={careRef}
+          className={`mb-16 scroll-hidden ${careVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-black text-xs">CARE</span>
+            <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-sm">
+              <span className="text-white font-black text-sm tracking-wide">CARE</span>
             </div>
             <h3 className="text-3xl font-bold text-primary">민죠이케어 시설</h3>
           </div>
@@ -135,10 +150,10 @@ const Facilities = () => {
               return (
                 <div
                   key={feature.id}
-                  className="group bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-300"
+                  className={`group bg-white rounded-xl overflow-hidden border border-gray-200 card-hover hover:border-primary transition-all duration-300 stagger-${index + 1}`}
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gray-100 relative overflow-hidden">
+                  <div className="h-48 bg-gradient-to-br from-ivory to-primary-50 relative overflow-hidden">
                     {feature.image ? (
                       <Image
                         src={feature.image}
@@ -149,10 +164,10 @@ const Facilities = () => {
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
-                          <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <IconComponent className="text-primary" size={24} />
+                          <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+                            <IconComponent className="text-primary" size={28} />
                           </div>
-                          <div className="text-xs text-gray-400">이미지 준비중</div>
+                          <div className="text-xs text-primary/50 font-medium">이미지 준비중</div>
                         </div>
                       </div>
                     )}
@@ -169,7 +184,10 @@ const Facilities = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="bg-primary rounded-xl p-8 md:p-12 text-center text-white">
+        <div
+          ref={ctaRef}
+          className={`bg-primary rounded-xl p-8 md:p-12 text-center text-white btn-premium scroll-hidden ${ctaVisible ? 'scroll-visible' : ''}`}
+        >
           <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <FiMapPin className="text-white" size={32} />
           </div>
