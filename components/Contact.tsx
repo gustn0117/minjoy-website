@@ -145,6 +145,23 @@ const Contact = () => {
               ))}
             </div>
 
+            {/* Instagram Links */}
+            <div className="flex flex-col gap-3 mb-8">
+              <h4 className="font-semibold text-gray-900">Instagram</h4>
+              <a href="https://instagram.com/min.joy___gym" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FiInstagram className="text-white" size={18} />
+                </div>
+                <span className="text-sm">@min.joy___gym (민죠이짐)</span>
+              </a>
+              <a href="https://instagram.com/min.joy___" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FiInstagram className="text-white" size={18} />
+                </div>
+                <span className="text-sm">@min.joy___ (대표 인스타)</span>
+              </a>
+            </div>
+
             {/* Map Placeholder */}
             <div className="bg-gradient-to-br from-primary-50 to-ivory rounded-xl h-64 flex items-center justify-center border border-primary/10">
               <div className="text-center">

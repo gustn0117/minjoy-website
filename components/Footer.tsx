@@ -2,8 +2,7 @@
 
 import Link from 'next/link'
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
-import { FaInstagram, FaYoutube } from 'react-icons/fa'
-import { SiNaver } from 'react-icons/si'
+import { FaInstagram } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -16,16 +15,23 @@ const Footer = () => {
               운동과 관리를 한 곳에서!<br />
               확실한 변화를 위한 프리미엄 토탈케어 센터
             </p>
-            <div className="flex items-center gap-3">
-              <a href="#" className="w-10 h-10 border-2 border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
-                <FaInstagram size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 border-2 border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
-                <FaYoutube size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 border-2 border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
-                <SiNaver size={14} />
-              </a>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <a href="https://instagram.com/min.joy___gym" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border-2 border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
+                  <FaInstagram size={18} />
+                </a>
+                <a href="https://instagram.com/min.joy___gym" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-primary transition-colors">
+                  @min.joy___gym
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <a href="https://instagram.com/min.joy___" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border-2 border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
+                  <FaInstagram size={18} />
+                </a>
+                <a href="https://instagram.com/min.joy___" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-primary transition-colors">
+                  @min.joy___ (대표)
+                </a>
+              </div>
             </div>
           </div>
 
