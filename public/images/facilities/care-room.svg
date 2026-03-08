@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="0" fill="#FBF5F4"/>
+  <rect x="0" y="250" width="400" height="50" fill="#F5E8E6"/>
+  <!-- Treatment bed -->
+  <rect x="80" y="160" width="240" height="16" rx="8" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <!-- Pillow -->
+  <rect x="90" y="148" width="50" height="14" rx="7" fill="#D4A9A3" opacity="0.4"/>
+  <!-- Blanket -->
+  <rect x="150" y="152" width="160" height="12" rx="4" fill="#C4918A" opacity="0.15"/>
+  <!-- Bed legs -->
+  <rect x="100" y="176" width="6" height="40" rx="2" fill="#D4A9A3" opacity="0.5"/>
+  <rect x="294" y="176" width="6" height="40" rx="2" fill="#D4A9A3" opacity="0.5"/>
+  <!-- Equipment cart -->
+  <rect x="50" y="90" width="50" height="70" rx="6" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <rect x="56" y="96" width="38" height="20" rx="3" fill="#C4918A" opacity="0.1"/>
+  <circle cx="65" cy="110" r="2" fill="#C4918A" opacity="0.5"/>
+  <circle cx="75" cy="110" r="2" fill="#D4A9A3" opacity="0.5"/>
+  <rect x="56" y="125" width="38" height="3" rx="1" fill="#F5E8E6"/>
+  <rect x="56" y="135" width="38" height="3" rx="1" fill="#F5E8E6"/>
+  <circle cx="62" cy="168" r="5" fill="#D4A9A3" opacity="0.3"/>
+  <circle cx="88" cy="168" r="5" fill="#D4A9A3" opacity="0.3"/>
+  <!-- Plant -->
+  <rect x="310" y="105" width="24" height="30" rx="5" fill="#C4918A" opacity="0.2"/>
+  <path d="M315 105 Q322 80 330 105" fill="#8B7670" opacity="0.15"/>
+  <path d="M318 105 Q310 75 325 90 Q330 85 328 105" fill="#6B4F47" opacity="0.12"/>
+  <!-- Ceiling light -->
+  <circle cx="200" cy="40" r="20" fill="#C4918A" opacity="0.08"/>
+  <circle cx="200" cy="40" r="8" fill="#D4A9A3" opacity="0.15"/>
+  <line x1="200" y1="20" x2="200" y2="32" stroke="#D4A9A3" stroke-width="1" opacity="0.3"/>
+</svg>

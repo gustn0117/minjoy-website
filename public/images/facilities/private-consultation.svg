@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="0" fill="#FBF5F4"/>
+  <rect x="0" y="250" width="400" height="50" fill="#F5E8E6"/>
+  <!-- Room walls -->
+  <path d="M60 60 L200 30 L340 60 L340 250 L60 250 Z" fill="white" stroke="#F5E8E6" stroke-width="1"/>
+  <line x1="200" y1="30" x2="200" y2="250" stroke="#F5E8E6" stroke-width="0.5" opacity="0.5"/>
+  <!-- Desk -->
+  <rect x="120" y="140" width="160" height="10" rx="3" fill="#8B7670"/>
+  <rect x="130" y="150" width="6" height="60" rx="2" fill="#6B4F47" opacity="0.5"/>
+  <rect x="264" y="150" width="6" height="60" rx="2" fill="#6B4F47" opacity="0.5"/>
+  <!-- Laptop -->
+  <rect x="170" y="115" width="60" height="25" rx="3" fill="#D4A9A3"/>
+  <rect x="175" y="119" width="50" height="17" rx="2" fill="white" opacity="0.6"/>
+  <rect x="160" y="138" width="80" height="4" rx="2" fill="#C4918A"/>
+  <!-- Person silhouette -->
+  <circle cx="200" cy="82" r="14" fill="#C4918A" opacity="0.25"/>
+  <path d="M182 100 C182 92, 218 92, 218 100 L216 120 L184 120 Z" fill="#C4918A" opacity="0.15"/>
+  <!-- Clipboard -->
+  <rect x="260" y="100" width="30" height="40" rx="4" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <line x1="268" y1="112" x2="282" y2="112" stroke="#C4918A" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="268" y1="119" x2="280" y2="119" stroke="#D4A9A3" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="268" y1="126" x2="278" y2="126" stroke="#D4A9A3" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="270" y="94" width="16" height="8" rx="2" fill="#C4918A" opacity="0.3"/>
+  <!-- Lock icon -->
+  <rect x="85" y="85" width="24" height="18" rx="4" fill="#C4918A" opacity="0.2"/>
+  <path d="M92 85 L92 78 A5 5 0 0 1 102 78 L102 85" stroke="#C4918A" stroke-width="2" fill="none" opacity="0.3"/>
+  <circle cx="97" cy="94" r="2" fill="#C4918A" opacity="0.4"/>
+</svg>

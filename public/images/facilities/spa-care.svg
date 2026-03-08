@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="0" fill="#FBF5F4"/>
+  <rect x="0" y="250" width="400" height="50" fill="#F5E8E6"/>
+  <!-- Spa capsule machine -->
+  <ellipse cx="200" cy="175" rx="130" ry="40" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <!-- Capsule dome -->
+  <path d="M100 175 Q100 80 200 75 Q300 80 300 175" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <path d="M110 175 Q110 90 200 85 Q290 90 290 175" fill="#C4918A" opacity="0.04"/>
+  <!-- Opening line -->
+  <path d="M130 175 Q130 110 200 105 Q270 110 270 175" stroke="#D4A9A3" stroke-width="0.8" fill="none" stroke-dasharray="4 4" opacity="0.4"/>
+  <!-- Control panel -->
+  <rect x="280" y="100" width="30" height="40" rx="4" fill="white" stroke="#C4918A" stroke-width="1.5"/>
+  <rect x="285" y="106" width="20" height="10" rx="2" fill="#C4918A" opacity="0.15"/>
+  <circle cx="290" cy="126" r="3" fill="#C4918A" opacity="0.4"/>
+  <circle cx="300" cy="126" r="3" fill="#D4A9A3" opacity="0.3"/>
+  <!-- Person silhouette relaxing inside -->
+  <circle cx="170" cy="145" r="10" fill="#C4918A" opacity="0.12"/>
+  <path d="M160 158 C160 152 180 152 180 158 L178 175 L162 175 Z" fill="#C4918A" opacity="0.08"/>
+  <line x1="175" y1="175" x2="220" y2="180" stroke="#C4918A" stroke-width="3" stroke-linecap="round" opacity="0.06"/>
+  <!-- Pillow -->
+  <ellipse cx="155" cy="155" rx="15" ry="6" fill="#D4A9A3" opacity="0.15"/>
+  <!-- Steam/relaxation waves -->
+  <path d="M200 60 Q205 50 200 40" stroke="#C4918A" stroke-width="1.5" fill="none" opacity="0.15" stroke-linecap="round"/>
+  <path d="M215 65 Q220 52 215 42" stroke="#D4A9A3" stroke-width="1.5" fill="none" opacity="0.12" stroke-linecap="round"/>
+  <path d="M185 63 Q190 50 185 38" stroke="#D4A9A3" stroke-width="1.5" fill="none" opacity="0.12" stroke-linecap="round"/>
+  <!-- Sparkle accents -->
+  <path d="M120 50 L121 54 L125 55 L121 56 L120 60 L119 56 L115 55 L119 54 Z" fill="#C4918A" opacity="0.2"/>
+  <path d="M310 65 L311 68 L314 69 L311 70 L310 73 L309 70 L306 69 L309 68 Z" fill="#D4A9A3" opacity="0.15"/>
+  <!-- Bed legs -->
+  <rect x="120" y="210" width="6" height="20" rx="2" fill="#D4A9A3" opacity="0.3"/>
+  <rect x="274" y="210" width="6" height="20" rx="2" fill="#D4A9A3" opacity="0.3"/>
+</svg>

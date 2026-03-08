@@ -18,6 +18,20 @@ interface Facility {
 const gymIcons = [FiActivity, FiTarget, FiActivity, FiDroplet]
 const careIcons = [FiStar, FiActivity, FiDroplet, FiStar]
 
+// SVG 일러스트 매핑 (기본값용)
+const gymSvgs = [
+  '/images/facilities/body-analyzer.svg',
+  '/images/facilities/consultation.svg',
+  '/images/facilities/private-consultation.svg',
+  '/images/facilities/locker-room.svg',
+]
+const careSvgs = [
+  '/images/facilities/care-room.svg',
+  '/images/facilities/treatment-room.svg',
+  '/images/facilities/private-room.svg',
+  '/images/facilities/spa-care.svg',
+]
+
 const Facilities = () => {
   const [facilities, setFacilities] = useState<Facility[]>([])
 
@@ -42,19 +56,19 @@ const Facilities = () => {
     fetchData()
   }, [])
 
-  // 기본값 with real images
+  // 기본값
   const defaultGymFeatures: Facility[] = [
-    { id: '1', type: 'gym', title: '체성분 분석기', description: '정밀한 체성분 측정 장비', image: '/images/body-analyzer.jpg', order: 0 },
-    { id: '2', type: 'gym', title: '상담실', description: '1:1 맞춤 상담 공간', image: '/images/consultation-1.jpg', order: 1 },
-    { id: '3', type: 'gym', title: '프라이빗 상담', description: '편안한 상담 환경', image: '/images/consultation-2.jpg', order: 2 },
-    { id: '4', type: 'gym', title: '락커룸', description: '깨끗하고 쾌적한 환경', image: '/images/locker-room.jpg', order: 3 },
+    { id: '1', type: 'gym', title: '체성분 분석기', description: '정밀한 체성분 측정 장비', order: 0 },
+    { id: '2', type: 'gym', title: '상담실', description: '1:1 맞춤 상담 공간', order: 1 },
+    { id: '3', type: 'gym', title: '프라이빗 상담', description: '편안한 상담 환경', order: 2 },
+    { id: '4', type: 'gym', title: '락커룸', description: '깨끗하고 쾌적한 환경', order: 3 },
   ]
 
   const defaultCareFeatures: Facility[] = [
-    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/images/care-room-2.jpg', order: 0 },
-    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/images/care-rooms.jpg', order: 1 },
-    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', image: '/images/private-room.jpg', order: 2 },
-    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', image: '/images/spa-care.jpg', order: 3 },
+    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', order: 0 },
+    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', order: 1 },
+    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', order: 2 },
+    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', order: 3 },
   ]
 
   const gymFeatures = facilities.length > 0
@@ -96,13 +110,14 @@ const Facilities = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {gymFeatures.map((feature, index) => {
               const IconComponent = gymIcons[index] || FiActivity
+              const svgSrc = gymSvgs[index]
               return (
                 <div
                   key={feature.id}
                   className={`group bg-white rounded-xl overflow-hidden border border-gray-200 card-hover hover:border-primary transition-all duration-300 stagger-${index + 1}`}
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gradient-to-br from-primary-50 to-primary-100 relative overflow-hidden">
+                  <div className="h-48 relative overflow-hidden">
                     {feature.image ? (
                       <>
                         <Image
@@ -114,13 +129,17 @@ const Facilities = () => {
                         <div className="absolute inset-0 bg-primary/5"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/40 to-transparent"></div>
                       </>
+                    ) : svgSrc ? (
+                      <Image
+                        src={svgSrc}
+                        alt={feature.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
-                            <IconComponent className="text-primary" size={28} />
-                          </div>
-                          <div className="text-xs text-primary/50 font-medium">이미지 준비중</div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
+                        <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                          <IconComponent className="text-primary" size={28} />
                         </div>
                       </div>
                     )}
@@ -151,13 +170,14 @@ const Facilities = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {careFeatures.map((feature, index) => {
               const IconComponent = careIcons[index] || FiStar
+              const svgSrc = careSvgs[index]
               return (
                 <div
                   key={feature.id}
                   className={`group bg-white rounded-xl overflow-hidden border border-gray-200 card-hover hover:border-primary transition-all duration-300 stagger-${index + 1}`}
                 >
                   {/* Image Area */}
-                  <div className="h-48 bg-gradient-to-br from-ivory to-primary-50 relative overflow-hidden">
+                  <div className="h-48 relative overflow-hidden">
                     {feature.image ? (
                       <>
                         <Image
@@ -169,13 +189,17 @@ const Facilities = () => {
                         <div className="absolute inset-0 bg-primary/5"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/40 to-transparent"></div>
                       </>
+                    ) : svgSrc ? (
+                      <Image
+                        src={svgSrc}
+                        alt={feature.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
-                            <IconComponent className="text-primary" size={28} />
-                          </div>
-                          <div className="text-xs text-primary/50 font-medium">이미지 준비중</div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-ivory to-primary-50 flex items-center justify-center">
+                        <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                          <IconComponent className="text-primary" size={28} />
                         </div>
                       </div>
                     )}

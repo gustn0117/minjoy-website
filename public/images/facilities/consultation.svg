@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="0" fill="#FBF5F4"/>
+  <rect x="0" y="250" width="400" height="50" fill="#F5E8E6"/>
+  <!-- Table -->
+  <ellipse cx="200" cy="195" rx="80" ry="20" fill="#6B4F47" opacity="0.15"/>
+  <rect x="140" y="160" width="120" height="8" rx="4" fill="#8B7670"/>
+  <rect x="155" y="168" width="8" height="82" rx="2" fill="#6B4F47" opacity="0.6"/>
+  <rect x="237" y="168" width="8" height="82" rx="2" fill="#6B4F47" opacity="0.6"/>
+  <!-- Chair 1 -->
+  <rect x="95" y="155" width="30" height="30" rx="8" fill="#D4A9A3"/>
+  <rect x="90" y="140" width="6" height="50" rx="3" fill="#C4918A"/>
+  <rect x="105" y="185" width="6" height="30" rx="2" fill="#B07D76" opacity="0.5"/>
+  <rect x="115" y="185" width="6" height="30" rx="2" fill="#B07D76" opacity="0.5"/>
+  <!-- Chair 2 -->
+  <rect x="275" y="155" width="30" height="30" rx="8" fill="#D4A9A3"/>
+  <rect x="304" y="140" width="6" height="50" rx="3" fill="#C4918A"/>
+  <rect x="280" y="185" width="6" height="30" rx="2" fill="#B07D76" opacity="0.5"/>
+  <rect x="290" y="185" width="6" height="30" rx="2" fill="#B07D76" opacity="0.5"/>
+  <!-- Monitor on table -->
+  <rect x="180" y="110" width="40" height="48" rx="4" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <rect x="185" y="115" width="30" height="22" rx="2" fill="#C4918A" opacity="0.1"/>
+  <rect x="195" y="158" width="10" height="4" rx="1" fill="#D4A9A3"/>
+  <!-- Plant -->
+  <rect x="310" y="100" width="20" height="22" rx="4" fill="#C4918A" opacity="0.3"/>
+  <circle cx="315" cy="92" r="10" fill="#8B7670" opacity="0.2"/>
+  <circle cx="325" cy="88" r="8" fill="#6B4F47" opacity="0.15"/>
+  <line x1="320" y1="100" x2="320" y2="88" stroke="#8B7670" stroke-width="1.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="0" fill="#FBF5F4"/>
+  <rect x="0" y="250" width="400" height="50" fill="#F5E8E6"/>
+  <!-- Treatment bed with equipment -->
+  <rect x="100" y="170" width="200" height="14" rx="7" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <rect x="110" y="160" width="40" height="12" rx="6" fill="#D4A9A3" opacity="0.35"/>
+  <rect x="160" y="163" width="130" height="10" rx="3" fill="#C4918A" opacity="0.12"/>
+  <rect x="120" y="184" width="6" height="35" rx="2" fill="#D4A9A3" opacity="0.4"/>
+  <rect x="274" y="184" width="6" height="35" rx="2" fill="#D4A9A3" opacity="0.4"/>
+  <!-- Advanced equipment - left side -->
+  <rect x="45" y="70" width="60" height="100" rx="8" fill="white" stroke="#C4918A" stroke-width="1.5"/>
+  <rect x="52" y="78" width="46" height="30" rx="4" fill="#C4918A" opacity="0.08"/>
+  <!-- Screen lines -->
+  <line x1="58" y1="88" x2="92" y2="88" stroke="#C4918A" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  <line x1="58" y1="95" x2="85" y2="95" stroke="#D4A9A3" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+  <line x1="58" y1="102" x2="88" y2="102" stroke="#D4A9A3" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+  <!-- Buttons -->
+  <circle cx="62" cy="125" r="4" fill="#C4918A" opacity="0.4"/>
+  <circle cx="75" cy="125" r="4" fill="#D4A9A3" opacity="0.3"/>
+  <circle cx="88" cy="125" r="4" fill="#F5E8E6" stroke="#D4A9A3" stroke-width="1"/>
+  <rect x="52" y="140" width="46" height="4" rx="2" fill="#F5E8E6"/>
+  <rect x="52" y="150" width="46" height="4" rx="2" fill="#F5E8E6"/>
+  <!-- Cables -->
+  <path d="M105 130 Q130 140 140 170" stroke="#D4A9A3" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <!-- Right equipment -->
+  <rect x="320" y="100" width="40" height="70" rx="6" fill="white" stroke="#D4A9A3" stroke-width="1.5"/>
+  <rect x="327" y="108" width="26" height="18" rx="3" fill="#C4918A" opacity="0.08"/>
+  <circle cx="340" cy="145" r="5" fill="#C4918A" opacity="0.2"/>
+  <rect x="330" y="160" width="20" height="3" rx="1" fill="#F5E8E6"/>
+  <!-- Star/sparkle accent -->
+  <path d="M330 55 L332 62 L340 64 L332 66 L330 73 L328 66 L320 64 L328 62 Z" fill="#C4918A" opacity="0.2"/>
+</svg>
