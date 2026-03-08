@@ -51,8 +51,8 @@ const Facilities = () => {
   ]
 
   const defaultCareFeatures: Facility[] = [
-    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/images/care-rooms.jpg', order: 0 },
-    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/images/care-room-1.jpg', order: 1 },
+    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/images/care-room-2.jpg', order: 0 },
+    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/images/care-rooms.jpg', order: 1 },
     { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', image: '/images/private-room.jpg', order: 2 },
     { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', image: '/images/spa-care.jpg', order: 3 },
   ]
@@ -104,12 +104,16 @@ const Facilities = () => {
                   {/* Image Area */}
                   <div className="h-48 bg-gradient-to-br from-primary-50 to-primary-100 relative overflow-hidden">
                     {feature.image ? (
-                      <Image
-                        src={feature.image}
-                        alt={feature.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <>
+                        <Image
+                          src={feature.image}
+                          alt={feature.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-primary/5"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/40 to-transparent"></div>
+                      </>
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
@@ -155,12 +159,16 @@ const Facilities = () => {
                   {/* Image Area */}
                   <div className="h-48 bg-gradient-to-br from-ivory to-primary-50 relative overflow-hidden">
                     {feature.image ? (
-                      <Image
-                        src={feature.image}
-                        alt={feature.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <>
+                        <Image
+                          src={feature.image}
+                          alt={feature.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-primary/5"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/40 to-transparent"></div>
+                      </>
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">

@@ -82,20 +82,19 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/care-rooms.jpg"
-          alt="민죠이 케어룸"
+          src="/images/logo-wall.jpg"
+          alt="민죠이 브랜드"
           fill
-          className="object-cover"
+          className="object-cover object-center scale-110"
           priority
         />
       </div>
 
-      {/* Warm gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brown-dark/85 via-black/60 to-primary-dark/50"></div>
+      {/* Warm gradient overlay - deeper for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brown-dark/90 via-brown-dark/75 to-brown-dark/90"></div>
 
-      {/* Decorative circles */}
-      <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 left-10 w-96 h-96 bg-primary-light/8 rounded-full blur-3xl"></div>
+      {/* Warm accent glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[120px]"></div>
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center text-white">
@@ -125,7 +124,7 @@ const Hero = () => {
         </h1>
 
         {/* Description */}
-        <p className={`text-lg md:text-xl mb-10 text-white/70 max-w-2xl mx-auto transition-all duration-700 delay-300 ${
+        <p className={`text-lg md:text-xl mb-10 text-white/80 max-w-2xl mx-auto transition-all duration-700 delay-300 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}>
           {content.subtitle}<br />

@@ -77,7 +77,7 @@ const MinjoyCare = () => {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/75 to-primary/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-brown-dark/85 via-brown-dark/65 to-primary/40"></div>
           </div>
 
           <div className="px-8 md:px-12 py-16 md:py-20 relative z-10">

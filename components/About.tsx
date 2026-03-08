@@ -60,16 +60,18 @@ const About = () => {
           className={`grid md:grid-cols-2 gap-8 mb-20 scroll-hidden ${brandSection.isVisible ? 'scroll-visible' : ''}`}
         >
           {/* Gym Card */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-1">
+          <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-1">
             <div className="relative h-56 overflow-hidden">
               <Image
                 src="/images/consultation-2.jpg"
                 alt="민죠이짐 상담실"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-              <span className="absolute top-4 left-4 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full">
+              {/* Warm tint + gradient for brand harmony */}
+              <div className="absolute inset-0 bg-primary/10"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/60 via-transparent to-transparent"></div>
+              <span className="absolute top-4 left-4 bg-white text-primary text-sm font-bold px-4 py-1.5 rounded-full shadow-md">
                 GYM
               </span>
             </div>
@@ -89,16 +91,18 @@ const About = () => {
           </div>
 
           {/* Care Card */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-2">
+          <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-2">
             <div className="relative h-56 overflow-hidden">
               <Image
-                src="/images/spa-care.jpg"
-                alt="민죠이케어 스파 관리"
+                src="/images/care-room-1.jpg"
+                alt="민죠이케어 관리실"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-              <span className="absolute top-4 left-4 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full">
+              {/* Warm tint + gradient for brand harmony */}
+              <div className="absolute inset-0 bg-primary/10"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/60 via-transparent to-transparent"></div>
+              <span className="absolute top-4 left-4 bg-white text-primary text-sm font-bold px-4 py-1.5 rounded-full shadow-md">
                 CARE
               </span>
             </div>
@@ -200,27 +204,20 @@ const About = () => {
             </div>
 
             {/* Visual Element - Photo Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="relative h-48 rounded-xl overflow-hidden">
-                <Image src="/images/care-room-1.jpg" alt="관리실" fill className="object-cover hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">관리실</span>
-              </div>
-              <div className="relative h-48 rounded-xl overflow-hidden">
-                <Image src="/images/body-analyzer.jpg" alt="체성분 분석" fill className="object-cover hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">체성분 분석</span>
-              </div>
-              <div className="relative h-48 rounded-xl overflow-hidden">
-                <Image src="/images/spa-care.jpg" alt="스파 케어" fill className="object-cover hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">스파 케어</span>
-              </div>
-              <div className="relative h-48 rounded-xl overflow-hidden">
-                <Image src="/images/consultation-1.jpg" alt="상담실" fill className="object-cover hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">상담실</span>
-              </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { src: '/images/spa-care.jpg', label: '스파 케어' },
+                { src: '/images/body-analyzer.jpg', label: '체성분 분석' },
+                { src: '/images/private-room.jpg', label: '프라이빗 룸' },
+                { src: '/images/locker-room.jpg', label: '락커룸' },
+              ].map((item, index) => (
+                <div key={index} className="group relative h-44 rounded-xl overflow-hidden">
+                  <Image src={item.src} alt={item.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-primary/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/60 to-transparent"></div>
+                  <span className="absolute bottom-3 left-3 text-white text-sm font-bold drop-shadow-md">{item.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
