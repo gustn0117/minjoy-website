@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 interface HeroContent {
@@ -78,23 +77,25 @@ const Hero = () => {
   const titleParts = content.title.split(',')
 
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/logo-wall.jpg"
-          alt="민죠이 브랜드"
-          fill
-          className="object-cover object-center scale-110"
-          priority
-        />
-      </div>
+    <section id="home" className="relative h-screen flex items-center justify-center bg-brown-dark overflow-hidden">
+      {/* Decorative SVG background pattern */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #C4918A 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
 
-      {/* Warm gradient overlay - deeper for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brown-dark/90 via-brown-dark/75 to-brown-dark/90"></div>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brown-dark via-brown-dark/95 to-brown-dark"></div>
 
-      {/* Warm accent glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[120px]"></div>
+      {/* Decorative accent shapes */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-primary/6 rounded-full blur-[150px]"></div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary-dark/8 rounded-full blur-[100px]"></div>
+      <div className="absolute top-20 left-10 w-[200px] h-[200px] bg-primary-light/5 rounded-full blur-[80px]"></div>
+
+      {/* Decorative lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20%" y1="0" x2="20%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
+        <line x1="40%" y1="0" x2="40%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
+        <line x1="60%" y1="0" x2="60%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
+        <line x1="80%" y1="0" x2="80%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
+      </svg>
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center text-white">
@@ -144,7 +145,7 @@ const Hero = () => {
           {content.buttonText2 && (
             <Link
               href={content.buttonLink2 || '/'}
-              className="border-2 border-white/40 text-white px-10 py-4 rounded-md font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300"
+              className="border-2 border-white/30 text-white px-10 py-4 rounded-md font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300"
             >
               {content.buttonText2}
             </Link>
@@ -156,7 +157,7 @@ const Hero = () => {
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}>
           {stats.map((stat) => (
-            <div key={stat.id} className="group p-6 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:bg-white/20 hover:border-primary-light/40 transition-all duration-300">
+            <div key={stat.id} className="group p-6 bg-white/10 backdrop-blur-md rounded-xl border border-white/15 hover:bg-white/20 hover:border-primary-light/40 transition-all duration-300">
               <div className="text-3xl md:text-4xl font-bold mb-2 text-primary-light group-hover:scale-105 transition-transform duration-300">{stat.value}</div>
               <div className="text-sm text-white/60">{stat.label}</div>
             </div>

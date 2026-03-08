@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" fill="none">
+  <rect width="600" height="340" fill="#FBF5F4"/>
+  <rect x="0" y="280" width="600" height="60" fill="#F5E8E6"/>
+  <!-- Spa capsule (simplified) -->
+  <ellipse cx="300" cy="200" rx="160" ry="50" fill="white" stroke="#D4A9A3" stroke-width="2"/>
+  <path d="M170 200 Q170 100 300 90 Q430 100 430 200" fill="white" stroke="#D4A9A3" stroke-width="2"/>
+  <path d="M185 200 Q185 115 300 105 Q415 115 415 200" fill="#C4918A" opacity="0.04"/>
+  <!-- Opening arc -->
+  <path d="M210 200 Q210 140 300 130 Q390 140 390 200" stroke="#D4A9A3" stroke-width="1" fill="none" stroke-dasharray="6 4" opacity="0.3"/>
+  <!-- Relaxing person silhouette -->
+  <circle cx="260" cy="170" r="12" fill="#C4918A" opacity="0.1"/>
+  <ellipse cx="240" cy="183" rx="18" ry="8" fill="#D4A9A3" opacity="0.08"/>
+  <line x1="270" y1="190" x2="340" y2="195" stroke="#C4918A" stroke-width="4" stroke-linecap="round" opacity="0.05"/>
+  <!-- Steam waves -->
+  <path d="M280 65 Q286 50 280 35" stroke="#C4918A" stroke-width="2" fill="none" opacity="0.12" stroke-linecap="round"/>
+  <path d="M300 60 Q306 42 300 25" stroke="#D4A9A3" stroke-width="2" fill="none" opacity="0.1" stroke-linecap="round"/>
+  <path d="M320 65 Q326 50 320 35" stroke="#C4918A" stroke-width="2" fill="none" opacity="0.12" stroke-linecap="round"/>
+  <!-- Lotus flower -->
+  <g transform="translate(490, 80)" opacity="0.2">
+    <ellipse cx="0" cy="0" rx="12" ry="20" fill="#C4918A" transform="rotate(-30)"/>
+    <ellipse cx="0" cy="0" rx="12" ry="20" fill="#D4A9A3" transform="rotate(0)"/>
+    <ellipse cx="0" cy="0" rx="12" ry="20" fill="#C4918A" transform="rotate(30)"/>
+    <circle cx="0" cy="0" r="5" fill="#B07D76"/>
+  </g>
+  <!-- Sparkles -->
+  <path d="M140 50 L142 58 L150 60 L142 62 L140 70 L138 62 L130 60 L138 58 Z" fill="#C4918A" opacity="0.18"/>
+  <path d="M450 140 L451 145 L456 146 L451 147 L450 152 L449 147 L444 146 L449 145 Z" fill="#D4A9A3" opacity="0.15"/>
+  <!-- Candle -->
+  <rect x="100" y="200" width="16" height="40" rx="4" fill="#D4A9A3" opacity="0.25"/>
+  <ellipse cx="108" cy="198" rx="4" ry="6" fill="#C4918A" opacity="0.2"/>
+  <line x1="108" y1="194" x2="108" y2="188" stroke="#C4918A" stroke-width="1" opacity="0.15"/>
+</svg>
