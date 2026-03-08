@@ -63,12 +63,13 @@ const About = () => {
           <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-1">
             <div className="relative h-52 overflow-hidden">
               <Image
-                src="/images/facilities/gym-brand.svg"
-                alt="민죠이짐"
+                src="/images/consultation-2.jpg"
+                alt="민죠이짐 상담실"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
-              <span className="absolute top-4 left-4 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-sm">
+              <div className="absolute inset-0 bg-brown-dark/30"></div>
+              <span className="absolute top-4 left-4 bg-white text-primary text-sm font-bold px-4 py-1.5 rounded-full shadow-md">
                 GYM
               </span>
             </div>
@@ -91,12 +92,13 @@ const About = () => {
           <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-2">
             <div className="relative h-52 overflow-hidden">
               <Image
-                src="/images/facilities/care-brand.svg"
-                alt="민죠이케어"
+                src="/images/spa-care.jpg"
+                alt="민죠이케어 스파 관리"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
-              <span className="absolute top-4 left-4 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-sm">
+              <div className="absolute inset-0 bg-brown-dark/30"></div>
+              <span className="absolute top-4 left-4 bg-white text-primary text-sm font-bold px-4 py-1.5 rounded-full shadow-md">
                 CARE
               </span>
             </div>

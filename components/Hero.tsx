@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface HeroContent {
@@ -51,8 +52,6 @@ const Hero = () => {
     }
 
     fetchData()
-
-    // Trigger entrance animation
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
@@ -78,35 +77,31 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative h-screen flex items-center justify-center bg-brown-dark overflow-hidden">
-      {/* Decorative SVG background pattern */}
-      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #C4918A 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
+      {/* Background Photo */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/care-rooms.jpg"
+          alt="민죠이 케어룸"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brown-dark via-brown-dark/95 to-brown-dark"></div>
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brown-dark/80 via-brown-dark/70 to-brown-dark/85"></div>
 
-      {/* Decorative accent shapes */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-primary/6 rounded-full blur-[150px]"></div>
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary-dark/8 rounded-full blur-[100px]"></div>
-      <div className="absolute top-20 left-10 w-[200px] h-[200px] bg-primary-light/5 rounded-full blur-[80px]"></div>
-
-      {/* Decorative lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
-        <line x1="20%" y1="0" x2="20%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
-        <line x1="40%" y1="0" x2="40%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
-        <line x1="60%" y1="0" x2="60%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
-        <line x1="80%" y1="0" x2="80%" y2="100%" stroke="#C4918A" strokeWidth="1"/>
-      </svg>
+      {/* Warm accent glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/6 rounded-full blur-[120px]"></div>
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center text-white">
-        {/* Subtitle */}
         <p className={`text-sm md:text-base uppercase tracking-[0.3em] text-primary-light mb-6 transition-all duration-700 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
           Premium Total Care Center
         </p>
 
-        {/* Title */}
         <h1 className={`text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight transition-all duration-700 delay-200 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}>
@@ -118,13 +113,10 @@ const Hero = () => {
               </span>
             </>
           ) : (
-            <span className="text-primary-light">
-              {content.title}
-            </span>
+            <span className="text-primary-light">{content.title}</span>
           )}
         </h1>
 
-        {/* Description */}
         <p className={`text-lg md:text-xl mb-10 text-white/80 max-w-2xl mx-auto transition-all duration-700 delay-300 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}>
@@ -132,7 +124,6 @@ const Hero = () => {
           {content.description}
         </p>
 
-        {/* Buttons */}
         <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 delay-500 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}>
@@ -152,7 +143,6 @@ const Hero = () => {
           )}
         </div>
 
-        {/* Stats */}
         <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 transition-all duration-700 delay-700 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}>

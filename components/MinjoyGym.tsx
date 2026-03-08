@@ -93,10 +93,11 @@ const MinjoyGym = () => {
           ref={heroSection.ref}
           className={`mb-16 rounded-xl overflow-hidden relative scroll-hidden ${heroSection.isVisible ? 'scroll-visible' : ''}`}
         >
-          {/* CSS gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-dark to-brown-dark"></div>
-          <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '20px 20px' }}></div>
-          <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/4 translate-x-1/4"></div>
+          {/* Background photo + overlay */}
+          <div className="absolute inset-0">
+            <Image src="/images/logo-wall.jpg" alt="민죠이" fill className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brown-dark/80 via-brown-dark/60 to-primary/30"></div>
+          </div>
 
           <div className="px-8 md:px-12 py-16 md:py-20 relative z-10">
             <div className="max-w-2xl text-white">
