@@ -42,19 +42,19 @@ const Facilities = () => {
     fetchData()
   }, [])
 
-  // 기본값 with placeholder images
+  // 기본값 with real images
   const defaultGymFeatures: Facility[] = [
-    { id: '1', type: 'gym', title: '최신 웨이트 장비', description: '프리미엄 웨이트 트레이닝 장비', order: 0 },
-    { id: '2', type: 'gym', title: '프리웨이트존', description: '다양한 덤벨과 바벨', order: 1 },
-    { id: '3', type: 'gym', title: '프라이빗 트레이닝룸', description: '1:1 맞춤 PT 공간', order: 2 },
-    { id: '4', type: 'gym', title: '여성 전용 샤워실', description: '깨끗하고 쾌적한 환경', order: 3 },
+    { id: '1', type: 'gym', title: '체성분 분석기', description: '정밀한 체성분 측정 장비', image: '/images/body-analyzer.jpg', order: 0 },
+    { id: '2', type: 'gym', title: '상담실', description: '1:1 맞춤 상담 공간', image: '/images/consultation-1.jpg', order: 1 },
+    { id: '3', type: 'gym', title: '프라이빗 상담', description: '편안한 상담 환경', image: '/images/consultation-2.jpg', order: 2 },
+    { id: '4', type: 'gym', title: '락커룸', description: '깨끗하고 쾌적한 환경', image: '/images/locker-room.jpg', order: 3 },
   ]
 
   const defaultCareFeatures: Facility[] = [
-    { id: '5', type: 'care', title: '첨단 체형관리 장비', description: '최신 관리 기기 완비', order: 0 },
-    { id: '6', type: 'care', title: '프리미엄 관리실', description: '프라이빗 1인실', order: 1 },
-    { id: '7', type: 'care', title: '힐링 스파존', description: '편안한 휴식 공간', order: 2 },
-    { id: '8', type: 'care', title: '청결한 위생 관리', description: '철저한 소독 시스템', order: 3 },
+    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/images/care-rooms.jpg', order: 0 },
+    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/images/care-room-1.jpg', order: 1 },
+    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', image: '/images/private-room.jpg', order: 2 },
+    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', image: '/images/spa-care.jpg', order: 3 },
   ]
 
   const gymFeatures = facilities.length > 0

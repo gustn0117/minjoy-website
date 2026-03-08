@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface HeroContent {
@@ -78,8 +79,19 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/care-rooms.jpg"
+          alt="민죠이 케어룸"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
       {/* Warm gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brown-dark/80 via-black/50 to-primary-dark/40"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-brown-dark/85 via-black/60 to-primary-dark/50"></div>
 
       {/* Decorative circles */}
       <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>

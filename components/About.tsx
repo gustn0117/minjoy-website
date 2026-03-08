@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { FiHeart, FiShield, FiZap, FiStar, FiUsers, FiTarget, FiArrowDown, FiTrendingUp, FiPercent, FiMapPin, FiActivity, FiSun, FiSmile } from 'react-icons/fi'
 import Link from 'next/link'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
@@ -59,49 +60,61 @@ const About = () => {
           className={`grid md:grid-cols-2 gap-8 mb-20 scroll-hidden ${brandSection.isVisible ? 'scroll-visible' : ''}`}
         >
           {/* Gym Card */}
-          <div className="bg-white border border-gray-200 border-t-4 border-t-primary rounded-lg p-8 md:p-10 card-hover stagger-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                <FiActivity className="text-primary" size={20} />
-              </div>
-              <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-3 py-1 rounded-md">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-1">
+            <div className="relative h-56 overflow-hidden">
+              <Image
+                src="/images/consultation-2.jpg"
+                alt="민죠이짐 상담실"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <span className="absolute top-4 left-4 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full">
                 GYM
               </span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">민죠이짐</h3>
-            <p className="text-gray-600 text-lg mb-6">
-              여성 전용 PT 샵<br />
-              다이어트 · 힙업 · 바디프로필 · 통증케어
-            </p>
-            <Link
-              href="/gym"
-              className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-md font-medium btn-premium hover:bg-primary/90 transition-colors"
-            >
-              자세히 보기 →
-            </Link>
+            <div className="p-8">
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">민죠이짐</h3>
+              <p className="text-gray-600 text-lg mb-6">
+                여성 전용 PT 샵<br />
+                다이어트 · 힙업 · 바디프로필 · 통증케어
+              </p>
+              <Link
+                href="/gym"
+                className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-md font-medium btn-premium hover:bg-primary/90 transition-colors"
+              >
+                자세히 보기 →
+              </Link>
+            </div>
           </div>
 
           {/* Care Card */}
-          <div className="bg-white border border-gray-200 border-t-4 border-t-primary rounded-lg p-8 md:p-10 card-hover stagger-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                <FiHeart className="text-primary" size={20} />
-              </div>
-              <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-3 py-1 rounded-md">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-2">
+            <div className="relative h-56 overflow-hidden">
+              <Image
+                src="/images/spa-care.jpg"
+                alt="민죠이케어 스파 관리"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <span className="absolute top-4 left-4 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full">
                 CARE
               </span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">민죠이케어</h3>
-            <p className="text-gray-600 text-lg mb-6">
-              누워서 다이어트하는 힐링케어<br />
-              순환관리 · 탄력관리 · 스파관리
-            </p>
-            <Link
-              href="/care"
-              className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-md font-medium btn-premium hover:bg-primary/90 transition-colors"
-            >
-              자세히 보기 →
-            </Link>
+            <div className="p-8">
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">민죠이케어</h3>
+              <p className="text-gray-600 text-lg mb-6">
+                누워서 다이어트하는 힐링케어<br />
+                순환관리 · 탄력관리 · 스파관리
+              </p>
+              <Link
+                href="/care"
+                className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-md font-medium btn-premium hover:bg-primary/90 transition-colors"
+              >
+                자세히 보기 →
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -186,25 +199,28 @@ const About = () => {
               </p>
             </div>
 
-            {/* Visual Element - Service Cards */}
+            {/* Visual Element - Photo Grid */}
             <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: 'PT', name: '트레이닝', Icon: FiActivity },
-                { label: 'CARE', name: '체형관리', Icon: FiHeart },
-                { label: 'DIET', name: '식단 관리', Icon: FiSun },
-                { label: 'MIND', name: '멘탈 케어', Icon: FiSmile },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white border border-gray-200 rounded-lg p-6 text-center card-hover group cursor-default stagger-${index + 1}`}
-                >
-                  <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary-50 transition-colors duration-300">
-                    <item.Icon className="text-primary" size={22} />
-                  </div>
-                  <div className="text-2xl font-bold text-primary mb-2">{item.label}</div>
-                  <div className="font-medium text-gray-900">{item.name}</div>
-                </div>
-              ))}
+              <div className="relative h-48 rounded-xl overflow-hidden">
+                <Image src="/images/care-room-1.jpg" alt="관리실" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">관리실</span>
+              </div>
+              <div className="relative h-48 rounded-xl overflow-hidden">
+                <Image src="/images/body-analyzer.jpg" alt="체성분 분석" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">체성분 분석</span>
+              </div>
+              <div className="relative h-48 rounded-xl overflow-hidden">
+                <Image src="/images/spa-care.jpg" alt="스파 케어" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">스파 케어</span>
+              </div>
+              <div className="relative h-48 rounded-xl overflow-hidden">
+                <Image src="/images/consultation-1.jpg" alt="상담실" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                <span className="absolute bottom-3 left-3 text-white text-sm font-bold">상담실</span>
+              </div>
             </div>
           </div>
         </div>
