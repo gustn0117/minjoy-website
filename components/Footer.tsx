@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
-import { FaInstagram } from 'react-icons/fa'
+import { FaInstagram, FaComment } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -16,6 +16,16 @@ const Footer = () => {
               확실한 변화를 위한 프리미엄 토탈케어 센터
             </p>
             <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <a href="https://pf.kakao.com/_vxiyIX" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border-2 border-[#FEE500] bg-[#FEE500] text-[#3C1E1E] rounded-full flex items-center justify-center hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+                    <path d="M12 3C6.477 3 2 6.463 2 10.691c0 2.65 1.734 4.974 4.336 6.332-.136.503-.878 3.237-.907 3.459 0 0-.018.173.091.238.109.065.237.015.237.015.313-.043 3.622-2.365 4.185-2.765.684.097 1.39.148 2.058.148 5.523 0 10-3.463 10-7.427C22 6.463 17.523 3 12 3z"/>
+                  </svg>
+                </a>
+                <a href="https://pf.kakao.com/_vxiyIX" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-primary transition-colors">
+                  카카오톡 채널
+                </a>
+              </div>
               <div className="flex items-center gap-3">
                 <a href="https://instagram.com/min.joy___gym" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border-2 border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-200">
                   <FaInstagram size={18} />

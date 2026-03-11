@@ -145,6 +145,19 @@ const Contact = () => {
               ))}
             </div>
 
+            {/* KakaoTalk Channel */}
+            <div className="flex flex-col gap-3 mb-8">
+              <h4 className="font-semibold text-gray-900">카카오톡 채널</h4>
+              <a href="https://pf.kakao.com/_vxiyIX" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                <div className="w-10 h-10 bg-[#FEE500] rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-[#3C1E1E]">
+                    <path d="M12 3C6.477 3 2 6.463 2 10.691c0 2.65 1.734 4.974 4.336 6.332-.136.503-.878 3.237-.907 3.459 0 0-.018.173.091.238.109.065.237.015.237.015.313-.043 3.622-2.365 4.185-2.765.684.097 1.39.148 2.058.148 5.523 0 10-3.463 10-7.427C22 6.463 17.523 3 12 3z"/>
+                  </svg>
+                </div>
+                <span className="text-sm">카카오톡 채널 상담</span>
+              </a>
+            </div>
+
             {/* Instagram Links */}
             <div className="flex flex-col gap-3 mb-8">
               <h4 className="font-semibold text-gray-900">Instagram</h4>

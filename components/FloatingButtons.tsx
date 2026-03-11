@@ -39,7 +39,7 @@ const FloatingButtons = () => {
       id: 'kakao',
       type: 'kakao',
       label: '카톡상담',
-      href: 'https://pf.kakao.com/_xYourKakaoId',
+      href: 'https://pf.kakao.com/_vxiyIX',
       bgColor: 'bg-[#FEE500]',
       textColor: 'text-[#3C1E1E]',
       order: 0,
