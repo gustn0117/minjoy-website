@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { FiMail, FiLock, FiLogIn } from 'react-icons/fi'
+import { FiLock, FiLogIn } from 'react-icons/fi'
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [checkingSession, setCheckingSession] = useState(true)
@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ password }),
       })
 
       const data = await response.json()
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
       <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary mb-2">민죠이 관리자</h1>
-          <p className="text-gray-600">관리자 계정으로 로그인하세요</p>
+          <p className="text-gray-600">비밀번호를 입력하세요</p>
         </div>
 
         {error && (
@@ -79,36 +79,19 @@ export default function AdminLoginPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              이메일
-            </label>
-            <div className="relative">
-              <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                disabled={isLoading}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100"
-                placeholder="admin@minjoy.com"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
               비밀번호
             </label>
             <div className="relative">
               <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="password"
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100"
-                placeholder="••••••••"
+                placeholder="비밀번호 입력"
+                autoFocus
               />
             </div>
           </div>
