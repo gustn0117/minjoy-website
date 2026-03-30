@@ -1,16 +1,16 @@
 import Hero from '@/components/Hero'
 import Review from '@/components/Review'
-import About from '@/components/About'
-import Facilities from '@/components/Facilities'
+import Gallery from '@/components/Gallery'
+import Instagram from '@/components/Instagram'
 
 // 메인 페이지 컴포넌트
 export default function Home() {
   return (
     <main>
       <Hero />
-      <About />
-      <Facilities />
       <Review />
+      <Gallery />
+      <Instagram />
     </main>
   )
 }
