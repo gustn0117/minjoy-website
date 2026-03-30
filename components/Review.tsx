@@ -38,8 +38,8 @@ const Review = () => {
 
   // 기본 플레이스홀더 이미지 (관리자가 업로드하기 전)
   const defaultImages = [
-    { id: '1', image: '/images/1.png', order: 0 },
-    { id: '2', image: '/images/1.png', order: 1 },
+    { id: '1', image: '/images/후기1.png', order: 0 },
+    { id: '2', image: '/images/후기2.png', order: 1 },
   ]
 
   const images = reviewImages.length > 0 ? reviewImages : defaultImages
