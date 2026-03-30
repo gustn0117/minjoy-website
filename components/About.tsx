@@ -63,8 +63,8 @@ const About = () => {
           <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden card-hover stagger-1">
             <div className="relative h-52 overflow-hidden">
               <Image
-                src="/images/consultation-2.jpg"
-                alt="민죠이짐 상담실"
+                src="/images/메인_민죠이.jpg"
+                alt="민죠이짐"
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
