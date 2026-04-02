@@ -97,7 +97,7 @@ const Hero = () => {
             Premium Total Care Center
           </p>
 
-          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight transition-all duration-700 delay-200 ${
+          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.35] transition-all duration-700 delay-200 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}>
             운동만 하는 PT는 끝<br />

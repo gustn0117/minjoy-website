@@ -58,7 +58,7 @@ const Review = () => {
             ref={contentRef}
             className={`text-white scroll-hidden ${contentVisible ? 'scroll-visible' : ''}`}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-[1.35]">
               민죠이<br />
               고객님들의
             </h2>
