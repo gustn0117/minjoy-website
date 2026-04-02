@@ -75,7 +75,7 @@ const Hero = () => {
         {/* Background Photo */}
         <div className="absolute inset-0">
           <Image
-            src="/images/care-rooms.jpg"
+            src="/images/메인화면.jpg"
             alt="민죠이"
             fill
             className="object-cover"
