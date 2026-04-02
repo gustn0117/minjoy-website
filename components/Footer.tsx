@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
-import { FaInstagram, FaComment } from 'react-icons/fa'
+import { FiPhone, FiMapPin } from 'react-icons/fi'
+import { FaInstagram } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -61,16 +61,15 @@ const Footer = () => {
             <div className="w-8 h-0.5 bg-primary rounded-full mb-4" />
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
-                <FiPhone className="text-primary" size={16} />
-                <span className="text-gray-500">전화 문의</span>
+                <FiPhone className="text-primary flex-shrink-0" size={16} />
+                <a href="tel:010-2869-3413" className="text-gray-500 hover:text-primary transition-colors">010-2869-3413</a>
               </li>
-              <li className="flex items-center space-x-3">
-                <FiMail className="text-primary" size={16} />
-                <span className="text-gray-500">이메일 문의</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <FiMapPin className="text-primary" size={16} />
-                <span className="text-gray-500">오시는 길</span>
+              <li className="flex items-start space-x-3">
+                <FiMapPin className="text-primary flex-shrink-0 mt-0.5" size={16} />
+                <div className="text-gray-500 text-sm">
+                  <p>민죠이짐 - 경기 안산시 단원구 고잔1길 17 대유빌딩 5층</p>
+                  <p>민죠이케어 - 경기 안산시 단원구 고잔1길 17 대유빌딩 4층</p>
+                </div>
               </li>
             </ul>
           </div>

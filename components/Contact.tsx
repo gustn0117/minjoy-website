@@ -57,9 +57,9 @@ const Contact = () => {
 
   // 기본값
   const defaultContacts = [
-    { id: '1', type: 'phone', label: '전화', value: '전화 문의 가능\n카카오톡 상담 가능', icon: 'FiPhone', order: 0 },
-    { id: '2', type: 'email', label: '이메일', value: '이메일 문의 가능', icon: 'FiMail', order: 1 },
-    { id: '3', type: 'address', label: '위치', value: '민죠이짐: [주소]\n민죠이케어: [주소] (같은 건물 내)', icon: 'FiMapPin', order: 2 },
+    { id: '1', type: 'phone', label: '전화', value: '010-2869-3413', icon: 'FiPhone', order: 0 },
+    { id: '2', type: 'address', label: '민죠이짐', value: '경기 안산시 단원구 고잔1길 17 대유빌딩 5층', icon: 'FiMapPin', order: 1 },
+    { id: '3', type: 'address', label: '민죠이케어', value: '경기 안산시 단원구 고잔1길 17 대유빌딩 4층', icon: 'FiMapPin', order: 2 },
     { id: '4', type: 'hours', label: '운영시간', value: '평일: 06:00 - 22:00\n주말: 08:00 - 20:00\n※ 예약제 운영', icon: 'FiClock', order: 3 },
   ]
 

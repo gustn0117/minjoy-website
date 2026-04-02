@@ -57,7 +57,7 @@ const FloatingButtons = () => {
       id: 'phone',
       type: 'phone',
       label: '전화하기',
-      href: 'tel:010-0000-0000',
+      href: 'tel:010-2869-3413',
       bgColor: 'bg-primary',
       textColor: 'text-white',
       order: 2,
