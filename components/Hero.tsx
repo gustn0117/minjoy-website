@@ -102,7 +102,7 @@ const Hero = () => {
           }`}>
             운동만 하는 PT는 끝<br />
             <span className="text-primary-light">
-              운동+순환+라인관리로<br className="md:hidden" /> 바디라인을 설계합니다
+              운동+순환+라인관리로<br />바디라인을 설계합니다
             </span>
           </h1>
 
