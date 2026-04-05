@@ -65,10 +65,12 @@ const Facilities = () => {
   ]
 
   const defaultCareFeatures: Facility[] = [
-    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', order: 0 },
-    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', order: 1 },
-    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', order: 2 },
-    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', order: 3 },
+    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/images/facilities/DSC_0737.jpg', order: 0 },
+    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/images/facilities/DSC_0751.jpg', order: 1 },
+    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', image: '/images/facilities/DSC_0787.jpg', order: 2 },
+    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', image: '/images/facilities/DSC_0790.jpg', order: 3 },
+    { id: '9', type: 'care', title: '힐링 케어', description: '순환관리 전문 공간', image: '/images/facilities/DSC_0954.jpg', order: 4 },
+    { id: '10', type: 'care', title: '관리 공간', description: '쾌적한 관리 환경', image: '/images/facilities/DSC_0976.jpg', order: 5 },
   ]
 
   const gymFeatures = facilities.length > 0
@@ -167,7 +169,7 @@ const Facilities = () => {
             <h3 className="text-3xl font-bold text-primary">민죠이케어 시설</h3>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {careFeatures.map((feature, index) => {
               const IconComponent = careIcons[index] || FiStar
               const svgSrc = careSvgs[index]
