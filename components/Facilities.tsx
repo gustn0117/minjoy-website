@@ -58,10 +58,12 @@ const Facilities = () => {
 
   // 기본값
   const defaultGymFeatures: Facility[] = [
-    { id: '1', type: 'gym', title: '체성분 분석기', description: '정밀한 체성분 측정 장비', order: 0 },
-    { id: '2', type: 'gym', title: '상담실', description: '1:1 맞춤 상담 공간', order: 1 },
-    { id: '3', type: 'gym', title: '프라이빗 상담', description: '편안한 상담 환경', order: 2 },
-    { id: '4', type: 'gym', title: '락커룸', description: '깨끗하고 쾌적한 환경', order: 3 },
+    { id: '1', type: 'gym', title: '트레이닝 공간', description: '프라이빗 PT 전용 공간', image: '/images/facilities/DSC_1356.jpg', order: 0 },
+    { id: '2', type: 'gym', title: '운동 시설', description: '최신 운동 장비 완비', image: '/images/facilities/DSC_1401.jpg', order: 1 },
+    { id: '3', type: 'gym', title: 'PT룸', description: '1:1 맞춤 트레이닝', image: '/images/facilities/DSC_1567.jpg', order: 2 },
+    { id: '4', type: 'gym', title: '피트니스 공간', description: '쾌적한 운동 환경', image: '/images/facilities/DSC_1611.jpg', order: 3 },
+    { id: '11', type: 'gym', title: '내부 시설', description: '편안한 인테리어', image: '/images/facilities/KakaoTalk_20260323_161613187_10.jpg', order: 4 },
+    { id: '12', type: 'gym', title: '시설 전경', description: '프리미엄 공간', image: '/images/facilities/KakaoTalk_20260323_161613187_11.jpg', order: 5 },
   ]
 
   const defaultCareFeatures: Facility[] = [
@@ -109,7 +111,7 @@ const Facilities = () => {
             <h3 className="text-3xl font-bold text-primary">민죠이짐 시설</h3>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {gymFeatures.map((feature, index) => {
               const IconComponent = gymIcons[index] || FiActivity
               const svgSrc = gymSvgs[index]
