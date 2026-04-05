@@ -48,7 +48,7 @@ const FloatingButtons = () => {
       id: 'naver',
       type: 'naver',
       label: '예약하기',
-      href: 'https://booking.naver.com/booking/yourId',
+      href: 'https://map.naver.com/p/entry/place/1202063114?placePath=/ticket?entry=plt&fromPanelNum=1&additionalHeight=76&timestamp=202604021301&locale=ko&svcName=map_pcv5&searchType=place&lng=126.8355995&lat=37.3186729&c=15.00,0,0,0,dh',
       bgColor: 'bg-[#03C75A]',
       textColor: 'text-white',
       order: 1,
