@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { FiTarget, FiTrendingUp, FiAward, FiHeart, FiActivity, FiStar, FiUsers, FiPercent } from 'react-icons/fi'
+import { FiTarget, FiTrendingUp, FiAward, FiHeart, FiActivity, FiStar, FiUsers, FiPercent, FiVideo, FiLock, FiZap } from 'react-icons/fi'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 interface GymProgram {
@@ -29,10 +29,13 @@ const iconMap: Record<string, React.ReactNode> = {
   FiHeart: <FiHeart size={40} />,
   FiActivity: <FiActivity size={40} />,
   FiStar: <FiStar size={40} />,
+  FiVideo: <FiVideo size={40} />,
+  FiLock: <FiLock size={40} />,
+  FiZap: <FiZap size={40} />,
 }
 
 // 프로그램별 아이콘 매핑
-const programIcons = [FiTarget, FiTrendingUp, FiAward, FiHeart]
+const programIcons = [FiActivity, FiStar, FiHeart, FiVideo, FiLock, FiZap]
 
 const MinjoyGym = () => {
   const [programs, setPrograms] = useState<GymProgram[]>([])
@@ -72,10 +75,12 @@ const MinjoyGym = () => {
 
   // 기본값
   const programList = programs.length > 0 ? programs : [
-    { id: '1', icon: 'FiTarget', title: '다이어트 프로그램', description: '체계적인 식단 관리와 운동으로 건강한 다이어트를 실현합니다.', order: 0 },
-    { id: '2', icon: 'FiTrendingUp', title: '힙업 & 라인 교정', description: '탄력있는 힙라인과 균형잡힌 바디라인을 만들어드립니다.', order: 1 },
-    { id: '3', icon: 'FiAward', title: '바디프로필', description: '대회 준비부터 촬영 당일까지 완벽하게 준비해드립니다.', order: 2 },
-    { id: '4', icon: 'FiHeart', title: '통증 케어', description: '근골격계 통증 개선과 자세 교정으로 건강한 몸을 만듭니다.', order: 3 },
+    { id: '1', icon: 'FiActivity', title: 'AI 체형평가 기반 맞춤 운동', description: 'AI 체형분석을 통해 자세와 체형을 정확하게 분석하고, 내 몸에 꼭 맞는 1:1 맞춤 운동을 제공합니다.', order: 0 },
+    { id: '2', icon: 'FiStar', title: '민죠이짐&케어 (운동 + 케어)', description: '운동과 바디케어를 함께 진행하여 다이어트와 근력 향상 효과를 극대화합니다.', order: 1 },
+    { id: '3', icon: 'FiHeart', title: '소변 테스트 기반 맞춤 식단관리', description: '소변 테스트 결과를 바탕으로 현재 몸 상태를 확인하고, 1:1 맞춤 식단 가이드를 제공합니다.', order: 2 },
+    { id: '4', icon: 'FiVideo', title: 'PT 영상 기록 제공', description: '수업 내용을 영상으로 기록해 드려 센터 밖에서도 복습할 수 있도록 도와드립니다.', order: 3 },
+    { id: '5', icon: 'FiLock', title: '여성전용 프라이빗 공간', description: '여성 회원만을 위한 편안하고 프라이빗한 공간에서 눈치 보지 않고 운동에 집중할 수 있습니다.', order: 4 },
+    { id: '6', icon: 'FiZap', title: '파워플레이트 VIP 프로그램', description: '파워플레이트를 활용하여 일반 운동 대비 근력 향상과 체지방 감량 효과를 극대화합니다.', order: 5 },
   ]
 
   const targetList = targets.length > 0 ? targets : [
@@ -95,21 +100,25 @@ const MinjoyGym = () => {
         >
           {/* Background photo + overlay */}
           <div className="absolute inset-0">
-            <Image src="/images/logo-wall.jpg" alt="민죠이" fill className="object-cover" />
+            <Image src="/0326/민죠이짐.jpg" alt="민죠이짐" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-brown-dark/80 via-brown-dark/60 to-primary/30"></div>
           </div>
 
           <div className="px-8 md:px-12 py-16 md:py-20 relative z-10">
             <div className="max-w-2xl text-white">
+              <p className="text-sm uppercase tracking-[0.2em] text-primary-light mb-3">GYM</p>
               <h2 className="text-4xl md:text-6xl font-black mb-4">
                 민죠이짐
               </h2>
               <p className="text-xl md:text-2xl font-medium text-white/90">
                 여성 전용 PT 샵
               </p>
-              <p className="text-lg text-white/80 mt-2">
-                확실한 변화를 위한 전문 트레이닝
+              <p className="text-lg text-white/70 mt-3">
+                다이어트 · 힙업 · 바디프로필 · 통증케어
               </p>
+              <a href="/gym" className="inline-flex items-center gap-2 mt-6 text-white/90 hover:text-white font-medium transition-colors">
+                자세히 보기 →
+              </a>
             </div>
           </div>
 
@@ -125,8 +134,11 @@ const MinjoyGym = () => {
           className={`mb-20 scroll-hidden ${programSection.isVisible ? 'scroll-visible' : ''}`}
         >
           <div className="text-center mb-10">
-            <p className="text-sm text-primary font-medium mb-2">PROGRAMS</p>
-            <h3 className="text-3xl font-bold text-gray-900 section-accent">프로그램 소개</h3>
+            <p className="text-sm text-primary font-medium mb-2">WHY MINJOY GYM</p>
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">민죠이짐만의 차별화된 시스템</h3>
+            <p className="mt-6 text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              운동, 식단, 케어, 기록까지. 건강과 라인을 완성하는 여성전용 프리미엄 PT 시스템.
+            </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {programList.map((program, index) => {
