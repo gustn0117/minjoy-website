@@ -202,10 +202,10 @@ const About = () => {
             {/* Visual Element - SVG Illustration Grid */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { src: '/images/facilities/스파케어.jpg', label: '스파 케어' },
-                { src: '/images/facilities/체성분분석.jpg', label: '체성분 분석' },
-                { src: '/images/facilities/프라이빗룸.jpg', label: '프라이빗 룸' },
-                { src: '/images/facilities/락커룸.jpg', label: '락커룸' },
+                { src: '/images/facilities/스파케어.jpg', label: '순환관리' },
+                { src: '/images/facilities/체성분분석.jpg', label: 'AI체형분석' },
+                { src: '/images/facilities/프라이빗룸.jpg', label: '라인관리' },
+                { src: '/images/facilities/락커룸.jpg', label: '1:1 맞춤운동' },
               ].map((item, index) => (
                 <div key={index} className="group relative h-44 rounded-xl overflow-hidden border border-gray-100">
                   <Image src={item.src} alt={item.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { FiMenu, FiX, FiUser } from 'react-icons/fi'
 
@@ -56,11 +57,27 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center relative z-10 transition-opacity duration-200 hover:opacity-80">
-            <span className={`text-2xl font-bold transition-colors duration-200 ${
-              showBackground ? 'text-primary' : 'text-white'
-            }`}>
-              민죠이
-            </span>
+            <Image
+              src="/images/logo-dark.png"
+              alt="민죠이 MIN JOY"
+              width={788}
+              height={300}
+              priority
+              className={`h-9 w-auto md:h-11 transition-opacity duration-300 ${
+                showBackground ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+            <Image
+              src="/images/logo-white.png"
+              alt=""
+              aria-hidden
+              width={788}
+              height={300}
+              priority
+              className={`absolute left-0 top-0 h-9 w-auto md:h-11 transition-opacity duration-300 ${
+                showBackground ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center space-x-8">

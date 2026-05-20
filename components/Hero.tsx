@@ -100,8 +100,8 @@ const Hero = () => {
           <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.35] transition-all duration-700 delay-200 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}>
-            운동만 하는 PT는 끝<br />
-            <span className="text-primary-light">
+            운동만 하는 PT는 끝
+            <span className="block mt-7 md:mt-11 text-3xl md:text-5xl lg:text-6xl text-primary-light">
               운동+순환+라인관리로<br />바디라인을 설계합니다
             </span>
           </h1>
