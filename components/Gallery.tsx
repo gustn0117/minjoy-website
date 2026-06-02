@@ -41,12 +41,12 @@ const Gallery = () => {
               key={item.id}
               className={`group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 stagger-${index + 1}`}
             >
-              <div className="relative aspect-[3/4]">
+              <div className="relative aspect-square bg-gray-100">
                 <Image
                   src={item.src}
                   alt={item.alt}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

@@ -38,8 +38,10 @@ const Review = () => {
 
   // 기본 플레이스홀더 이미지 (관리자가 업로드하기 전)
   const defaultImages = [
-    { id: '1', image: '/images/후기1.png', order: 0 },
-    { id: '2', image: '/images/후기2.png', order: 1 },
+    { id: '1', image: '/0602/리뷰1.png', order: 0 },
+    { id: '2', image: '/0602/리뷰2.png', order: 1 },
+    { id: '3', image: '/0602/리뷰3.png', order: 2 },
+    { id: '4', image: '/0602/리뷰4.png', order: 3 },
   ]
 
   const images = reviewImages.length > 0 ? reviewImages : defaultImages
@@ -79,43 +81,34 @@ const Review = () => {
           {/* Right Content - Phone Mockups */}
           <div
             ref={phonesRef}
-            className={`relative flex justify-center lg:justify-end scroll-hidden ${phonesVisible ? 'scroll-visible' : ''}`}
+            className={`relative scroll-hidden ${phonesVisible ? 'scroll-visible' : ''}`}
           >
-            {/* Phone Frame 1 */}
-            <div className="relative w-56 h-[450px] bg-black rounded-[3rem] p-2 shadow-2xl transform -rotate-6 z-10 transition-all duration-500 hover:shadow-[0_35px_60px_-15px_rgba(196,145,138,0.3)] hover:scale-[1.03]">
-              <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-                {images[0] && (
-                  <Image
-                    src={images[0].image}
-                    alt="리뷰 스크린샷"
-                    fill
-                    className="object-cover"
-                  />
-                )}
-                {/* Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl"></div>
-                {/* Home indicator */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-black/30 rounded-full"></div>
-              </div>
+            <div className="grid grid-cols-2 gap-4 md:gap-5 max-w-[440px] mx-auto lg:mr-0 lg:ml-auto">
+              {images.slice(0, 4).map((img, i) => {
+                const rotations = ['-rotate-3', 'rotate-3', 'rotate-3', '-rotate-3']
+                const offsets = ['', 'mt-6', '-mt-2', 'mt-4']
+                return (
+                  <div
+                    key={img.id}
+                    className={`relative aspect-[9/19] bg-black rounded-[2rem] p-1.5 shadow-2xl ${rotations[i]} ${offsets[i]} transition-all duration-500 hover:shadow-[0_25px_50px_-12px_rgba(196,145,138,0.35)] hover:scale-[1.03]`}
+                  >
+                    <div className="w-full h-full bg-white rounded-[1.6rem] overflow-hidden relative">
+                      <Image
+                        src={img.image}
+                        alt="리뷰 스크린샷"
+                        fill
+                        className="object-cover"
+                        sizes="220px"
+                      />
+                      {/* Notch */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-3.5 bg-black rounded-b-2xl"></div>
+                      {/* Home indicator */}
+                      <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-12 h-1 bg-black/30 rounded-full"></div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-
-            {/* Phone Frame 2 */}
-            {images[1] && (
-              <div className="relative w-56 h-[450px] bg-black rounded-[3rem] p-2 shadow-2xl transform rotate-6 -ml-20 z-20 transition-all duration-500 hover:shadow-[0_35px_60px_-15px_rgba(196,145,138,0.3)] hover:scale-[1.03]">
-                <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-                  <Image
-                    src={images[1].image}
-                    alt="리뷰 스크린샷"
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl"></div>
-                  {/* Home indicator */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-black/30 rounded-full"></div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
