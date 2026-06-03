@@ -58,21 +58,21 @@ const Facilities = () => {
 
   // 기본값
   const defaultGymFeatures: Facility[] = [
-    { id: '1', type: 'gym', title: '트레이닝 공간', description: '프라이빗 PT 전용 공간', image: '/images/facilities/DSC_1356.jpg', order: 0 },
-    { id: '2', type: 'gym', title: '운동 시설', description: '최신 운동 장비 완비', image: '/images/facilities/DSC_1401.jpg', order: 1 },
-    { id: '3', type: 'gym', title: 'PT룸', description: '1:1 맞춤 트레이닝', image: '/images/facilities/DSC_1567.jpg', order: 2 },
-    { id: '4', type: 'gym', title: '피트니스 공간', description: '쾌적한 운동 환경', image: '/images/facilities/DSC_1611.jpg', order: 3 },
-    { id: '11', type: 'gym', title: '내부 시설', description: '편안한 인테리어', image: '/images/facilities/KakaoTalk_20260323_161613187_10.jpg', order: 4 },
-    { id: '12', type: 'gym', title: '시설 전경', description: '프리미엄 공간', image: '/images/facilities/KakaoTalk_20260323_161613187_11.jpg', order: 5 },
+    { id: '1', type: 'gym', title: '트레이닝 공간', description: '프라이빗 PT 전용 공간', image: '/0603/gym1.jpg', order: 0 },
+    { id: '2', type: 'gym', title: '운동 시설', description: '최신 운동 장비 완비', image: '/0603/gym2.jpg', order: 1 },
+    { id: '3', type: 'gym', title: 'PT룸', description: '1:1 맞춤 트레이닝', image: '/0603/gym3.jpg', order: 2 },
+    { id: '4', type: 'gym', title: '피트니스 공간', description: '쾌적한 운동 환경', image: '/0603/gym4.jpg', order: 3 },
+    { id: '11', type: 'gym', title: '내부 시설', description: '편안한 인테리어', image: '/0603/gym5.jpg', order: 4 },
+    { id: '12', type: 'gym', title: '시설 전경', description: '프리미엄 공간', image: '/0603/gym6.jpg', order: 5 },
   ]
 
   const defaultCareFeatures: Facility[] = [
-    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/images/facilities/DSC_0737.jpg', order: 0 },
-    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/images/facilities/DSC_0751.jpg', order: 1 },
-    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', image: '/images/facilities/DSC_0787.jpg', order: 2 },
-    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', image: '/images/facilities/DSC_0790.jpg', order: 3 },
-    { id: '9', type: 'care', title: '힐링 케어', description: '순환관리 전문 공간', image: '/images/facilities/DSC_0954.jpg', order: 4 },
-    { id: '10', type: 'care', title: '관리 공간', description: '쾌적한 관리 환경', image: '/images/facilities/DSC_0976.jpg', order: 5 },
+    { id: '5', type: 'care', title: '케어룸', description: '프라이빗 관리 공간', image: '/0603/care1.jpg', order: 0 },
+    { id: '6', type: 'care', title: '프리미엄 관리실', description: '최신 관리 장비 완비', image: '/0603/care2.jpg', order: 1 },
+    { id: '7', type: 'care', title: '프라이빗 1인실', description: '독립된 관리 공간', image: '/0603/care3.jpg', order: 2 },
+    { id: '8', type: 'care', title: '스파 관리', description: '누워서 편안하게 케어', image: '/0603/care4.jpg', order: 3 },
+    { id: '9', type: 'care', title: '힐링 케어', description: '순환관리 전문 공간', image: '/0603/care5.jpg', order: 4 },
+    { id: '10', type: 'care', title: '관리 공간', description: '쾌적한 관리 환경', image: '/0603/care6.jpg', order: 5 },
   ]
 
   const gymFeatures = facilities.length > 0

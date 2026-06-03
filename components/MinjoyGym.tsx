@@ -44,6 +44,7 @@ const MinjoyGym = () => {
   // Scroll animation refs
   const heroSection = useScrollAnimation()
   const programSection = useScrollAnimation()
+  const spaceSection = useScrollAnimation()
   const targetSection = useScrollAnimation()
   const statsSection = useScrollAnimation()
   const ctaSection = useScrollAnimation()
@@ -181,6 +182,33 @@ const MinjoyGym = () => {
                 </div>
               )
             })}
+          </div>
+        </div>
+
+        {/* Facility Preview */}
+        <div
+          ref={spaceSection.ref}
+          className={`mb-20 scroll-hidden ${spaceSection.isVisible ? 'scroll-visible' : ''}`}
+        >
+          <div className="text-center mb-10">
+            <p className="text-sm text-primary font-medium mb-2">GYM SPACE</p>
+            <h3 className="text-3xl font-bold text-gray-900 section-accent">프리미엄 트레이닝 공간</h3>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {[1, 2, 3, 4, 5, 6].map((n, i) => (
+              <div
+                key={n}
+                className={`relative aspect-[4/3] rounded-xl overflow-hidden border border-gray-200 group stagger-${(i % 6) + 1}`}
+              >
+                <Image
+                  src={`/0603/gym${n}.jpg`}
+                  alt={`민죠이짐 시설 ${n}`}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
+                />
+              </div>
+            ))}
           </div>
         </div>
 
